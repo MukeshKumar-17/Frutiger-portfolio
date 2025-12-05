@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import './Dock.css';
 
 const icons = [
@@ -16,74 +17,82 @@ const icons = [
     { name: 'Trash', src: '/trash.png' },
 ];
 
-export default function Dock() {
-    const dockRef = useRef(null);
+// Spring configuration for smooth, natural feel
+const springConfig = {
+    stiffness: 400,
+    damping: 25,
+    mass: 0.5,
+};
 
-    const handleMouseMove = (e) => {
-        const dock = dockRef.current;
-        if (!dock) return;
+function DockIcon({ icon, mouseX }) {
+    const ref = useRef(null);
 
-        const icons = dock.querySelectorAll('.dock-icon');
-        const dockRect = dock.getBoundingClientRect();
+    // Calculate distance from mouse to icon center
+    const distance = useTransform(mouseX, (val) => {
+        const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
+        return val - bounds.x - bounds.width / 2;
+    });
 
-        // Mouse X relative to the viewport is e.clientX
-        // But we want it relative to the dock's items?
-        // The Fisheye effect depends on the distance of the mouse X from the center of each icon.
+    // Configuration
+    const baseSize = 60;
+    const maxSize = 100;
+    const magnificationRange = 180;
 
-        icons.forEach((icon) => {
-            const rect = icon.getBoundingClientRect();
-            const iconCenterX = rect.left + rect.width / 2;
-            const distanceFromMouse = Math.abs(e.clientX - iconCenterX);
+    // Map distance to scale using smooth interpolation
+    const widthSync = useTransform(
+        distance,
+        [-magnificationRange, 0, magnificationRange],
+        [baseSize, maxSize, baseSize]
+    );
 
-            // Configuration for magnification
-            const maxScale = 1.8;
-            const minScale = 1.0;
-            const range = 150; // Distance of effect influence
+    // Apply spring physics for ultra-smooth animation
+    const width = useSpring(widthSync, springConfig);
+    const height = useSpring(widthSync, springConfig);
 
-            let scale = minScale;
-
-            if (distanceFromMouse < range) {
-                // Calculate scale based on distance (Gaussian-ish or Cosine)
-                // Using a simple cosine curve for smoothness
-                const normalizedDistance = distanceFromMouse / range;
-                // Cosine from 0 to Pi
-                const curve = Math.cos(normalizedDistance * Math.PI / 2); // 1 at 0, 0 at 1
-                scale = minScale + (maxScale - minScale) * curve;
-            }
-
-            icon.style.width = `${60 * scale}px`;
-            icon.style.height = `${60 * scale}px`;
-            icon.style.marginBottom = `${(scale - 1) * 30}px`; // Push up slightly?
-            // Actually standard mac dock aligns bottom, so changing width/height with flex-end is enough if margin is handled
-            // But we need to make sure the margin doesn't break layout.
-            // Flexbox 'align-items: flex-end' handles the vertical growth upwards.
-            // We just need horizontal expansion.
-        });
-    };
-
-    const handleMouseLeave = () => {
-        const dock = dockRef.current;
-        if (!dock) return;
-        const icons = dock.querySelectorAll('.dock-icon');
-        icons.forEach((icon) => {
-            icon.style.width = '60px';
-            icon.style.height = '60px';
-            icon.style.marginBottom = '0px';
-        });
-    };
+    // Subtle Y translation for the "rise" effect
+    const ySync = useTransform(
+        distance,
+        [-magnificationRange, 0, magnificationRange],
+        [0, -15, 0]
+    );
+    const y = useSpring(ySync, springConfig);
 
     return (
-        <div className="dock-container" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-            <div className="dock-glass" ref={dockRef}>
+        <motion.div
+            ref={ref}
+            className="dock-icon"
+            style={{
+                width,
+                height,
+                y,
+            }}
+            title={icon.name}
+            whileTap={{ scale: 0.85 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+        >
+            <img src={icon.src} alt={icon.name} draggable={false} />
+        </motion.div>
+    );
+}
+
+export default function Dock() {
+    // Track mouse X position
+    const mouseX = useMotionValue(Infinity);
+
+    return (
+        <motion.div
+            className="dock-container"
+            onMouseMove={(e) => mouseX.set(e.pageX)}
+            onMouseLeave={() => mouseX.set(Infinity)}
+        >
+            <motion.div className="dock-glass">
                 {icons.map((icon, index) => (
                     <React.Fragment key={icon.name}>
                         {index === 8 && <div className="dock-separator"></div>}
-                        <div className="dock-icon" title={icon.name}>
-                            <img src={icon.src} alt={icon.name} />
-                        </div>
+                        <DockIcon icon={icon} mouseX={mouseX} />
                     </React.Fragment>
                 ))}
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     );
 }
