@@ -3,18 +3,18 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import './Dock.css';
 
 const icons = [
-    { name: 'Finder', src: '/finder.png' },
-    { name: 'Mail', src: '/mail.png' },
-    { name: 'Explorer', src: '/ie.png' },
-    { name: 'Sherlock', src: '/sherlock.png' },
-    { name: 'System Prefs', src: '/system_prefs.png' },
-    { name: 'Monitor', src: '/monitor.png' },
-    { name: 'QuickTime', src: '/quicktime.png' },
-    { name: 'Grab', src: '/grab.png' },
+    { id: 'finder', name: 'Finder', src: '/finder.png' },
+    { id: 'mail', name: 'Mail', src: '/mail.png' },
+    { id: 'explorer', name: 'Explorer', src: '/ie.png' },
+    { id: 'sherlock', name: 'Sherlock', src: '/sherlock.png' },
+    { id: 'system_prefs', name: 'System Prefs', src: '/system_prefs.png' },
+    { id: 'monitor', name: 'Monitor', src: '/monitor.png' },
+    { id: 'quicktime', name: 'QuickTime', src: '/quicktime.png' },
+    { id: 'grab', name: 'Grab', src: '/grab.png' },
     // Separator here conceptually
-    { name: 'Spring', src: '/spring.png' },
-    { name: 'News', src: '/news.png' },
-    { name: 'Trash', src: '/trash.png' },
+    { id: 'spring', name: 'Spring', src: '/spring.png' },
+    { id: 'news', name: 'News', src: '/news.png' },
+    { id: 'trash', name: 'Trash', src: '/trash.png' },
 ];
 
 // Spring configuration for smooth, natural feel
@@ -24,7 +24,7 @@ const springConfig = {
     mass: 0.5,
 };
 
-function DockIcon({ icon, mouseX }) {
+function DockIcon({ icon, mouseX, onClick }) {
     const ref = useRef(null);
 
     // Calculate distance from mouse to icon center
@@ -69,15 +69,22 @@ function DockIcon({ icon, mouseX }) {
             title={icon.name}
             whileTap={{ scale: 0.85 }}
             transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+            onClick={() => onClick(icon)}
         >
             <img src={icon.src} alt={icon.name} draggable={false} />
         </motion.div>
     );
 }
 
-export default function Dock() {
+export default function Dock({ onIconClick }) {
     // Track mouse X position
     const mouseX = useMotionValue(Infinity);
+
+    const handleIconClick = (icon) => {
+        if (onIconClick) {
+            onIconClick(icon);
+        }
+    };
 
     return (
         <motion.div
@@ -87,9 +94,13 @@ export default function Dock() {
         >
             <motion.div className="dock-glass">
                 {icons.map((icon, index) => (
-                    <React.Fragment key={icon.name}>
+                    <React.Fragment key={icon.id}>
                         {index === 8 && <div className="dock-separator"></div>}
-                        <DockIcon icon={icon} mouseX={mouseX} />
+                        <DockIcon
+                            icon={icon}
+                            mouseX={mouseX}
+                            onClick={handleIconClick}
+                        />
                     </React.Fragment>
                 ))}
             </motion.div>

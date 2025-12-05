@@ -1,0 +1,319 @@
+/* Windows 7 Aero Glass Window Styling */
+
+.aero-window {
+    position: absolute;
+    width: 700px;
+    min-height: 450px;
+    z-index: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+}
+
+.aero-frame {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    /* Glass effect */
+    background: linear-gradient(180deg,
+            rgba(200, 220, 255, 0.85) 0%,
+            rgba(180, 210, 255, 0.75) 30px,
+            rgba(245, 250, 255, 0.95) 30px,
+            rgba(250, 252, 255, 0.98) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+        0 1px 0 rgba(255, 255, 255, 0.8) inset,
+        0 0 40px rgba(0, 100, 200, 0.15),
+        0 15px 40px rgba(0, 0, 0, 0.4),
+        0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(100, 150, 200, 0.5);
+}
+
+/* Title Bar */
+.aero-titlebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+    padding: 0 8px;
+    background: linear-gradient(180deg,
+            rgba(180, 210, 250, 0.6) 0%,
+            rgba(140, 180, 230, 0.4) 50%,
+            rgba(100, 150, 210, 0.3) 100%);
+    border-bottom: 1px solid rgba(100, 150, 200, 0.3);
+    cursor: move;
+}
+
+.aero-titlebar-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.aero-titlebar-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.aero-title {
+    font-size: 12px;
+    color: #1a1a1a;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+}
+
+/* Window Controls */
+.aero-window-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.window-control-btn {
+    width: 28px;
+    height: 20px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 0;
+    transition: background 0.1s ease;
+}
+
+.window-control-btn .control-icon {
+    font-size: 10px;
+    color: #333;
+}
+
+.window-control-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.window-control-btn.close-btn:hover {
+    background: linear-gradient(180deg, #f28b82 0%, #ea4335 100%);
+}
+
+.window-control-btn.close-btn:hover .control-icon {
+    color: white;
+}
+
+/* Navigation Bar */
+.aero-navbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    background: linear-gradient(180deg, #f5f8fc 0%, #e8eef5 100%);
+    border-bottom: 1px solid #c5d0dc;
+}
+
+.aero-nav-buttons {
+    display: flex;
+    gap: 2px;
+}
+
+.nav-btn {
+    width: 30px;
+    height: 26px;
+    border: 1px solid #a0b0c0;
+    background: linear-gradient(180deg, #fff 0%, #e5edf5 100%);
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #2563eb;
+    transition: all 0.1s ease;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: linear-gradient(180deg, #e3f0ff 0%, #c8dff7 100%);
+    border-color: #6ba5e7;
+}
+
+.nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.aero-breadcrumb {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    background: white;
+    border: 1px solid #a0b0c0;
+    border-radius: 3px;
+    font-size: 12px;
+    color: #333;
+}
+
+.breadcrumb-separator {
+    color: #888;
+}
+
+.aero-search {
+    position: relative;
+    width: 180px;
+}
+
+.aero-search input {
+    width: 100%;
+    padding: 4px 25px 4px 8px;
+    border: 1px solid #a0b0c0;
+    border-radius: 3px;
+    font-size: 12px;
+    background: white;
+}
+
+.aero-search input:focus {
+    outline: none;
+    border-color: #6ba5e7;
+    box-shadow: 0 0 3px rgba(107, 165, 231, 0.5);
+}
+
+.aero-search .search-icon {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    pointer-events: none;
+}
+
+/* Toolbar */
+.aero-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 5px 10px;
+    background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    border-bottom: 1px solid #c5d0dc;
+}
+
+.toolbar-btn {
+    padding: 4px 12px;
+    border: 1px solid transparent;
+    background: transparent;
+    border-radius: 3px;
+    font-size: 11px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.toolbar-btn:hover {
+    background: linear-gradient(180deg, #e3f0ff 0%, #c8dff7 100%);
+    border-color: #6ba5e7;
+}
+
+.toolbar-separator {
+    width: 1px;
+    height: 20px;
+    background: #c5d0dc;
+    margin: 0 5px;
+}
+
+/* Content Area */
+.aero-content {
+    display: flex;
+    flex: 1;
+    min-height: 300px;
+    background: #fff;
+}
+
+/* Sidebar */
+.aero-sidebar {
+    width: 180px;
+    background: linear-gradient(180deg, #e8f0f8 0%, #dce6f0 100%);
+    border-right: 1px solid #c5d0dc;
+    padding: 10px 0;
+    overflow-y: auto;
+}
+
+.sidebar-section {
+    margin-bottom: 15px;
+}
+
+.sidebar-header {
+    font-size: 11px;
+    font-weight: 600;
+    color: #1a5276;
+    padding: 5px 15px;
+}
+
+.sidebar-item {
+    font-size: 11px;
+    color: #333;
+    padding: 5px 15px 5px 25px;
+    cursor: pointer;
+    transition: background 0.1s ease;
+}
+
+.sidebar-item:hover {
+    background: rgba(50, 120, 200, 0.15);
+}
+
+.sidebar-item.selected {
+    background: rgba(50, 120, 200, 0.25);
+}
+
+/* Main Content */
+.aero-main {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+.empty-folder-message {
+    color: #888;
+    font-size: 14px;
+    font-style: italic;
+}
+
+/* Status Bar */
+.aero-statusbar {
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    background: linear-gradient(180deg, #f0f4f8 0%, #e0e8f0 100%);
+    border-top: 1px solid #c5d0dc;
+    font-size: 11px;
+    color: #555;
+}
+
+/* Window Focus Effects */
+.aero-window:focus-within .aero-frame {
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.7) inset,
+        0 1px 0 rgba(255, 255, 255, 0.9) inset,
+        0 0 50px rgba(0, 120, 255, 0.2),
+        0 20px 50px rgba(0, 0, 0, 0.45),
+        0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Inactive Window */
+.aero-window.inactive .aero-frame {
+    background: linear-gradient(180deg,
+            rgba(220, 225, 230, 0.9) 0%,
+            rgba(200, 210, 220, 0.85) 30px,
+            rgba(240, 242, 245, 0.95) 30px,
+            rgba(245, 247, 250, 0.98) 100%);
+}
+
+.aero-window.inactive .aero-titlebar {
+    background: linear-gradient(180deg,
+            rgba(200, 210, 220, 0.6) 0%,
+            rgba(180, 190, 200, 0.4) 50%,
+            rgba(160, 170, 180, 0.3) 100%);
+}
