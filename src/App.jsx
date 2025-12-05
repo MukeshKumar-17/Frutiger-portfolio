@@ -49,10 +49,6 @@ function App() {
         <span className="desktop-icon-label">Macintosh HD</span>
       </div>
 
-      <div onClick={(e) => e.stopPropagation()}>
-        <Window />
-      </div>
-
       {/* Aero Windows */}
       <AnimatePresence>
         {openWindows.map((window) => (
