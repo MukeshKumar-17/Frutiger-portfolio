@@ -1,16 +1,42 @@
-# React + Vite
+# 🪟 Frutiger Aero Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A nostalgic, web-based operating system portfolio inspired by the **Frutiger Aero** and **Windows 7** design languages (2000s-2010s era).
 
-Currently, two official plugins are available:
+![Project Banner](public/wallpaper.jpg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- **Windows 7 Aero Glass UI**: Authentic glassmorphism with blur, reflection, and glow effects.
+- **MacOS-style Dock**: Smooth, physics-based magnification animation using `framer-motion` springs.
+- **Draggable Windows**: Fully interactive window management system.
+- **Dynamic Animations**: Fluid opening/closing transitions and hover effects.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- **React** components
+- **Vite** for fast development
+- **Framer Motion** for physics-based animations
+- **CSS3** for glassmorphism and glossy textures
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Getting Started
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+## 🎨 Design Philosophy
+
+This project aims to capture the optimism and "humanism" of tech design from the mid-2000s, featuring:
+- Skeuomorphic textures
+- Glossy finishes
+- Vibrants greens and blues
+- Frutiger fonts
+
+---
+*Created by Mukesh Kumar*
