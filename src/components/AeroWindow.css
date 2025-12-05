@@ -1,11 +1,11 @@
-/* Windows 7 Aero Glass Window Styling */
+/* Mac OS X Aqua Glass Window Styling */
 
 .aero-window {
     position: absolute;
     width: 700px;
     min-height: 450px;
     z-index: 500;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica Neue', sans-serif;
     user-select: none;
 }
 
@@ -13,132 +13,220 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    border-radius: 8px 8px 0 0;
+    border-radius: 10px;
     overflow: hidden;
-    /* Glass effect */
+    /* Aqua Glass effect - translucent blue/teal */
     background: linear-gradient(180deg,
-            rgba(200, 220, 255, 0.85) 0%,
-            rgba(180, 210, 255, 0.75) 30px,
-            rgba(245, 250, 255, 0.95) 30px,
-            rgba(250, 252, 255, 0.98) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+            rgba(180, 220, 255, 0.92) 0%,
+            rgba(140, 200, 250, 0.88) 22px,
+            rgba(230, 240, 250, 0.96) 22px,
+            rgba(245, 248, 255, 0.98) 100%);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.6) inset,
-        0 1px 0 rgba(255, 255, 255, 0.8) inset,
-        0 0 40px rgba(0, 100, 200, 0.15),
-        0 15px 40px rgba(0, 0, 0, 0.4),
-        0 5px 15px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(100, 150, 200, 0.5);
+        0 0 0 1px rgba(255, 255, 255, 0.9) inset,
+        0 2px 0 rgba(255, 255, 255, 0.7) inset,
+        0 -1px 0 rgba(0, 0, 0, 0.1) inset,
+        0 0 50px rgba(100, 180, 255, 0.2),
+        0 20px 60px rgba(0, 0, 0, 0.35),
+        0 8px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(80, 130, 180, 0.4);
 }
 
-/* Title Bar */
+/* Title Bar - Aqua Brushed Metal Look */
 .aero-titlebar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    height: 30px;
-    padding: 0 8px;
-    background: linear-gradient(180deg,
-            rgba(180, 210, 250, 0.6) 0%,
-            rgba(140, 180, 230, 0.4) 50%,
-            rgba(100, 150, 210, 0.3) 100%);
-    border-bottom: 1px solid rgba(100, 150, 200, 0.3);
-    cursor: move;
+    justify-content: center;
+    height: 22px;
+    padding: 0 10px;
+    /* Aqua pinstripe/brushed metal gradient */
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(255, 255, 255, 0.03) 0px,
+            rgba(255, 255, 255, 0.03) 1px,
+            transparent 1px,
+            transparent 2px),
+        linear-gradient(180deg,
+            rgba(220, 230, 245, 0.95) 0%,
+            rgba(200, 215, 235, 0.9) 45%,
+            rgba(180, 200, 225, 0.85) 55%,
+            rgba(190, 208, 230, 0.9) 100%);
+    border-bottom: 1px solid rgba(150, 170, 190, 0.5);
+    position: relative;
 }
 
 .aero-titlebar-left {
+    position: absolute;
+    left: 10px;
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
 .aero-titlebar-icon {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     object-fit: contain;
 }
 
 .aero-title {
-    font-size: 12px;
-    color: #1a1a1a;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    font-weight: 400;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    color: #333;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-/* Window Controls */
+/* Aqua Traffic Light Window Controls */
 .aero-window-controls {
+    position: absolute;
+    left: 8px;
     display: flex;
-    gap: 2px;
+    gap: 6px;
 }
 
 .window-control-btn {
-    width: 28px;
-    height: 20px;
+    width: 14px;
+    height: 14px;
     border: none;
+    border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
-    border-radius: 0;
-    transition: background 0.1s ease;
+    padding: 0;
+    transition: all 0.15s ease;
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .window-control-btn .control-icon {
-    font-size: 10px;
-    color: #333;
+    font-size: 8px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
 }
 
-.window-control-btn:hover {
-    background: rgba(255, 255, 255, 0.4);
+.aero-window:hover .window-control-btn .control-icon {
+    opacity: 1;
+}
+
+/* Close button - Red Aqua Gel */
+.window-control-btn.close-btn {
+    background: linear-gradient(180deg,
+            #ff6b6b 0%,
+            #ff5f57 50%,
+            #e74c3c 100%);
+    border: 1px solid #c0392b;
+}
+
+.window-control-btn.close-btn .control-icon {
+    color: #4a0000;
 }
 
 .window-control-btn.close-btn:hover {
-    background: linear-gradient(180deg, #f28b82 0%, #ea4335 100%);
+    background: linear-gradient(180deg,
+            #ff8080 0%,
+            #ff6b6b 50%,
+            #e74c3c 100%);
 }
 
-.window-control-btn.close-btn:hover .control-icon {
-    color: white;
+/* Minimize button - Yellow Aqua Gel */
+.window-control-btn.minimize-btn {
+    background: linear-gradient(180deg,
+            #ffda6b 0%,
+            #ffbd2e 50%,
+            #f39c12 100%);
+    border: 1px solid #d68910;
 }
 
-/* Navigation Bar */
+.window-control-btn.minimize-btn .control-icon {
+    color: #5a4a00;
+}
+
+.window-control-btn.minimize-btn:hover {
+    background: linear-gradient(180deg,
+            #ffe680 0%,
+            #ffda6b 50%,
+            #f39c12 100%);
+}
+
+/* Maximize button - Green Aqua Gel */
+.window-control-btn.maximize-btn {
+    background: linear-gradient(180deg,
+            #5edc82 0%,
+            #28ca41 50%,
+            #1e8449 100%);
+    border: 1px solid #196f3d;
+}
+
+.window-control-btn.maximize-btn .control-icon {
+    color: #003a00;
+}
+
+.window-control-btn.maximize-btn:hover {
+    background: linear-gradient(180deg,
+            #7dea98 0%,
+            #5edc82 50%,
+            #1e8449 100%);
+}
+
+/* Navigation Bar - Aqua Toolbar */
 .aero-navbar {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     padding: 6px 10px;
-    background: linear-gradient(180deg, #f5f8fc 0%, #e8eef5 100%);
-    border-bottom: 1px solid #c5d0dc;
+    /* Aqua pinstripe background */
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(230, 235, 242, 1) 0px,
+            rgba(230, 235, 242, 1) 1px,
+            rgba(245, 248, 252, 1) 1px,
+            rgba(245, 248, 252, 1) 2px);
+    border-bottom: 1px solid #b8c4d0;
 }
 
 .aero-nav-buttons {
     display: flex;
-    gap: 2px;
+    gap: 3px;
 }
 
+/* Aqua Pill Buttons */
 .nav-btn {
-    width: 30px;
-    height: 26px;
-    border: 1px solid #a0b0c0;
-    background: linear-gradient(180deg, #fff 0%, #e5edf5 100%);
-    border-radius: 3px;
+    width: 28px;
+    height: 24px;
+    border: 1px solid rgba(100, 120, 140, 0.6);
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(230, 240, 250, 0.9) 50%,
+            rgba(200, 220, 240, 0.85) 100%);
+    border-radius: 5px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
-    color: #2563eb;
-    transition: all 0.1s ease;
+    font-size: 10px;
+    color: #4a6fa5;
+    transition: all 0.15s ease;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.8) inset,
+        0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .nav-btn:hover:not(:disabled) {
-    background: linear-gradient(180deg, #e3f0ff 0%, #c8dff7 100%);
-    border-color: #6ba5e7;
+    background: linear-gradient(180deg,
+            rgba(200, 230, 255, 0.95) 0%,
+            rgba(150, 200, 250, 0.9) 50%,
+            rgba(100, 170, 240, 0.85) 100%);
+    border-color: #5a90c8;
 }
 
 .nav-btn:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
 }
 
@@ -149,10 +237,13 @@
     gap: 5px;
     padding: 4px 10px;
     background: white;
-    border: 1px solid #a0b0c0;
-    border-radius: 3px;
+    border: 1px solid #b0bcc8;
+    border-radius: 5px;
     font-size: 12px;
     color: #333;
+    box-shadow:
+        inset 0 1px 3px rgba(0, 0, 0, 0.1),
+        0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .breadcrumb-separator {
@@ -167,58 +258,91 @@
 .aero-search input {
     width: 100%;
     padding: 4px 25px 4px 8px;
-    border: 1px solid #a0b0c0;
-    border-radius: 3px;
+    border: 1px solid #b0bcc8;
+    border-radius: 15px;
     font-size: 12px;
     background: white;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .aero-search input:focus {
     outline: none;
-    border-color: #6ba5e7;
-    box-shadow: 0 0 3px rgba(107, 165, 231, 0.5);
+    border-color: #5a90c8;
+    box-shadow:
+        inset 0 1px 3px rgba(0, 0, 0, 0.1),
+        0 0 5px rgba(90, 144, 200, 0.5);
 }
 
 .aero-search .search-icon {
     position: absolute;
-    right: 6px;
+    right: 8px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 12px;
+    font-size: 11px;
     pointer-events: none;
 }
 
-/* Toolbar */
+/* Toolbar - Aqua Style */
 .aero-toolbar {
     display: flex;
     align-items: center;
     gap: 3px;
     padding: 5px 10px;
-    background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    /* Aqua pinstripe */
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(235, 240, 248, 1) 0px,
+            rgba(235, 240, 248, 1) 1px,
+            rgba(248, 250, 254, 1) 1px,
+            rgba(248, 250, 254, 1) 2px);
     border-bottom: 1px solid #c5d0dc;
 }
 
+/* Aqua Gel Buttons */
 .toolbar-btn {
-    padding: 4px 12px;
-    border: 1px solid transparent;
-    background: transparent;
-    border-radius: 3px;
+    padding: 4px 14px;
+    border: 1px solid rgba(100, 130, 160, 0.5);
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(235, 245, 255, 0.9) 45%,
+            rgba(210, 230, 250, 0.85) 55%,
+            rgba(220, 235, 252, 0.9) 100%);
+    border-radius: 5px;
     font-size: 11px;
     color: #333;
     cursor: pointer;
-    transition: all 0.1s ease;
+    transition: all 0.15s ease;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.9) inset,
+        0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .toolbar-btn:hover {
-    background: linear-gradient(180deg, #e3f0ff 0%, #c8dff7 100%);
-    border-color: #6ba5e7;
+    background: linear-gradient(180deg,
+            rgba(180, 220, 255, 0.95) 0%,
+            rgba(140, 195, 250, 0.9) 45%,
+            rgba(100, 170, 240, 0.85) 55%,
+            rgba(120, 185, 250, 0.9) 100%);
+    border-color: #5a90c8;
+}
+
+.toolbar-btn:active {
+    background: linear-gradient(180deg,
+            rgba(100, 160, 220, 0.95) 0%,
+            rgba(80, 140, 200, 0.9) 45%,
+            rgba(60, 120, 180, 0.85) 55%,
+            rgba(70, 130, 190, 0.9) 100%);
 }
 
 .toolbar-separator {
     width: 1px;
     height: 20px;
-    background: #c5d0dc;
-    margin: 0 5px;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            #b8c4d0 20%,
+            #b8c4d0 80%,
+            transparent 100%);
+    margin: 0 6px;
 }
 
 /* Content Area */
@@ -229,40 +353,54 @@
     background: #fff;
 }
 
-/* Sidebar */
+/* Sidebar - Aqua Source List */
 .aero-sidebar {
     width: 180px;
-    background: linear-gradient(180deg, #e8f0f8 0%, #dce6f0 100%);
-    border-right: 1px solid #c5d0dc;
+    /* Aqua gradient sidebar */
+    background: linear-gradient(180deg,
+            rgba(210, 225, 245, 0.95) 0%,
+            rgba(190, 210, 235, 0.9) 100%);
+    border-right: 1px solid #b0c0d5;
     padding: 10px 0;
     overflow-y: auto;
 }
 
 .sidebar-section {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .sidebar-header {
     font-size: 11px;
-    font-weight: 600;
-    color: #1a5276;
-    padding: 5px 15px;
+    font-weight: bold;
+    color: #4a6a8a;
+    padding: 5px 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .sidebar-item {
-    font-size: 11px;
+    font-size: 12px;
     color: #333;
-    padding: 5px 15px 5px 25px;
+    padding: 5px 12px 5px 20px;
     cursor: pointer;
-    transition: background 0.1s ease;
+    transition: all 0.15s ease;
+    border-radius: 3px;
+    margin: 0 5px;
 }
 
 .sidebar-item:hover {
-    background: rgba(50, 120, 200, 0.15);
+    background: linear-gradient(180deg,
+            rgba(100, 170, 255, 0.3) 0%,
+            rgba(80, 150, 230, 0.4) 100%);
 }
 
 .sidebar-item.selected {
-    background: rgba(50, 120, 200, 0.25);
+    background: linear-gradient(180deg,
+            rgba(70, 140, 220, 0.6) 0%,
+            rgba(50, 120, 200, 0.7) 100%);
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 /* Main Content */
@@ -281,13 +419,19 @@
     font-style: italic;
 }
 
-/* Status Bar */
+/* Status Bar - Aqua Style */
 .aero-statusbar {
     display: flex;
     align-items: center;
     padding: 5px 15px;
-    background: linear-gradient(180deg, #f0f4f8 0%, #e0e8f0 100%);
-    border-top: 1px solid #c5d0dc;
+    /* Aqua pinstripe */
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(228, 235, 245, 1) 0px,
+            rgba(228, 235, 245, 1) 1px,
+            rgba(242, 246, 252, 1) 1px,
+            rgba(242, 246, 252, 1) 2px);
+    border-top: 1px solid #b8c4d0;
     font-size: 11px;
     color: #555;
 }
@@ -295,25 +439,32 @@
 /* Window Focus Effects */
 .aero-window:focus-within .aero-frame {
     box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.7) inset,
-        0 1px 0 rgba(255, 255, 255, 0.9) inset,
-        0 0 50px rgba(0, 120, 255, 0.2),
-        0 20px 50px rgba(0, 0, 0, 0.45),
-        0 8px 20px rgba(0, 0, 0, 0.25);
+        0 0 0 1px rgba(255, 255, 255, 0.95) inset,
+        0 2px 0 rgba(255, 255, 255, 0.8) inset,
+        0 0 60px rgba(100, 200, 255, 0.25),
+        0 25px 70px rgba(0, 0, 0, 0.4),
+        0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* Inactive Window */
 .aero-window.inactive .aero-frame {
     background: linear-gradient(180deg,
-            rgba(220, 225, 230, 0.9) 0%,
-            rgba(200, 210, 220, 0.85) 30px,
-            rgba(240, 242, 245, 0.95) 30px,
-            rgba(245, 247, 250, 0.98) 100%);
+            rgba(220, 225, 235, 0.92) 0%,
+            rgba(200, 210, 225, 0.88) 22px,
+            rgba(235, 240, 248, 0.96) 22px,
+            rgba(245, 248, 252, 0.98) 100%);
 }
 
 .aero-window.inactive .aero-titlebar {
-    background: linear-gradient(180deg,
-            rgba(200, 210, 220, 0.6) 0%,
-            rgba(180, 190, 200, 0.4) 50%,
-            rgba(160, 170, 180, 0.3) 100%);
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(255, 255, 255, 0.02) 0px,
+            rgba(255, 255, 255, 0.02) 1px,
+            transparent 1px,
+            transparent 2px),
+        linear-gradient(180deg,
+            rgba(230, 235, 245, 0.95) 0%,
+            rgba(215, 225, 240, 0.9) 45%,
+            rgba(200, 215, 235, 0.85) 55%,
+            rgba(210, 220, 240, 0.9) 100%);
 }
