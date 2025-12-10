@@ -133,10 +133,33 @@ export default function Welcome() {
     return (
         <div className="welcome-container" ref={containerRef}>
             <p className="welcome-line" ref={titleRef}>
-                {welcomeText.split('').map((letter, index) => (
+                {/* Part 1: Hey, I'm (Italic) */}
+                {"Hey, I'm ".split('').map((letter, index) => (
                     <span
-                        key={index}
+                        key={`part1-${index}`}
+                        className="welcome-letter italic-text"
+                        style={{ display: letter === ' ' ? 'inline' : 'inline-block' }}
+                    >
+                        {letter === ' ' ? '\u00A0' : letter}
+                    </span>
+                ))}
+
+                {/* Part 2: MUKESH KUMAR! (Normal) */}
+                {"MUKESH KUMAR!".split('').map((letter, index) => (
+                    <span
+                        key={`part2-${index}`}
                         className="welcome-letter"
+                        style={{ display: letter === ' ' ? 'inline' : 'inline-block' }}
+                    >
+                        {letter === ' ' ? '\u00A0' : letter}
+                    </span>
+                ))}
+
+                {/* Part 3: Welcome to my (Italic) */}
+                {" Welcome to my".split('').map((letter, index) => (
+                    <span
+                        key={`part3-${index}`}
+                        className="welcome-letter italic-text"
                         style={{ display: letter === ' ' ? 'inline' : 'inline-block' }}
                     >
                         {letter === ' ' ? '\u00A0' : letter}

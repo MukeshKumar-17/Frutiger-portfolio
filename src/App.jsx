@@ -46,10 +46,7 @@ function App() {
       {/* Welcome Typography */}
       <Welcome />
 
-      <div className="desktop-icon-container" onClick={(e) => e.stopPropagation()}>
-        <img src="/hard_disk.png" alt="Macintosh HD" className="desktop-icon" />
-        <span className="desktop-icon-label">Macintosh HD</span>
-      </div>
+
 
       {/* Aero Windows */}
       {openWindows.map((window) => (

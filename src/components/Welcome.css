@@ -47,6 +47,10 @@
     will-change: transform;
 }
 
+.italic-text {
+    font-style: italic;
+}
+
 .welcome-italic {
     font-family: 'Origamet Hamida', 'Georgia', 'Times New Roman', serif;
     font-style: normal;
@@ -80,7 +84,8 @@
     perspective: 1000px;
     display: flex;
     justify-content: center;
-    text-transform: uppercase;
+    font-style: italic;
+    text-transform: capitalize;
 }
 
 .portfolio-letter {
