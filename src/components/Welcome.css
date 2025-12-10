@@ -1,5 +1,23 @@
 /* Welcome Component Styles */
 
+/* Custom Font - Nearvana */
+@font-face {
+    font-family: 'Nearvana';
+    src: url('/MTC.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Custom Font - Origamet Hamida */
+@font-face {
+    font-family: 'Origamet Hamida';
+    src: url('/quen.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 .welcome-container {
     position: absolute;
     top: 50%;
@@ -13,47 +31,56 @@
 
 /* Welcome Line Styles */
 .welcome-line {
+    font-family: 'Origamet Hamida', 'Georgia', 'Times New Roman', serif;
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
     letter-spacing: 0.02em;
     line-height: 1.4;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-letter {
+    display: inline-block;
+    cursor: pointer;
+    transition: text-shadow 0.2s ease;
+    will-change: transform;
 }
 
 .welcome-italic {
-    font-family: 'Georgia', 'Times New Roman', serif;
-    font-style: italic;
+    font-family: 'Origamet Hamida', 'Georgia', 'Times New Roman', serif;
+    font-style: normal;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.9);
+    color: #ffffff;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .welcome-name {
-    font-family: 'Arial', 'Helvetica Neue', sans-serif;
-    font-weight: 700;
+    font-family: 'Origamet Hamida', 'Arial', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
     color: #ffffff;
-    text-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.3),
-        0 0 20px rgba(150, 200, 255, 0.4);
-}
-
-.welcome-light {
-    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.8);
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Portfolio Title */
+.welcome-light {
+    font-family: 'Origamet Hamida', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Portfolio Title - Using Nearvana Font */
 .portfolio-title {
-    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Nearvana', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     font-size: 7rem;
-    font-weight: 200;
+    font-weight: normal;
     margin: 0;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.02em;
     line-height: 1;
     perspective: 1000px;
     display: flex;
     justify-content: center;
+    text-transform: uppercase;
 }
 
 .portfolio-letter {

@@ -11,9 +11,15 @@ export default function Welcome() {
         // Initial animation on mount
         const tl = gsap.timeline();
 
-        tl.fromTo('.welcome-line',
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+        tl.fromTo('.welcome-letter',
+            { opacity: 0, y: 20 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.4,
+                ease: 'power3.out',
+                stagger: 0.02
+            }
         );
 
         tl.fromTo('.portfolio-letter',
@@ -26,13 +32,38 @@ export default function Welcome() {
                 ease: 'back.out(1.7)',
                 stagger: 0.05
             },
-            '-=0.3'
+            '-=0.5'
         );
 
-        // Setup hover animations for each letter
-        const letters = document.querySelectorAll('.portfolio-letter');
+        // Setup hover animations for welcome letters
+        const welcomeLetters = document.querySelectorAll('.welcome-letter');
+        welcomeLetters.forEach((letter) => {
+            letter.addEventListener('mouseenter', () => {
+                gsap.to(letter, {
+                    y: -8,
+                    scale: 1.15,
+                    color: '#ffffff',
+                    textShadow: '0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(100, 200, 255, 0.6)',
+                    duration: 0.25,
+                    ease: 'power2.out'
+                });
+            });
 
-        letters.forEach((letter) => {
+            letter.addEventListener('mouseleave', () => {
+                gsap.to(letter, {
+                    y: 0,
+                    scale: 1,
+                    color: '#ffffff',
+                    textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
+                    duration: 0.4,
+                    ease: 'elastic.out(1, 0.3)'
+                });
+            });
+        });
+
+        // Setup hover animations for portfolio letters
+        const portfolioLetters = document.querySelectorAll('.portfolio-letter');
+        portfolioLetters.forEach((letter) => {
             letter.addEventListener('mouseenter', () => {
                 gsap.to(letter, {
                     y: -15,
@@ -95,14 +126,22 @@ export default function Welcome() {
         };
     }, []);
 
+    // Split text into individual letters for animation
+    const welcomeText = "Hey, I'm Mukesh Kumar! Welcome to my";
     const portfolioText = 'portfolio';
 
     return (
         <div className="welcome-container" ref={containerRef}>
             <p className="welcome-line" ref={titleRef}>
-                <span className="welcome-italic">Hey, I'm </span>
-                <span className="welcome-name">Mukesh Kumar!</span>
-                <span className="welcome-light"> Welcome to my</span>
+                {welcomeText.split('').map((letter, index) => (
+                    <span
+                        key={index}
+                        className="welcome-letter"
+                        style={{ display: letter === ' ' ? 'inline' : 'inline-block' }}
+                    >
+                        {letter === ' ' ? '\u00A0' : letter}
+                    </span>
+                ))}
             </p>
 
             <h1 className="portfolio-title" ref={portfolioRef}>
