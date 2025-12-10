@@ -127,7 +127,7 @@ export default function Welcome() {
     }, []);
 
     // Split text into individual letters for animation
-    const welcomeText = "Hey, I'm Mukesh Kumar! Welcome to my";
+    const welcomeText = "Hey, I'm MUKESH KUMAR! Welcome to my";
     const portfolioText = 'portfolio';
 
     return (

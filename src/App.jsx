@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
 import TopBar from './components/TopBar';
 import Dock from './components/Dock';
 import AeroWindow from './components/AeroWindow';
@@ -53,17 +52,15 @@ function App() {
       </div>
 
       {/* Aero Windows */}
-      <AnimatePresence>
-        {openWindows.map((window) => (
-          <AeroWindow
-            key={window.id}
-            title={window.title}
-            icon={window.icon}
-            initialPosition={window.position}
-            onClose={() => handleCloseWindow(window.id)}
-          />
-        ))}
-      </AnimatePresence>
+      {openWindows.map((window) => (
+        <AeroWindow
+          key={window.id}
+          title={window.title}
+          icon={window.icon}
+          initialPosition={window.position}
+          onClose={() => handleCloseWindow(window.id)}
+        />
+      ))}
 
       <Dock onIconClick={handleIconClick} />
     </div>

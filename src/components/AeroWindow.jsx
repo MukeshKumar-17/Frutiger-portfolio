@@ -1,12 +1,55 @@
-import React, { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
 import './AeroWindow.css';
 
 export default function AeroWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 } }) {
     const [position, setPosition] = useState(initialPosition);
     const [isDragging, setIsDragging] = useState(false);
-    const dragRef = useRef(null);
+    const [isClosing, setIsClosing] = useState(false);
+    const windowRef = useRef(null);
     const offsetRef = useRef({ x: 0, y: 0 });
+
+    // GSAP entrance animation
+    useEffect(() => {
+        const window = windowRef.current;
+        if (!window) return;
+
+        // Set initial state
+        gsap.set(window, {
+            opacity: 0,
+            scale: 0.7,
+            y: 80,
+            transformOrigin: 'center bottom'
+        });
+
+        // Animate in with smooth ease
+        gsap.to(window, {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.4,
+            ease: 'back.out(1.4)'
+        });
+    }, []);
+
+    // Handle close with animation
+    const handleClose = () => {
+        const window = windowRef.current;
+        if (!window || isClosing) return;
+
+        setIsClosing(true);
+
+        gsap.to(window, {
+            opacity: 0,
+            scale: 0.8,
+            y: 50,
+            duration: 0.25,
+            ease: 'power2.in',
+            onComplete: () => {
+                onClose();
+            }
+        });
+    };
 
     const handleMouseDown = (e) => {
         // Don't drag if clicking on buttons or inputs
@@ -16,7 +59,7 @@ export default function AeroWindow({ title, icon, onClose, initialPosition = { x
 
         e.stopPropagation();
         setIsDragging(true);
-        const rect = dragRef.current.getBoundingClientRect();
+        const rect = windowRef.current.getBoundingClientRect();
         offsetRef.current = {
             x: e.clientX - rect.left,
             y: e.clientY - rect.top
@@ -35,7 +78,7 @@ export default function AeroWindow({ title, icon, onClose, initialPosition = { x
         setIsDragging(false);
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (isDragging) {
             window.addEventListener('mousemove', handleMouseMove);
             window.addEventListener('mouseup', handleMouseUp);
@@ -52,14 +95,10 @@ export default function AeroWindow({ title, icon, onClose, initialPosition = { x
     };
 
     return (
-        <motion.div
-            ref={dragRef}
+        <div
+            ref={windowRef}
             className="aero-window"
             style={{ left: position.x, top: position.y, cursor: isDragging ? 'grabbing' : 'grab' }}
-            initial={{ opacity: 0, scale: 0.8, y: 50 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 50 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             onMouseDown={handleMouseDown}
             onClick={handleWindowClick}
         >
@@ -78,7 +117,7 @@ export default function AeroWindow({ title, icon, onClose, initialPosition = { x
                         <button className="window-control-btn maximize-btn">
                             <span className="control-icon">□</span>
                         </button>
-                        <button className="window-control-btn close-btn" onClick={onClose}>
+                        <button className="window-control-btn close-btn" onClick={handleClose}>
                             <span className="control-icon">✕</span>
                         </button>
                     </div>
@@ -149,6 +188,6 @@ export default function AeroWindow({ title, icon, onClose, initialPosition = { x
                     <span>0 items</span>
                 </div>
             </div>
-        </motion.div>
+        </div>
     );
 }
