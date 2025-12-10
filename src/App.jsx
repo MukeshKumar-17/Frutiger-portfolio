@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import TopBar from './components/TopBar';
 import Dock from './components/Dock';
-import Window from './components/Window';
 import AeroWindow from './components/AeroWindow';
+import Welcome from './components/Welcome';
 import './App.css';
 
 function App() {
@@ -43,6 +43,9 @@ function App() {
   return (
     <div className="app-container" onClick={handleBackgroundClick}>
       <TopBar />
+
+      {/* Welcome Typography */}
+      <Welcome />
 
       <div className="desktop-icon-container" onClick={(e) => e.stopPropagation()}>
         <img src="/hard_disk.png" alt="Macintosh HD" className="desktop-icon" />
