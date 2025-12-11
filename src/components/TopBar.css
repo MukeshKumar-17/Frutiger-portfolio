@@ -12,16 +12,16 @@
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     font-size: 13px;
     font-weight: bold;
-    color: #000;
+    color: #fff;
     z-index: 1000;
     position: relative;
 }
 
-.apple-logo {
-    font-size: 16px;
+.corner-logo {
+    height: 16px;
+    width: auto;
     margin-right: 15px;
-    color: #333;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
 
 .menu-items {
@@ -30,8 +30,8 @@
 }
 
 .menu-item {
-    color: #000;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     cursor: default;
 }
 

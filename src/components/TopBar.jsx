@@ -16,7 +16,7 @@ export default function TopBar() {
 
     return (
         <div className="top-bar">
-            <span className="apple-logo"></span>
+            <img src="/logo.svg" alt="Logo" className="corner-logo" />
             <div className="menu-items">
                 <span className="menu-item bold">Grab</span>
                 <span className="menu-item">File</span>
