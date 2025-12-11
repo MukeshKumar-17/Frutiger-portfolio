@@ -85,7 +85,7 @@
     display: flex;
     justify-content: center;
     font-style: italic;
-    text-transform: capitalize;
+    text-transform: none;
 }
 
 .portfolio-letter {

@@ -128,7 +128,7 @@ export default function Welcome() {
 
     // Split text into individual letters for animation
     const welcomeText = "Hey, I'm MUKESH KUMAR! Welcome to my";
-    const portfolioText = 'portfolio';
+    const portfolioText = 'Portfolio';
 
     return (
         <div className="welcome-container" ref={containerRef}>
