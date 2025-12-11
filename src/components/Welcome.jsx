@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { gsap } from 'gsap';
 import './Welcome.css';
 
@@ -6,8 +6,112 @@ export default function Welcome() {
     const containerRef = useRef(null);
     const titleRef = useRef(null);
     const portfolioRef = useRef(null);
+    const letterRefs = useRef([]);
+    const mousePos = useRef({ x: 0, y: 0 });
+    const animationFrameId = useRef(null);
+    const letterStates = useRef([]);
+    const isMouseInContainer = useRef(false);
+
+    // Initialize letter states for smooth lerping
+    const initLetterStates = useCallback(() => {
+        letterStates.current = letterRefs.current.map(() => ({
+            currentWeight: 400,
+            targetWeight: 400,
+            currentScale: 1,
+            targetScale: 1
+        }));
+    }, []);
+
+    // Lerp function for smooth interpolation
+    const lerp = (start, end, factor) => start + (end - start) * factor;
+
+    // Calculate target values based on mouse position
+    const updateTargets = useCallback(() => {
+        const letters = letterRefs.current;
+        if (!letters.length || !isMouseInContainer.current) return;
+
+        letters.forEach((letterEl, index) => {
+            if (!letterEl || !letterStates.current[index]) return;
+
+            const rect = letterEl.getBoundingClientRect();
+            const letterCenterX = rect.left + rect.width / 2;
+            const letterCenterY = rect.top + rect.height / 2;
+
+            // Calculate distance from cursor to letter center
+            const dx = mousePos.current.x - letterCenterX;
+            const dy = mousePos.current.y - letterCenterY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // Effect parameters - wider radius for smoother falloff
+            const maxDistance = 200;
+            const normalWeight = 400;
+            const boldWeight = 900;
+            const normalScale = 1;
+            const hoverScale = 1.08;
+
+            if (distance >= maxDistance) {
+                letterStates.current[index].targetWeight = normalWeight;
+                letterStates.current[index].targetScale = normalScale;
+            } else {
+                // Smooth cubic easing for more natural feel
+                const t = 1 - (distance / maxDistance);
+                const easedT = t * t * t * (t * (t * 6 - 15) + 10); // Smootherstep easing
+
+                letterStates.current[index].targetWeight = normalWeight + (boldWeight - normalWeight) * easedT;
+                letterStates.current[index].targetScale = normalScale + (hoverScale - normalScale) * easedT;
+            }
+        });
+    }, []);
+
+    // Animation loop using requestAnimationFrame
+    const animate = useCallback(() => {
+        const letters = letterRefs.current;
+
+        letters.forEach((letterEl, index) => {
+            if (!letterEl || !letterStates.current[index]) return;
+
+            const state = letterStates.current[index];
+
+            // Lerp factor - lower = smoother but slower, higher = snappier
+            const lerpFactor = isMouseInContainer.current ? 0.12 : 0.08;
+
+            // Smoothly interpolate current values toward targets
+            state.currentWeight = lerp(state.currentWeight, state.targetWeight, lerpFactor);
+            state.currentScale = lerp(state.currentScale, state.targetScale, lerpFactor);
+
+            // Apply styles directly for maximum performance
+            letterEl.style.fontWeight = Math.round(state.currentWeight);
+            letterEl.style.transform = `scale(${state.currentScale.toFixed(4)})`;
+        });
+
+        animationFrameId.current = requestAnimationFrame(animate);
+    }, []);
+
+    // Mouse move handler - just updates mouse position
+    const handleMouseMove = useCallback((e) => {
+        mousePos.current = { x: e.clientX, y: e.clientY };
+        isMouseInContainer.current = true;
+        updateTargets();
+    }, [updateTargets]);
+
+    // Mouse leave handler - triggers smooth return to normal
+    const handleMouseLeave = useCallback(() => {
+        isMouseInContainer.current = false;
+
+        // Set all targets to normal state
+        letterStates.current.forEach((state) => {
+            state.targetWeight = 400;
+            state.targetScale = 1;
+        });
+    }, []);
 
     useEffect(() => {
+        // Initialize letter states after initial render
+        initLetterStates();
+
+        // Start the animation loop
+        animationFrameId.current = requestAnimationFrame(animate);
+
         // Initial animation on mount
         const tl = gsap.timeline();
 
@@ -61,34 +165,8 @@ export default function Welcome() {
             });
         });
 
-        // Setup hover animations for portfolio letters
-        const portfolioLetters = document.querySelectorAll('.portfolio-letter');
-        portfolioLetters.forEach((letter) => {
-            letter.addEventListener('mouseenter', () => {
-                gsap.to(letter, {
-                    y: -15,
-                    scale: 1.2,
-                    color: '#ffffff',
-                    textShadow: '0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(100, 200, 255, 0.6)',
-                    duration: 0.3,
-                    ease: 'power2.out'
-                });
-            });
-
-            letter.addEventListener('mouseleave', () => {
-                gsap.to(letter, {
-                    y: 0,
-                    scale: 1,
-                    color: '',
-                    textShadow: '',
-                    duration: 0.5,
-                    ease: 'elastic.out(1, 0.3)'
-                });
-            });
-        });
-
-        // Magnetic effect on mouse move
-        const handleMouseMove = (e) => {
+        // Magnetic effect on mouse move for portfolio container
+        const onMouseMove = (e) => {
             const container = containerRef.current;
             if (!container) return;
 
@@ -105,30 +183,54 @@ export default function Welcome() {
                 duration: 0.5,
                 ease: 'power2.out'
             });
+
+            // Update mouse position for proximity effect
+            handleMouseMove(e);
         };
 
-        const handleMouseLeave = () => {
+        const onMouseLeave = () => {
             gsap.to(portfolioRef.current, {
                 x: 0,
                 y: 0,
                 duration: 0.8,
                 ease: 'elastic.out(1, 0.3)'
             });
+
+            // Trigger smooth return to normal
+            handleMouseLeave();
         };
 
         const container = containerRef.current;
-        container.addEventListener('mousemove', handleMouseMove);
-        container.addEventListener('mouseleave', handleMouseLeave);
+        container.addEventListener('mousemove', onMouseMove);
+        container.addEventListener('mouseleave', onMouseLeave);
 
         return () => {
-            container.removeEventListener('mousemove', handleMouseMove);
-            container.removeEventListener('mouseleave', handleMouseLeave);
+            container.removeEventListener('mousemove', onMouseMove);
+            container.removeEventListener('mouseleave', onMouseLeave);
+
+            // Cancel animation frame on cleanup
+            if (animationFrameId.current) {
+                cancelAnimationFrame(animationFrameId.current);
+            }
         };
-    }, []);
+    }, [initLetterStates, animate, handleMouseMove, handleMouseLeave]);
 
     // Split text into individual letters for animation
-    const welcomeText = "Hey, I'm MUKESH KUMAR! Welcome to my";
-    const portfolioText = 'Portfolio';
+    const portfolioText = 'Portfolio.';
+
+    // Ref callback to store letter elements and initialize state
+    const setLetterRef = useCallback((el, index) => {
+        letterRefs.current[index] = el;
+        // Initialize state for this letter if not already done
+        if (el && !letterStates.current[index]) {
+            letterStates.current[index] = {
+                currentWeight: 400,
+                targetWeight: 400,
+                currentScale: 1,
+                targetScale: 1
+            };
+        }
+    }, []);
 
     return (
         <div className="welcome-container" ref={containerRef}>
@@ -171,6 +273,7 @@ export default function Welcome() {
                 {portfolioText.split('').map((letter, index) => (
                     <span
                         key={index}
+                        ref={(el) => setLetterRef(el, index)}
                         className="portfolio-letter"
                         style={{ animationDelay: `${index * 0.05}s` }}
                     >
