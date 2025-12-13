@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import './Dock.css';
 
 const icons = [
-    { id: 'finder', name: 'Finder', src: '/finder.png' },
+    { id: 'finder', name: 'Finder', src: '/finder.png', tooltip: 'About Me' },
     { id: 'mail', name: 'Mail', src: '/mail.png' },
     { id: 'explorer', name: 'Explorer', src: '/ie.png' },
     { id: 'sherlock', name: 'Sherlock', src: '/sherlock.png' },
@@ -26,6 +26,7 @@ const springConfig = {
 
 function DockIcon({ icon, mouseX, onClick }) {
     const ref = useRef(null);
+    const [isHovered, setIsHovered] = useState(false);
 
     // Calculate distance from mouse to icon center
     const distance = useTransform(mouseX, (val) => {
@@ -66,15 +67,32 @@ function DockIcon({ icon, mouseX, onClick }) {
                 height,
                 y,
             }}
-            title={icon.name}
             whileTap={{ scale: 0.85 }}
             transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             onClick={() => onClick(icon)}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
         >
             <img src={icon.src} alt={icon.name} draggable={false} />
+
+            {/* Frutiger Aero Tooltip for icons with custom tooltip */}
+            <AnimatePresence>
+                {isHovered && icon.tooltip && (
+                    <motion.div
+                        className="aero-tooltip"
+                        initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 5, scale: 0.95 }}
+                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                    >
+                        <span className="aero-tooltip-text">{icon.tooltip}</span>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.div>
     );
 }
+
 
 export default function Dock({ onIconClick }) {
     // Track mouse X position
