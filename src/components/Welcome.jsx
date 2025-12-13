@@ -191,16 +191,22 @@ export default function Welcome() {
     return (
         <div className="welcome-container" ref={containerRef}>
             <p className="welcome-line">
-                {"Hey, I'm ".split(" ").map((l, i, arr) => (
-                    <span key={i} className="welcome-letter italic-text">{l}{i < arr.length - 1 ? ' ' : ''}</span>
+                {"Hey, I'm".split(" ").map((word, i, arr) => (
+                    <span key={`hey-${i}`} className="welcome-letter italic-text">
+                        {word}{i < arr.length - 1 ? '\u00A0' : ''}
+                    </span>
                 ))}
-
-                {"MUKESH KUMAR!".split(" ").map((l, i, arr) => (
-                    <span key={i} className="welcome-letter">{l}{i < arr.length - 1 ? ' ' : ''}</span>
+                <span className="welcome-letter">&nbsp;</span>
+                {"MUKESH KUMAR!".split(" ").map((word, i, arr) => (
+                    <span key={`name-${i}`} className="welcome-letter">
+                        {word}{i < arr.length - 1 ? '\u00A0' : ''}
+                    </span>
                 ))}
-
-                {" Welcome to my".split(" ").filter(Boolean).map((l, i, arr) => (
-                    <span key={i} className="welcome-letter italic-text"> {l}</span>
+                <span className="welcome-letter">&nbsp;</span>
+                {"Welcome to my".split(" ").map((word, i, arr) => (
+                    <span key={`welcome-${i}`} className="welcome-letter italic-text">
+                        {word}{i < arr.length - 1 ? '\u00A0' : ''}
+                    </span>
                 ))}
             </p>
 
