@@ -117,15 +117,15 @@ export default function Welcome() {
                     y: -8,
                     scale: 1.12,
                     color: '#fff',
-                    textShadow: '0 0 20px rgba(255,255,255,0.8), 0 0 40px rgba(100,200,255,0.6)',
                     duration: 0.25,
                     ease: 'power2.out'
                 });
             });
             letter.addEventListener('mouseleave', () => {
                 gsap.to(letter, {
-                    y: 0, scale: 1, color: '#fff',
-                    textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+                    y: 0,
+                    scale: 1,
+                    color: '#fff',
                     duration: 0.4,
                     ease: 'elastic.out(1,0.3)'
                 });

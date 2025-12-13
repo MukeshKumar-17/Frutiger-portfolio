@@ -37,7 +37,6 @@
     letter-spacing: 0.02em;
     line-height: 1.4;
     color: #ffffff;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .welcome-letter {
@@ -56,21 +55,18 @@
     font-style: normal;
     font-weight: 400;
     color: #ffffff;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .welcome-name {
     font-family: 'Origamet Hamida', 'Arial', 'Helvetica Neue', sans-serif;
     font-weight: 400;
     color: #ffffff;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .welcome-light {
     font-family: 'Origamet Hamida', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
     color: #ffffff;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Portfolio Title - Using Nearvana Font */
@@ -91,9 +87,7 @@
 .portfolio-letter {
     display: inline-block;
     color: rgba(255, 255, 255, 0.95);
-    text-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.3),
-        0 2px 10px rgba(0, 0, 0, 0.2);
+
     cursor: pointer;
     transform-style: preserve-3d;
     will-change: transform, font-weight;
@@ -108,12 +102,6 @@
     font-variation-settings: 'wght' 400;
 }
 
-.portfolio-letter:hover {
-    text-shadow:
-        0 0 30px rgba(255, 255, 255, 0.8),
-        0 0 60px rgba(100, 200, 255, 0.6),
-        0 0 90px rgba(100, 200, 255, 0.4);
-}
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
