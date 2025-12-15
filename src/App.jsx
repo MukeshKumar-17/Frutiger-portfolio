@@ -13,7 +13,7 @@ function App() {
     // Don't open if trash is clicked (or handle differently)
     if (icon.id === 'trash') return;
 
-    // Create a new window for this icon
+    // Create a new window for this icon              
     const newWindow = {
       id: nextWindowId,
       title: icon.name,
