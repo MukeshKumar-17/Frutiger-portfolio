@@ -7,7 +7,7 @@ import './App.css';
 
 function App() {
   const [openWindows, setOpenWindows] = useState([]); 
-  const [nextWindowId, setNextWindowId] = useState(1);          
+  const [nextWindowId, setNextWindowId] = useState(1);         
 
   const handleIconClick = (icon) => {
     // Don't open if trash is clicked (or handle differently)
