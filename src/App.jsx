@@ -6,7 +6,7 @@ import Welcome from './components/Welcome';
 import './App.css';
 
 function App() {
-  const [openWindows, setOpenWindows] = useState([]);
+  const [openWindows, setOpenWindows] = useState([]); 
   const [nextWindowId, setNextWindowId] = useState(1);
 
   const handleIconClick = (icon) => {
