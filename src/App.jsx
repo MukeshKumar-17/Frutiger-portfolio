@@ -14,7 +14,7 @@ function App() {
     if (icon.id === 'trash') return;
 
     // Create a new window for this icon              
-    const newWindow = {
+    const newWindow = {           
       id: nextWindowId,
       title: icon.name,
       icon: icon.src,
