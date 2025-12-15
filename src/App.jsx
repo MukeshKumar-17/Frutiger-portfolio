@@ -29,7 +29,7 @@ function App() {
   };
 
   const handleCloseWindow = (windowId) => {
-    setOpenWindows(prev => prev.filter(w => w.id !== windowId));
+    setOpenWindows(prev => prev.filter(w => w.id !== windowId));               
   };
 
   // Close all windows when clicking outside
