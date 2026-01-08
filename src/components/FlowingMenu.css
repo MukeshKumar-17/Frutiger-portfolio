@@ -1,0 +1,133 @@
+.menu-wrap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    /* Matches inner content radius */
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.menu__item {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    /* Glassy border */
+    transition: background-color 0.3s ease;
+}
+
+.menu__item:first-child {
+    border-top: none;
+}
+
+/* Hover effect for the item itself */
+.menu__item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu__item-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 36px;
+    /* Adjusted size */
+    font-family: 'Apple Garamond', serif;
+    /* Consistent font */
+    color: #2a4a7a;
+    /* Frutiger dark blue */
+    z-index: 1;
+    /* Below marquee */
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.menu__item-link:hover {
+    color: #1a3a6a;
+}
+
+.marquee {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Glossy Blue Bubble Texture */
+    background: linear-gradient(to bottom,
+            #73bce3 0%,
+            #4ea6d7 50%,
+            #3691c9 51%,
+            #73bce3 100%);
+    border-top: 1px solid #7c98b6;
+    border-bottom: 1px solid #7c98b6;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transform: translate3d(0, 101%, 0);
+    z-index: 2;
+    /* Cover the text when active */
+    /* Below text link on hover? No, actually typically over it or replacing it. */
+    /* If we want it to replace, z-index should be higher, but user code pushes it in via transform */
+}
+
+/* 
+   In the original user code, the marquee slides IN over the link. 
+   So we need to make sure the marquee content looks good.
+*/
+
+.marquee__inner-wrap {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    /* Center content vertically */
+}
+
+.marquee__inner {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 100%;
+    width: fit-content;
+    will-change: transform;
+}
+
+.marquee__part {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.marquee__part-item {
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1;
+    padding: 0 20px;
+    color: #2a4a7a;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Clean font for skills */
+
+    /* Glass bubble style for each skill */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    margin: 0 10px;
+    padding: 8px 20px;
+    box-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+}

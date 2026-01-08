@@ -1,6 +1,34 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import './AeroWindow.css';
+import FlowingMenu from './FlowingMenu';
+
+const items = [
+    {
+        text: 'Frontend',
+        link: '#',
+        image: '',
+        skills: ['React', 'Vue', 'Next.js', 'Tailwind CSS', 'HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'Framer Motion']
+    },
+    {
+        text: 'Backend',
+        link: '#',
+        image: '',
+        skills: ['Node.js', 'Express', 'Python', 'Django', 'FastAPI', 'REST APIs', 'GraphQL', 'WebSockets']
+    },
+    {
+        text: 'Languages',
+        link: '#',
+        image: '',
+        skills: ['JavaScript', 'Python', 'C++', 'Java', 'SQL', 'HTML', 'CSS', 'Bash']
+    },
+    {
+        text: 'Database',
+        link: '#',
+        image: '',
+        skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Firebase', 'Supabase', 'Prisma']
+    }
+];
 
 export default function SkillsWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 } }) {
     const [position, setPosition] = useState(initialPosition);
@@ -102,7 +130,7 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
                 left: position.x,
                 top: position.y,
                 cursor: isDragging ? 'grabbing' : 'grab',
-                width: '600px',
+                width: '900px',
                 minHeight: '350px'
             }}
             onMouseDown={handleMouseDown}
@@ -130,40 +158,35 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
                 </div>
 
                 {/* Content Area */}
-                <div className="aero-content" style={{ flexDirection: 'column', padding: '0' }}>
+                <div className="aero-content" style={{ flexDirection: 'column', padding: '0', overflow: 'hidden' }}>
 
                     {/* Main Content */}
                     <div className="aero-main" style={{
                         flex: 1,
                         flexDirection: 'column',
-                        alignItems: 'flex-start',
+                        alignItems: 'stretch',
                         justifyContent: 'flex-start',
-                        padding: '30px',
+                        padding: '0',
                         lineHeight: '1.6',
                         color: '#333',
-                        overflowY: 'auto',
-                        position: 'relative'
+                        overflowY: 'hidden',
+                        position: 'relative',
+                        height: '100%'
                     }}>
+                        {/* Title Section */}
+                        <div style={{ padding: '20px 30px 10px 30px' }}>
+                            <h2 style={{
+                                fontSize: '50px',
+                                margin: '0',
+                                color: '#2a4a7a',
+                                fontWeight: '600',
+                                fontFamily: "'Apple Garamond', serif"
+                            }}>Skills</h2>
+                        </div>
 
-                        <h2 style={{
-                            fontSize: '50px',
-                            marginBottom: '15px',
-                            color: '#2a4a7a',
-                            fontWeight: '600',
-                            fontFamily: "'Apple Garamond', serif"
-                        }}>Skills</h2>
-
-                        <div style={{ fontSize: '14px', width: '100%' }}>
-                            <p style={{ marginBottom: '15px' }}>
-                                This is where your skills will be listed.
-                            </p>
-                            {/* Placeholder for skills content */}
-                            <ul style={{ listStyleType: 'disc', paddingLeft: '20px' }}>
-                                <li>Frontend Development (React, Vue, etc.)</li>
-                                <li>Backend Development (Node.js, Python, etc.)</li>
-                                <li>UI/UX Design</li>
-                                <li>Database Management</li>
-                            </ul>
+                        {/* Menu Section */}
+                        <div style={{ flex: 1, width: '100%', position: 'relative' }}>
+                            <FlowingMenu items={items} />
                         </div>
                     </div>
                 </div>
