@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TopBar from './components/TopBar';
 import Dock from './components/Dock';
 import AeroWindow from './components/AeroWindow';
+import AboutMeWindow from './components/AboutMeWindow';
 import Welcome from './components/Welcome';
 import './App.css';
 
@@ -16,6 +17,8 @@ function App() {
     // Create a new window for this icon              
     const newWindow = {           
       id: nextWindowId,
+
+      type: icon.id,
       title: icon.name,
       icon: icon.src,
       position: {
@@ -50,13 +53,23 @@ function App() {
 
       {/* Aero Windows */}
       {openWindows.map((window) => (
-        <AeroWindow
-          key={window.id}
-          title={window.title}
-          icon={window.icon}
-          initialPosition={window.position}
-          onClose={() => handleCloseWindow(window.id)}
-        />
+        window.type === 'finder' ? (
+          <AboutMeWindow
+            key={window.id}
+            title={window.title}
+            icon={window.icon}
+            initialPosition={window.position}
+            onClose={() => handleCloseWindow(window.id)}
+          />
+        ) : (
+          <AeroWindow
+            key={window.id}
+            title={window.title}
+            icon={window.icon}
+            initialPosition={window.position}
+            onClose={() => handleCloseWindow(window.id)}
+          />
+        )
       ))}
 
       <Dock onIconClick={handleIconClick} />
