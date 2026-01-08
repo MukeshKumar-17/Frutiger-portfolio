@@ -1,0 +1,123 @@
+.tilted-card-overlay-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    backdrop-filter: none;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tilted-card-container {
+    perspective: 1000px;
+}
+
+.tilted-card-figure {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tilted-card-inner {
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.tilted-card-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    border-radius: 20px;
+    will-change: transform;
+    transform: translateZ(0);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.4) inset;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.tilted-card-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    will-change: transform;
+    transform: translateZ(40px);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    pointer-events: none;
+    /* Let clicks pass through to links unless specifically targeting links */
+}
+
+.card-header {
+    text-align: left;
+    color: #333;
+    pointer-events: none;
+}
+
+.card-header h2 {
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+    font-weight: 700;
+    color: #000;
+    /* Solid black for visibility */
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4);
+    /* Light shadow to pop from metal */
+    font-family: 'Apple Garamond', 'Inter', sans-serif;
+}
+
+.card-header p {
+    font-size: 1.1rem;
+    margin: 0;
+    color: #000;
+    /* Solid black */
+    line-height: 1.4;
+    font-weight: 600;
+    /* Increased weight */
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.card-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    pointer-events: auto;
+    /* Enable clicks on links */
+}
+
+.card-link {
+    text-decoration: none;
+    color: #000;
+    /* Black text */
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    padding: 8px 16px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.3);
+    /* More transparent white */
+    backdrop-filter: blur(8px);
+    /* stronger blur */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.card-link:hover {
+    transform: translateX(-5px) scale(1.05);
+    background: rgba(255, 255, 255, 0.6);
+    color: #000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}

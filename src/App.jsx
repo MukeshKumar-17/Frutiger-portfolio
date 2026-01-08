@@ -5,15 +5,22 @@ import AeroWindow from './components/AeroWindow';
 import AboutMeWindow from './components/AboutMeWindow';
 import SkillsWindow from './components/SkillsWindow';
 import Welcome from './components/Welcome';
+import TiltedContactCard from './components/TiltedContactCard';
 import './App.css';
 
 function App() {
   const [openWindows, setOpenWindows] = useState([]);
   const [nextWindowId, setNextWindowId] = useState(1);
+  const [showContactCard, setShowContactCard] = useState(false);
 
   const handleIconClick = (icon) => {
     // Don't open if trash is clicked (or handle differently)
     if (icon.id === 'trash') return;
+
+    if (icon.id === 'spring') {
+      setShowContactCard(true);
+      return;
+    }
 
     // Create a new window for this icon              
     const newWindow = {
@@ -49,6 +56,11 @@ function App() {
 
       {/* Welcome Typography */}
       <Welcome />
+
+      {/* Contact Card Overlay */}
+      {showContactCard && (
+        <TiltedContactCard onClose={() => setShowContactCard(false)} />
+      )}
 
 
 
