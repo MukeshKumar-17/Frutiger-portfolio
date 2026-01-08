@@ -9,10 +9,10 @@
     font-display: swap;
 }
 
-/* Custom Font - Origamet Hamida */
+/* Custom Font - Apple Garamond */
 @font-face {
-    font-family: 'Origamet Hamida';
-    src: url('/quen.otf') format('truetype');
+    font-family: 'Apple Garamond';
+    src: url('/AppleGaramond-Light.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -31,8 +31,9 @@
 
 /* Welcome Line Styles */
 .welcome-line {
-    font-family: 'Origamet Hamida', 'Georgia', 'Times New Roman', serif;
-    font-size: 1.8rem;
+    font-family: 'Apple Garamond', 'Georgia', 'Times New Roman', serif;
+    font-size: 2.2rem;
+    /* Slighly larger for Garamond readability */
     margin-bottom: 0.5rem;
     letter-spacing: 0.02em;
     line-height: 1.4;
@@ -51,27 +52,27 @@
 }
 
 .welcome-italic {
-    font-family: 'Origamet Hamida', 'Georgia', 'Times New Roman', serif;
+    font-family: 'Apple Garamond', 'Georgia', 'Times New Roman', serif;
     font-style: normal;
     font-weight: 400;
     color: #ffffff;
 }
 
 .welcome-name {
-    font-family: 'Origamet Hamida', 'Arial', 'Helvetica Neue', sans-serif;
+    font-family: 'Apple Garamond', 'Arial', 'Helvetica Neue', sans-serif;
     font-weight: 400;
     color: #ffffff;
 }
 
 .welcome-light {
-    font-family: 'Origamet Hamida', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Apple Garamond', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
     color: #ffffff;
 }
 
 /* Portfolio Title - Using Nearvana Font */
 .portfolio-title {
-    font-family: 'Nearvana', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Apple Garamond', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     font-size: 7rem;
     font-weight: normal;
     margin: 0;

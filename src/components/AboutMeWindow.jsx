@@ -191,11 +191,12 @@ export default function AboutMeWindow({ title, icon, onClose, initialPosition = 
                         </div>
 
                         <h2 style={{
-                            fontSize: '24px',
+                            fontSize: '50px',
                             marginBottom: '15px',
                             color: '#2a4a7a',
                             fontWeight: '600',
-                            maxWidth: '65%'
+                            maxWidth: '65%',
+                            fontFamily: "'Apple Garamond', serif"
                         }}>About Me</h2>
 
                         <div style={{ fontSize: '14px', maxWidth: '65%' }}>
