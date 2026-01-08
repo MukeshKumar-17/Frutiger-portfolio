@@ -117,7 +117,7 @@
     -webkit-backdrop-filter: blur(10px);
 }
 
-/* Tooltip arrow/pointer */
+/* Tooltip arrow/pointer - Applied globally to aero-tooltip */
 .aero-tooltip::after {
     content: '';
     position: absolute;
@@ -128,4 +128,11 @@
     border-style: solid;
     border-color: rgba(220, 235, 250, 0.9) transparent transparent transparent;
     filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Hide arrow specifically for finder-tooltip */
+.aero-tooltip.finder-tooltip::after {
+    display: none !important;
+    content: none !important;
+    border: none !important;
 }
