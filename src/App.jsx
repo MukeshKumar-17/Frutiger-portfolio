@@ -3,6 +3,7 @@ import TopBar from './components/TopBar';
 import Dock from './components/Dock';
 import AeroWindow from './components/AeroWindow';
 import AboutMeWindow from './components/AboutMeWindow';
+import SkillsWindow from './components/SkillsWindow';
 import Welcome from './components/Welcome';
 import './App.css';
 
@@ -55,6 +56,14 @@ function App() {
       {openWindows.map((window) => (
         window.type === 'finder' ? (
           <AboutMeWindow
+            key={window.id}
+            title={window.title}
+            icon={window.icon}
+            initialPosition={window.position}
+            onClose={() => handleCloseWindow(window.id)}
+          />
+        ) : window.type === 'sherlock' ? (
+          <SkillsWindow
             key={window.id}
             title={window.title}
             icon={window.icon}
