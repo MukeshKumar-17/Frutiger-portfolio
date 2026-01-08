@@ -6,6 +6,7 @@ import AboutMeWindow from './components/AboutMeWindow';
 import SkillsWindow from './components/SkillsWindow';
 import Welcome from './components/Welcome';
 import TiltedContactCard from './components/TiltedContactCard';
+import BrowserWindow from './components/BrowserWindow';
 import './App.css';
 
 function App() {
@@ -76,6 +77,14 @@ function App() {
           />
         ) : window.type === 'sherlock' ? (
           <SkillsWindow
+            key={window.id}
+            title={window.title}
+            icon={window.icon}
+            initialPosition={window.position}
+            onClose={() => handleCloseWindow(window.id)}
+          />
+        ) : window.type === 'explorer' ? (
+          <BrowserWindow
             key={window.id}
             title={window.title}
             icon={window.icon}
