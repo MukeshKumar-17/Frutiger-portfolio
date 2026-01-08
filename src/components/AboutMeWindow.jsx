@@ -141,16 +141,64 @@ export default function AboutMeWindow({ title, icon, onClose, initialPosition = 
                         padding: '30px',
                         lineHeight: '1.6',
                         color: '#333',
-                        overflowY: 'auto'
+                        overflowY: 'auto',
+                        position: 'relative'
                     }}>
+                        {/* Profile Photo with Aero Gloss Border */}
+                        <div style={{
+                            position: 'absolute',
+                            top: '30px',
+                            right: '30px',
+                            width: '150px',
+                            height: '180px',
+                            padding: '6px',
+                            borderRadius: '8px',
+                            background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.0) 51%, rgba(255,255,255,0.1) 100%)',
+                            boxShadow: `
+                                inset 0 0 0 1px rgba(255,255,255,0.6),
+                                inset 0 1px 0 rgba(255,255,255,0.9),
+                                0 5px 15px rgba(0,0,0,0.3),
+                                0 0 0 1px rgba(0,0,0,0.1)
+                            `,
+                            backdropFilter: 'blur(5px)',
+                            WebkitBackdropFilter: 'blur(5px)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}>
+                            <img
+                                src="/mukesh.photo.jpg"
+                                alt="Mukesh Kumar K"
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
+                                    borderRadius: '4px',
+                                    border: '1px solid rgba(0,0,0,0.2)'
+                                }}
+                            />
+                            {/* Gloss Shine Overlay */}
+                            <div style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                height: '40%',
+                                background: 'linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 100%)',
+                                borderRadius: '7px 7px 40% 40% / 7px 7px 10px 10px',
+                                pointerEvents: 'none'
+                            }}></div>
+                        </div>
+
                         <h2 style={{
                             fontSize: '24px',
                             marginBottom: '15px',
                             color: '#2a4a7a',
-                            fontWeight: '600'
+                            fontWeight: '600',
+                            maxWidth: '65%'
                         }}>About Me</h2>
 
-                        <div style={{ fontSize: '14px' }}>
+                        <div style={{ fontSize: '14px', maxWidth: '65%' }}>
                             <p style={{ marginBottom: '15px' }}>
                                 Hi, I’m <strong>Mukesh Kumar K</strong>, a Computer Science student specializing in Artificial Intelligence & Machine Learning. I enjoy building clean, functional interfaces and turning ideas into practical digital experiences.
                             </p>

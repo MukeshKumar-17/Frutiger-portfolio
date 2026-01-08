@@ -7,15 +7,15 @@ import Welcome from './components/Welcome';
 import './App.css';
 
 function App() {
-  const [openWindows, setOpenWindows] = useState([]); 
-  const [nextWindowId, setNextWindowId] = useState(1);                              
+  const [openWindows, setOpenWindows] = useState([]);
+  const [nextWindowId, setNextWindowId] = useState(1);
 
   const handleIconClick = (icon) => {
     // Don't open if trash is clicked (or handle differently)
     if (icon.id === 'trash') return;
 
     // Create a new window for this icon              
-    const newWindow = {           
+    const newWindow = {
       id: nextWindowId,
 
       type: icon.id,
@@ -32,7 +32,7 @@ function App() {
   };
 
   const handleCloseWindow = (windowId) => {
-    setOpenWindows(prev => prev.filter(w => w.id !== windowId));               
+    setOpenWindows(prev => prev.filter(w => w.id !== windowId));
   };
 
   // Close all windows when clicking outside

@@ -54,6 +54,7 @@
             rgba(190, 208, 230, 0.9) 100%);
     border-bottom: 1px solid rgba(150, 170, 190, 0.5);
     position: relative;
+    z-index: 10;
 }
 
 .aero-titlebar-left {
