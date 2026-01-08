@@ -102,7 +102,7 @@ export default function AboutMeWindow({ title, icon, onClose, initialPosition = 
                 left: position.x,
                 top: position.y,
                 cursor: isDragging ? 'grabbing' : 'grab',
-                width: '600px', // Slightly smaller width for profile
+                width: '500px', // Slightly smaller width for profile
                 minHeight: '350px'
             }}
             onMouseDown={handleMouseDown}
