@@ -30,7 +30,7 @@ const items = [
     }
 ];
 
-export default function SkillsWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 } }) {
+export default function SkillsWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus }) {
     const [position, setPosition] = useState(initialPosition);
     const [isDragging, setIsDragging] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
@@ -60,7 +60,7 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
         });
     }, []);
 
-    // Handle close with animation
+    // Handle close with pop-out animation
     const handleClose = () => {
         const window = windowRef.current;
         if (!window || isClosing) return;
@@ -69,10 +69,9 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
 
         gsap.to(window, {
             opacity: 0,
-            scale: 0.8,
-            y: 50,
-            duration: 0.25,
-            ease: 'power2.in',
+            scale: 1.05,  // Pop-out effect - slight scale up
+            duration: 0.2,
+            ease: 'power2.out',
             onComplete: () => {
                 onClose();
             }
@@ -86,6 +85,9 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
             e.target.closest('input')) return;
 
         e.stopPropagation();
+        // Bring window to front when clicked
+        if (onFocus) onFocus();
+
         setIsDragging(true);
         const rect = windowRef.current.getBoundingClientRect();
         offsetRef.current = {
@@ -117,9 +119,10 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
         };
     }, [isDragging]);
 
-    // Stop propagation to prevent closing when clicking inside window
+    // Stop propagation and bring to front when clicking inside window
     const handleWindowClick = (e) => {
         e.stopPropagation();
+        if (onFocus) onFocus();
     };
 
     return (
@@ -131,7 +134,8 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
                 top: position.y,
                 cursor: isDragging ? 'grabbing' : 'grab',
                 width: '900px',
-                minHeight: '350px'
+                minHeight: '350px',
+                zIndex: zIndex
             }}
             onMouseDown={handleMouseDown}
             onClick={handleWindowClick}

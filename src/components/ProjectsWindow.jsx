@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import './AeroWindow.css';
 import './ProjectsWindow.css';
 
-export default function ProjectsWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 } }) {
+export default function ProjectsWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus }) {
     const [position, setPosition] = useState(initialPosition);
     const [isDragging, setIsDragging] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
@@ -33,7 +33,7 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
         });
     }, []);
 
-    // Handle close with animation
+    // Handle close with pop-out animation
     const handleClose = () => {
         const window = windowRef.current;
         if (!window || isClosing) return;
@@ -42,10 +42,9 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
 
         gsap.to(window, {
             opacity: 0,
-            scale: 0.8,
-            y: 50,
-            duration: 0.25,
-            ease: 'power2.in',
+            scale: 1.05,  // Pop-out effect - slight scale up
+            duration: 0.2,
+            ease: 'power2.out',
             onComplete: () => {
                 onClose();
             }
@@ -66,6 +65,9 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
             e.target.closest('.projects-window-content')) return;
 
         e.stopPropagation();
+        // Bring window to front when clicked
+        if (onFocus) onFocus();
+
         setIsDragging(true);
         const rect = windowRef.current.getBoundingClientRect();
         offsetRef.current = {
@@ -99,6 +101,7 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
 
     const handleWindowClick = (e) => {
         e.stopPropagation();
+        if (onFocus) onFocus();
     };
 
     // Project Data
@@ -116,7 +119,8 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
                 top: position.y,
                 cursor: isDragging ? 'grabbing' : 'grab',
                 width: '800px',
-                height: '500px'
+                height: '500px',
+                zIndex: zIndex
             }}
             onMouseDown={handleMouseDown}
             onClick={handleWindowClick}

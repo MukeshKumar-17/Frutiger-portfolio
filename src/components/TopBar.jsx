@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './TopBar.css';
 
-export default function TopBar() {
+export default function TopBar({ onOpenProjects, onOpenContact, onOpenResume }) {
     const [time, setTime] = useState('');
 
     useEffect(() => {
@@ -18,12 +18,27 @@ export default function TopBar() {
         <div className="top-bar">
             <img src="/logo.svg" alt="Logo" className="corner-logo" />
             <div className="menu-items">
-                <span className="menu-item bold">Grab</span>
-                <span className="menu-item">File</span>
-                <span className="menu-item">Edit</span>
-                <span className="menu-item">Capture</span>
-                <span className="menu-item">Window</span>
-                <span className="menu-item">Help</span>
+                <span
+                    className="menu-item link-item"
+                    onClick={onOpenProjects}
+                    style={{ color: '#ffffff', fontWeight: 'bold', cursor: 'pointer' }}
+                >
+                    Mukesh Kumar's Portfolio
+                </span>
+                <span
+                    className="menu-item"
+                    onClick={onOpenContact}
+                    style={{ cursor: 'pointer' }}
+                >
+                    Contact
+                </span>
+                <span
+                    className="menu-item"
+                    onClick={onOpenResume}
+                    style={{ cursor: 'pointer' }}
+                >
+                    Resume
+                </span>
             </div>
             <div className="right-items">
                 <span className="menu-item">Mon {time}</span>
