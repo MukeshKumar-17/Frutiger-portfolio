@@ -4,6 +4,7 @@ import Dock from './components/Dock';
 import AeroWindow from './components/AeroWindow';
 import AboutMeWindow from './components/AboutMeWindow';
 import SkillsWindow from './components/SkillsWindow';
+import ProjectsWindow from './components/ProjectsWindow';
 import Welcome from './components/Welcome';
 import TiltedContactCard from './components/TiltedContactCard';
 import BrowserWindow from './components/BrowserWindow';
@@ -85,6 +86,14 @@ function App() {
           />
         ) : window.type === 'explorer' ? (
           <BrowserWindow
+            key={window.id}
+            title={window.title}
+            icon={window.icon}
+            initialPosition={window.position}
+            onClose={() => handleCloseWindow(window.id)}
+          />
+        ) : window.type === 'system_prefs' ? (
+          <ProjectsWindow
             key={window.id}
             title={window.title}
             icon={window.icon}
