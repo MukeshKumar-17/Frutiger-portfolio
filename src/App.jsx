@@ -5,6 +5,7 @@ import AeroWindow from './components/AeroWindow';
 import AboutMeWindow from './components/AboutMeWindow';
 import SkillsWindow from './components/SkillsWindow';
 import ProjectsWindow from './components/ProjectsWindow';
+import ResumeWindow from './components/ResumeWindow';
 import Welcome from './components/Welcome';
 import TiltedContactCard from './components/TiltedContactCard';
 import BrowserWindow from './components/BrowserWindow';
@@ -14,6 +15,7 @@ function App() {
   const [openWindows, setOpenWindows] = useState([]);
   const [nextWindowId, setNextWindowId] = useState(1);
   const [showContactCard, setShowContactCard] = useState(false);
+  const [showResumeWindow, setShowResumeWindow] = useState(false);
 
   const handleIconClick = (icon) => {
     // Don't open if trash is clicked (or handle differently)
@@ -26,6 +28,11 @@ function App() {
 
     if (icon.id === 'monitor') {
       window.open('https://github.com/MukeshKumar-17', '_blank');
+      return;
+    }
+
+    if (icon.id === 'news') {
+      setShowResumeWindow(true);
       return;
     }
 
@@ -115,6 +122,14 @@ function App() {
           />
         )
       ))}
+
+      {showResumeWindow && (
+        <ResumeWindow
+          title="Resume"
+          icon="/news.png"
+          onClose={() => setShowResumeWindow(false)}
+        />
+      )}
 
       <Dock onIconClick={handleIconClick} />
     </div>

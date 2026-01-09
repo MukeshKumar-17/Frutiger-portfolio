@@ -14,7 +14,7 @@ const icons = [
     { id: 'grab', name: 'Grab', src: '/grab.png' },
     // Separator here conceptually
     { id: 'spring', name: 'Spring', src: '/spring.png', tooltip: 'Contact' },
-    { id: 'news', name: 'News', src: '/news.png' },
+    { id: 'news', name: 'News', src: '/news.png', tooltip: 'Resume' },
     { id: 'trash', name: 'Trash', src: '/trash.png' },
 ];
 
@@ -31,7 +31,7 @@ function DockIcon({ icon, mouseX, onClick }) {
     const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
     const handleMouseMove = (e) => {
-        if (icon.id === 'finder' || icon.id === 'sherlock' || icon.id === 'spring' || icon.id === 'explorer' || icon.id === 'system_prefs' || icon.id === 'monitor') {
+        if (icon.id === 'finder' || icon.id === 'sherlock' || icon.id === 'spring' || icon.id === 'explorer' || icon.id === 'system_prefs' || icon.id === 'monitor' || icon.id === 'news') {
             setCursorPos({ x: e.clientX, y: e.clientY });
         }
     };
@@ -67,7 +67,7 @@ function DockIcon({ icon, mouseX, onClick }) {
     const y = useSpring(ySync, springConfig);
 
     const renderTooltip = () => {
-        if (icon.id === 'finder' || icon.id === 'sherlock' || icon.id === 'spring' || icon.id === 'explorer' || icon.id === 'system_prefs' || icon.id === 'monitor') {
+        if (icon.id === 'finder' || icon.id === 'sherlock' || icon.id === 'spring' || icon.id === 'explorer' || icon.id === 'system_prefs' || icon.id === 'monitor' || icon.id === 'news') {
             if (!isHovered) return null;
             return createPortal(
                 <div
