@@ -24,6 +24,11 @@ function App() {
       return;
     }
 
+    if (icon.id === 'monitor') {
+      window.open('https://github.com/MukeshKumar-17', '_blank');
+      return;
+    }
+
     // Create a new window for this icon              
     const newWindow = {
       id: nextWindowId,
