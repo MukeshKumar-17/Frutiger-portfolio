@@ -7,6 +7,7 @@ import AboutMeWindow from './components/AboutMeWindow';
 import SkillsWindow from './components/SkillsWindow';
 import ProjectsWindow from './components/ProjectsWindow';
 import ResumeWindow from './components/ResumeWindow';
+import GalleryWindow from './components/GalleryWindow';
 import Welcome from './components/Welcome';
 import TiltedContactCard from './components/TiltedContactCard';
 import BrowserWindow from './components/BrowserWindow';
@@ -17,6 +18,7 @@ function App() {
   const [nextWindowId, setNextWindowId] = useState(1);
   const [showContactCard, setShowContactCard] = useState(false);
   const [showResumeWindow, setShowResumeWindow] = useState(false);
+  const [showGalleryWindow, setShowGalleryWindow] = useState(false);
 
   // Window stack for z-index management - last item has highest z-index
   const [windowStack, setWindowStack] = useState([]);
@@ -41,6 +43,7 @@ function App() {
     setOpenWindows([]);
     setWindowStack([]);
     setShowResumeWindow(false);
+    setShowGalleryWindow(false);
   }, []);
 
   // Handle Contact Card open - close all windows first
@@ -70,6 +73,17 @@ function App() {
         setWindowStack(prev => [...prev, 'resume']);
       } else {
         bringToFront('resume');
+      }
+      return;
+    }
+
+    if (icon.id === 'mail') {
+      // Open gallery window
+      if (!showGalleryWindow) {
+        setShowGalleryWindow(true);
+        setWindowStack(prev => [...prev, 'gallery']);
+      } else {
+        bringToFront('gallery');
       }
       return;
     }
@@ -109,6 +123,11 @@ function App() {
     setWindowStack(prev => prev.filter(id => id !== 'resume'));
   };
 
+  const handleCloseGallery = () => {
+    setShowGalleryWindow(false);
+    setWindowStack(prev => prev.filter(id => id !== 'gallery'));
+  };
+
   // Background click - do nothing (keep windows open like real desktop)
   const handleBackgroundClick = () => {
     // Removed: closing all windows on background click
@@ -136,6 +155,8 @@ function App() {
         return <BrowserWindow {...commonProps} />;
       case 'system_prefs':
         return <ProjectsWindow {...commonProps} />;
+      case 'mail':
+        return <GalleryWindow {...commonProps} />;
       default:
         return <AeroWindow {...commonProps} />;
     }
@@ -183,6 +204,16 @@ function App() {
           onClose={handleCloseResume}
           zIndex={getZIndex('resume')}
           onFocus={() => bringToFront('resume')}
+        />
+      )}
+
+      {showGalleryWindow && (
+        <GalleryWindow
+          title="Art Gallery"
+          icon="/mail.png"
+          onClose={handleCloseGallery}
+          zIndex={getZIndex('gallery')}
+          onFocus={() => bringToFront('gallery')}
         />
       )}
 
