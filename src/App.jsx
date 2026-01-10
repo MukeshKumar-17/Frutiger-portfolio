@@ -11,6 +11,7 @@ import GalleryWindow from './components/GalleryWindow';
 import Welcome from './components/Welcome';
 import TiltedContactCard from './components/TiltedContactCard';
 import BrowserWindow from './components/BrowserWindow';
+import MusicPlayer from './components/MusicPlayer';
 import './App.css';
 
 function App() {
@@ -180,6 +181,8 @@ function App() {
         );
       case 'mail':
         return <GalleryWindow {...commonProps} />;
+      case 'music':
+        return <MusicPlayer {...commonProps} />;
       default:
         return <AeroWindow {...commonProps} />;
     }

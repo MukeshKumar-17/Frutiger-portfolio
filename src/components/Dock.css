@@ -136,3 +136,8 @@
     content: none !important;
     border: none !important;
 }
+
+/* Reduce iTunes icon size */
+.dock-icon img[src*="itunes"] {
+    transform: scale(0.75);
+}
