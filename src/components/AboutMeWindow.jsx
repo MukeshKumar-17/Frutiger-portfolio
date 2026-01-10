@@ -126,10 +126,10 @@ export default function AboutMeWindow({ title, icon, onClose, initialPosition = 
                         {icon && <img src={icon} alt="" className="aero-titlebar-icon" />}
                     </div>
                     <div className="aero-window-controls">
-                        <button className="window-control-btn minimize-btn">
+                        <button className="window-control-btn minimize-btn" onClick={handleClose}>
                             <span className="control-icon">─</span>
                         </button>
-                        <button className="window-control-btn maximize-btn">
+                        <button className="window-control-btn maximize-btn" onClick={handleClose}>
                             <span className="control-icon">□</span>
                         </button>
                         <button className="window-control-btn close-btn" onClick={handleClose}>
