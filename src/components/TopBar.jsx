@@ -21,7 +21,7 @@ export default function TopBar({ onOpenProjects, onOpenContact, onOpenResume }) 
                 <span
                     className="menu-item link-item"
                     onClick={onOpenProjects}
-                    style={{ color: '#ffffff', fontWeight: 'bold', cursor: 'pointer' }}
+                    style={{ color: '#000000', fontWeight: 'bold', cursor: 'pointer' }}
                 >
                     Mukesh Kumar's Portfolio
                 </span>

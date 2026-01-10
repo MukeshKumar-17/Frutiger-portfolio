@@ -116,7 +116,7 @@ export default function Welcome() {
                 gsap.to(letter, {
                     y: -8,
                     scale: 1.12,
-                    color: '#fff',
+                    color: '#000',
                     duration: 0.25,
                     ease: 'power2.out'
                 });
@@ -125,7 +125,7 @@ export default function Welcome() {
                 gsap.to(letter, {
                     y: 0,
                     scale: 1,
-                    color: '#fff',
+                    color: '#000',
                     duration: 0.4,
                     ease: 'elastic.out(1,0.3)'
                 });

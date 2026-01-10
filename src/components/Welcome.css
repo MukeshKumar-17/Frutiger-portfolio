@@ -12,7 +12,7 @@
 /* Custom Font - Apple Garamond */
 @font-face {
     font-family: 'Apple Garamond';
-    src: url('/AppleGaramond-Light.ttf') format('truetype');
+    src: url('/AppleGaramond.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -37,7 +37,7 @@
     margin-bottom: 0.5rem;
     letter-spacing: 0.02em;
     line-height: 1.4;
-    color: #ffffff;
+    color: #000000;
 }
 
 .welcome-letter {
@@ -55,19 +55,19 @@
     font-family: 'Apple Garamond', 'Georgia', 'Times New Roman', serif;
     font-style: normal;
     font-weight: 400;
-    color: #ffffff;
+    color: #000000;
 }
 
 .welcome-name {
     font-family: 'Apple Garamond', 'Arial', 'Helvetica Neue', sans-serif;
     font-weight: 400;
-    color: #ffffff;
+    color: #000000;
 }
 
 .welcome-light {
     font-family: 'Apple Garamond', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
-    color: #ffffff;
+    color: #000000;
 }
 
 /* Portfolio Title - Using Nearvana Font */
@@ -87,7 +87,7 @@
 
 .portfolio-letter {
     display: inline-block;
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(0, 0, 0, 0.95);
 
     cursor: pointer;
     transform-style: preserve-3d;
