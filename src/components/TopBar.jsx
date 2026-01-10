@@ -16,7 +16,7 @@ export default function TopBar({ onOpenProjects, onOpenContact, onOpenResume }) 
 
     return (
         <div className="top-bar">
-            <img src="/glsapl.svg" alt="Logo" className="corner-logo" />
+            <img src="/glassapple.png" alt="Logo" className="corner-logo" />
             <div className="menu-items">
                 <span
                     className="menu-item link-item"
