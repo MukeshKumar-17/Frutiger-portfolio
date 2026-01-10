@@ -115,9 +115,6 @@ export default function AeroWindow({ title, icon, onClose, initialPosition = { x
             <div className="aero-frame">
                 {/* Title Bar */}
                 <div className="aero-titlebar">
-                    <div className="aero-titlebar-left">
-                        {icon && <img src={icon} alt="" className="aero-titlebar-icon" />}
-                    </div>
                     <div className="aero-window-controls">
                         <button className="window-control-btn minimize-btn" onClick={handleClose}>
                             <span className="control-icon">─</span>
