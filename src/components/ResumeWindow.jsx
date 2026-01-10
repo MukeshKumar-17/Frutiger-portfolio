@@ -149,39 +149,6 @@ export default function ResumeWindow({ title, icon, onClose, initialPosition = {
 
                 {/* Content Area */}
                 <div className="aero-content" style={{ padding: 0, overflow: 'hidden', position: 'relative', flex: 1, display: 'flex' }}>
-
-                    {/* View in New Tab Button Overlay */}
-                    <div style={{
-                        position: 'absolute',
-                        top: '10px',
-                        right: '25px',
-                        zIndex: 10
-                    }}>
-                        <button
-                            onClick={handleOpenNewTab}
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '6px',
-                                padding: '6px 12px',
-                                background: 'rgba(255, 255, 255, 0.8)',
-                                border: '1px solid rgba(0, 0, 0, 0.2)',
-                                borderRadius: '6px',
-                                cursor: 'pointer',
-                                fontSize: '12px',
-                                fontWeight: '500',
-                                color: '#333',
-                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                                backdropFilter: 'blur(5px)',
-                                transition: 'all 0.2s'
-                            }}
-                            onMouseEnter={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.95)'}
-                            onMouseLeave={(e) => e.target.style.background = 'rgba(255, 255, 255, 0.8)'}
-                        >
-                            <span style={{ fontSize: '14px' }}>↗</span> Open in New Tab
-                        </button>
-                    </div>
-
                     <iframe
                         src="/MukeshResume.pdf"
                         title="Resume PDF"
