@@ -106,7 +106,7 @@ export default function BrowserWindow({ title, icon, onClose, initialPosition = 
     };
 
     const openInNewTab = () => {
-        window.open(url, '_blank');
+        window.open('https://codolio.com/profile/Mukesh_Kumar', '_blank');
     };
 
     return (
