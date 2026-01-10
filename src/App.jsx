@@ -128,10 +128,13 @@ function App() {
     setWindowStack(prev => prev.filter(id => id !== 'gallery'));
   };
 
-  // Background click - do nothing (keep windows open like real desktop)
-  const handleBackgroundClick = () => {
-    // Removed: closing all windows on background click
-    // This matches real desktop OS behavior
+  // Background click - close all windows when clicking outside
+  const handleBackgroundClick = (e) => {
+    // Only close if clicking directly on the app container background
+    if (e.target.classList.contains('app-container')) {
+      closeAllWindows();
+      setShowContactCard(false);
+    }
   };
 
   // Render window based on type
