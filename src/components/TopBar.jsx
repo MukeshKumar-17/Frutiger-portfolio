@@ -23,7 +23,7 @@ export default function TopBar({ onOpenProjects, onOpenContact, onOpenResume }) 
                     onClick={onOpenProjects}
                     style={{ color: '#000000', fontWeight: 'bold', cursor: 'pointer' }}
                 >
-                    Mukesh Kumar's Portfolio
+                    Mukesh's Portfolio
                 </span>
                 <span
                     className="menu-item"
