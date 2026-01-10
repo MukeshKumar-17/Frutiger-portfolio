@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import './AeroWindow.css';
 import './ProjectsWindow.css';
 
-export default function ProjectsWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus }) {
+export default function ProjectsWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus, onOpenAboutMe, onOpenResume }) {
     const [position, setPosition] = useState(initialPosition);
     const [isDragging, setIsDragging] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
@@ -159,17 +159,17 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
                                     <div className="sidebar-icon" style={{ background: '#888' }}></div>
                                     Work
                                 </div>
-                                <div className="sidebar-item">
+                                <div className="sidebar-item" onClick={onOpenAboutMe} style={{ cursor: 'pointer' }}>
                                     <div className="sidebar-icon"></div>
                                     About Me
                                 </div>
-                                <div className="sidebar-item">
+                                <div className="sidebar-item" onClick={onOpenResume} style={{ cursor: 'pointer' }}>
                                     <div className="sidebar-icon"></div>
                                     Resume
                                 </div>
-                                <div className="sidebar-item">
+                                <div className="sidebar-item" onClick={() => window.open('https://github.com/MukeshKumar-17', '_blank')} style={{ cursor: 'pointer' }}>
                                     <div className="sidebar-icon"></div>
-                                    Trash
+                                    GitHub
                                 </div>
                             </div>
 

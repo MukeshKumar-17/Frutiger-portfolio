@@ -154,7 +154,20 @@ function App() {
       case 'explorer':
         return <BrowserWindow {...commonProps} />;
       case 'system_prefs':
-        return <ProjectsWindow {...commonProps} />;
+        return (
+          <ProjectsWindow
+            {...commonProps}
+            onOpenAboutMe={() => handleIconClick({ id: 'finder', name: 'About Me', src: '/finder.png' })}
+            onOpenResume={() => {
+              if (!showResumeWindow) {
+                setShowResumeWindow(true);
+                setWindowStack(prev => [...prev, 'resume']);
+              } else {
+                bringToFront('resume');
+              }
+            }}
+          />
+        );
       case 'mail':
         return <GalleryWindow {...commonProps} />;
       default:
