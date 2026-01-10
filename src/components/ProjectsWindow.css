@@ -82,9 +82,10 @@
 }
 
 .projects-title {
-    font-size: 20px;
+    font-family: 'Apple Garamond', serif;
+    font-size: 50px;
     font-weight: 600;
-    color: #444;
+    color: #3d5d88;
     margin-bottom: 5px;
 }
 

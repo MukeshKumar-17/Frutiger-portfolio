@@ -197,7 +197,7 @@ export default function BrowserWindow({ title, icon, onClose, initialPosition = 
                     }}>
 
                         <h2 style={{
-                            fontSize: '32px',
+                            fontSize: '50px',
                             color: '#3d5d88',
                             marginBottom: '40px',
                             fontFamily: "'Apple Garamond', serif",

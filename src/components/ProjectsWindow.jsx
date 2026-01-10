@@ -195,8 +195,7 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
                         {/* Main Grid */}
                         <div className="projects-main-area">
                             <div className="projects-header">
-                                <div className="projects-title">Work</div>
-                                <div className="projects-subtitle">Recent Projects</div>
+                                <div className="projects-title">Projects</div>
                             </div>
 
                             <div className="projects-grid">
