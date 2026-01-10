@@ -133,7 +133,7 @@ export default function ResumeWindow({ title, icon, onClose, initialPosition = {
             {/* Glass Frame */}
             <div className="aero-frame" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                 {/* Title Bar */}
-                <div className="aero-titlebar">
+                <div className="aero-titlebar" style={{ position: 'relative' }}>
                     <div className="aero-window-controls">
                         <button className="window-control-btn minimize-btn" onClick={handleClose}>
                             <span className="control-icon">─</span>
@@ -145,6 +145,25 @@ export default function ResumeWindow({ title, icon, onClose, initialPosition = {
                             <span className="control-icon">✕</span>
                         </button>
                     </div>
+                    {/* Open in New Tab Button */}
+                    <button
+                        className="nav-btn"
+                        onClick={handleOpenNewTab}
+                        title="Open in new tab"
+                        style={{
+                            position: 'absolute',
+                            right: '8px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            zIndex: 10
+                        }}
+                    >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </button>
                 </div>
 
                 {/* Content Area */}
