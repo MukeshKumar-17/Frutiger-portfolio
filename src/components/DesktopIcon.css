@@ -1,0 +1,59 @@
+/* Desktop Icon Styles - Mac OS X Style */
+.desktop-icon {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+    z-index: 50;
+    transition: background-color 0.15s ease;
+}
+
+.desktop-icon:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.desktop-icon.selected {
+    background: rgba(100, 150, 255, 0.35);
+    border: 1px solid rgba(100, 150, 255, 0.6);
+}
+
+.desktop-icon-image {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.desktop-icon-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.desktop-icon-label {
+    font-family: 'Lucida Grande', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 10px !important;
+    color: #ffffff;
+    text-align: center;
+    text-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.8),
+        0 0 4px rgba(0, 0, 0, 0.5);
+    word-wrap: break-word;
+    max-width: 76px;
+    line-height: 1.2;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+.desktop-icon.selected .desktop-icon-label {
+    background: rgba(50, 100, 200, 0.8);
+    color: #fff;
+}

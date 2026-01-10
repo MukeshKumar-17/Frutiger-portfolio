@@ -12,6 +12,8 @@ import Welcome from './components/Welcome';
 import TiltedContactCard from './components/TiltedContactCard';
 import BrowserWindow from './components/BrowserWindow';
 import MusicPlayer from './components/MusicPlayer';
+import DesktopIcon from './components/DesktopIcon';
+import FinderWindow from './components/FinderWindow';
 import './App.css';
 
 function App() {
@@ -159,6 +161,28 @@ function App() {
 
     switch (win.type) {
       case 'finder':
+        return (
+          <FinderWindow
+            {...commonProps}
+            onOpenResume={() => {
+              if (!showResumeWindow) {
+                setShowResumeWindow(true);
+                setWindowStack(prev => [...prev, 'resume']);
+              } else {
+                bringToFront('resume');
+              }
+            }}
+            onOpenGallery={() => {
+              if (!showGalleryWindow) {
+                setShowGalleryWindow(true);
+                setWindowStack(prev => [...prev, 'gallery']);
+              } else {
+                bringToFront('gallery');
+              }
+            }}
+          />
+        );
+      case 'aboutme':
         return <AboutMeWindow {...commonProps} />;
       case 'sherlock':
         return <SkillsWindow {...commonProps} />;
@@ -212,6 +236,49 @@ function App() {
 
       {/* Welcome Typography */}
       <Welcome />
+
+      {/* Desktop Icons */}
+      <DesktopIcon
+        name="Projects"
+        icon="/glass_folder.png"
+        initialPosition={{ x: 30, y: 60 }}
+        onClick={() => {
+          const existingWindow = openWindows.find(w => w.type === 'system_prefs');
+          if (existingWindow) {
+            bringToFront(existingWindow.id);
+          } else {
+            handleIconClick({ id: 'system_prefs', name: 'Projects', src: '/system_prefs.png' });
+          }
+        }}
+      />
+
+      <DesktopIcon
+        name="Resume.pdf"
+        icon="/docr.png"
+        initialPosition={{ x: 30, y: 170 }}
+        onClick={() => {
+          if (!showResumeWindow) {
+            setShowResumeWindow(true);
+            setWindowStack(prev => [...prev, 'resume']);
+          } else {
+            bringToFront('resume');
+          }
+        }}
+      />
+
+      <DesktopIcon
+        name="AboutMe.txt"
+        icon="/doct.png"
+        initialPosition={{ x: 30, y: 280 }}
+        onClick={() => {
+          const existingWindow = openWindows.find(w => w.type === 'aboutme');
+          if (existingWindow) {
+            bringToFront(existingWindow.id);
+          } else {
+            handleIconClick({ id: 'aboutme', name: 'About Me', src: '/finder.png' });
+          }
+        }}
+      />
 
       {/* Contact Card Overlay - highest z-index, covers everything */}
       <AnimatePresence>
