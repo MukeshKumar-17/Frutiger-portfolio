@@ -69,8 +69,26 @@ export default function TiltedContactCard({ onClose }) {
     }
 
     return (
-        <div className="tilted-card-overlay-wrapper" onClick={onClose}>
-            <div className="tilted-card-container" onClick={(e) => e.stopPropagation()}>
+        <motion.div
+            className="tilted-card-overlay-wrapper"
+            onClick={onClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        >
+            <motion.div
+                className="tilted-card-container"
+                onClick={(e) => e.stopPropagation()}
+                initial={{ scale: 0.8, opacity: 0, y: 50 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.8, opacity: 0, y: 50 }}
+                transition={{
+                    duration: 0.4,
+                    ease: [0.4, 0, 0.2, 1],
+                    type: "tween"
+                }}
+            >
                 <figure
                     ref={ref}
                     className="tilted-card-figure"
@@ -117,7 +135,7 @@ export default function TiltedContactCard({ onClose }) {
                         </motion.div>
                     </motion.div>
                 </figure>
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     );
 }

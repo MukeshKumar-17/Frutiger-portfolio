@@ -22,13 +22,13 @@ export default function ResumeWindow({ title, icon, onClose, initialPosition = {
             transformOrigin: 'center bottom'
         });
 
-        // Animate in with smooth ease
+        // Animate in with smooth ease-in-out
         gsap.to(window, {
             opacity: 1,
             scale: 1,
             y: 0,
             duration: 0.4,
-            ease: 'back.out(1.4)'
+            ease: 'power2.inOut'
         });
     }, []);
 
@@ -41,9 +41,10 @@ export default function ResumeWindow({ title, icon, onClose, initialPosition = {
 
         gsap.to(window, {
             opacity: 0,
-            scale: 1.05,  // Pop-out effect - slight scale up
-            duration: 0.2,
-            ease: 'power2.out',
+            scale: 0.85,
+            y: 30,
+            duration: 0.3,
+            ease: 'power2.inOut',
             onComplete: () => {
                 onClose();
             }
@@ -123,7 +124,6 @@ export default function ResumeWindow({ title, icon, onClose, initialPosition = {
                 <div className="aero-titlebar">
                     <div className="aero-titlebar-left">
                         {icon && <img src={icon} alt="" className="aero-titlebar-icon" />}
-                        <span className="aero-title">{title}</span>
                     </div>
                     <div className="aero-window-controls">
                         <button className="window-control-btn minimize-btn">

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import TopBar from './components/TopBar';
 import Dock from './components/Dock';
 import AeroWindow from './components/AeroWindow';
@@ -166,9 +167,11 @@ function App() {
       <Welcome />
 
       {/* Contact Card Overlay - highest z-index, covers everything */}
-      {showContactCard && (
-        <TiltedContactCard onClose={() => setShowContactCard(false)} />
-      )}
+      <AnimatePresence>
+        {showContactCard && (
+          <TiltedContactCard onClose={() => setShowContactCard(false)} />
+        )}
+      </AnimatePresence>
 
       {/* Aero Windows */}
       {openWindows.map(renderWindow)}
