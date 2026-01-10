@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import DomeGallery from './DomeGallery';
 import './AeroWindow.css';
 
-export default function GalleryWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus }) {
+export default function GalleryWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus, triggerClose }) {
     const [position, setPosition] = useState(initialPosition);
     const [isDragging, setIsDragging] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
@@ -41,6 +41,13 @@ export default function GalleryWindow({ title, icon, onClose, initialPosition = 
             }
         });
     }, []);
+
+    // Handle external close trigger
+    useEffect(() => {
+        if (triggerClose && !isClosing) {
+            handleClose();
+        }
+    }, [triggerClose]);
 
     // Handle close with pop-out animation
     const handleClose = () => {

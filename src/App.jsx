@@ -19,6 +19,7 @@ function App() {
   const [showContactCard, setShowContactCard] = useState(false);
   const [showResumeWindow, setShowResumeWindow] = useState(false);
   const [showGalleryWindow, setShowGalleryWindow] = useState(false);
+  const [triggerCloseAll, setTriggerCloseAll] = useState(false);
 
   // Window stack for z-index management - last item has highest z-index
   const [windowStack, setWindowStack] = useState([]);
@@ -40,10 +41,15 @@ function App() {
 
   // Close all windows with animation support
   const closeAllWindows = useCallback(() => {
-    setOpenWindows([]);
-    setWindowStack([]);
-    setShowResumeWindow(false);
-    setShowGalleryWindow(false);
+    setTriggerCloseAll(true);
+    // Reset trigger after animations complete
+    setTimeout(() => {
+      setOpenWindows([]);
+      setWindowStack([]);
+      setShowResumeWindow(false);
+      setShowGalleryWindow(false);
+      setTriggerCloseAll(false);
+    }, 250); // Match animation duration
   }, []);
 
   // Handle Contact Card open - close all windows first
@@ -146,7 +152,8 @@ function App() {
       initialPosition: win.position,
       onClose: () => handleCloseWindow(win.id),
       zIndex: getZIndex(win.id),
-      onFocus: () => bringToFront(win.id)
+      onFocus: () => bringToFront(win.id),
+      triggerClose: triggerCloseAll
     };
 
     switch (win.type) {
@@ -220,6 +227,7 @@ function App() {
           onClose={handleCloseResume}
           zIndex={getZIndex('resume')}
           onFocus={() => bringToFront('resume')}
+          triggerClose={triggerCloseAll}
         />
       )}
 
@@ -230,6 +238,7 @@ function App() {
           onClose={handleCloseGallery}
           zIndex={getZIndex('gallery')}
           onFocus={() => bringToFront('gallery')}
+          triggerClose={triggerCloseAll}
         />
       )}
 

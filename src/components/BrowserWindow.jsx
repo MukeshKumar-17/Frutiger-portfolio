@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import './AeroWindow.css';
 
-export default function BrowserWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus }) {
+export default function BrowserWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus, triggerClose }) {
     const [position, setPosition] = useState(initialPosition);
     const [isDragging, setIsDragging] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
@@ -36,6 +36,13 @@ export default function BrowserWindow({ title, icon, onClose, initialPosition = 
             clearProps: 'willChange'
         });
     }, []);
+
+    // Handle external close trigger
+    useEffect(() => {
+        if (triggerClose && !isClosing) {
+            handleClose();
+        }
+    }, [triggerClose]);
 
     // Handle close with pop-out animation
     const handleClose = () => {

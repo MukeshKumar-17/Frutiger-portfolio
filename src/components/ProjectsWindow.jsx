@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import './AeroWindow.css';
 import './ProjectsWindow.css';
 
-export default function ProjectsWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus, onOpenAboutMe, onOpenResume }) {
+export default function ProjectsWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus, onOpenAboutMe, onOpenResume, triggerClose }) {
     const [position, setPosition] = useState(initialPosition);
     const [isDragging, setIsDragging] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
@@ -36,6 +36,13 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
             clearProps: 'willChange'
         });
     }, []);
+
+    // Handle external close trigger
+    useEffect(() => {
+        if (triggerClose && !isClosing) {
+            handleClose();
+        }
+    }, [triggerClose]);
 
     // Handle close with pop-out animation
     const handleClose = () => {
