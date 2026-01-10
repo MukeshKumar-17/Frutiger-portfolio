@@ -7,6 +7,10 @@
     z-index: 500;
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica Neue', sans-serif;
     user-select: none;
+    /* GPU acceleration for smooth animations */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .aero-frame {

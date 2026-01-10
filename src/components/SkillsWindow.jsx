@@ -34,6 +34,7 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
     const [position, setPosition] = useState(initialPosition);
     const [isDragging, setIsDragging] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
+    const [isMenuReady, setIsMenuReady] = useState(false); // Delay heavy component
     const windowRef = useRef(null);
     const offsetRef = useRef({ x: 0, y: 0 });
 
@@ -42,21 +43,29 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
         const window = windowRef.current;
         if (!window) return;
 
-        // Set initial state
+        // Set initial state - use minimal transforms for smooth animation
         gsap.set(window, {
             opacity: 0,
-            scale: 0.7,
-            y: 80,
-            transformOrigin: 'center bottom'
+            scale: 0.92,
+            y: 25,
+            transformOrigin: 'center center',
+            force3D: true,
+            willChange: 'transform, opacity'
         });
 
-        // Animate in with smooth ease-in-out
+        // Animate in with buttery smooth easing
         gsap.to(window, {
             opacity: 1,
             scale: 1,
             y: 0,
-            duration: 0.4,
-            ease: 'power2.inOut'
+            duration: 0.25,
+            ease: 'power1.out',
+            force3D: true,
+            clearProps: 'willChange',
+            onComplete: () => {
+                // Delay rendering heavy FlowingMenu until animation is done
+                setTimeout(() => setIsMenuReady(true), 50);
+            }
         });
     }, []);
 
@@ -69,10 +78,11 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
 
         gsap.to(window, {
             opacity: 0,
-            scale: 0.85,
-            y: 30,
-            duration: 0.3,
-            ease: 'power2.inOut',
+            scale: 0.95,
+            y: 15,
+            duration: 0.18,
+            ease: 'power1.in',
+            force3D: true,
             onComplete: () => {
                 onClose();
             }
@@ -188,9 +198,22 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
                             }}>Skills</h2>
                         </div>
 
-                        {/* Menu Section */}
+                        {/* Menu Section - Deferred render for smooth animation */}
                         <div style={{ flex: 1, width: '100%', position: 'relative' }}>
-                            <FlowingMenu items={items} />
+                            {isMenuReady ? (
+                                <FlowingMenu items={items} />
+                            ) : (
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    height: '100%',
+                                    color: '#888',
+                                    fontSize: '14px'
+                                }}>
+                                    Loading...
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

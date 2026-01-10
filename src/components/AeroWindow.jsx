@@ -14,21 +14,25 @@ export default function AeroWindow({ title, icon, onClose, initialPosition = { x
         const window = windowRef.current;
         if (!window) return;
 
-        // Set initial state
+        // Set initial state - use minimal transforms for smooth animation
         gsap.set(window, {
             opacity: 0,
-            scale: 0.7,
-            y: 80,
-            transformOrigin: 'center bottom'
+            scale: 0.92,
+            y: 25,
+            transformOrigin: 'center center',
+            force3D: true,
+            willChange: 'transform, opacity'
         });
 
-        // Animate in with smooth ease-in-out
+        // Animate in with buttery smooth easing
         gsap.to(window, {
             opacity: 1,
             scale: 1,
             y: 0,
-            duration: 0.4,
-            ease: 'power2.inOut'
+            duration: 0.25,
+            ease: 'power1.out',
+            force3D: true,
+            clearProps: 'willChange'
         });
     }, []);
 
@@ -41,10 +45,11 @@ export default function AeroWindow({ title, icon, onClose, initialPosition = { x
 
         gsap.to(window, {
             opacity: 0,
-            scale: 0.85,
-            y: 30,
-            duration: 0.3,
-            ease: 'power2.inOut',
+            scale: 0.95,
+            y: 15,
+            duration: 0.18,
+            ease: 'power1.in',
+            force3D: true,
             onComplete: () => {
                 onClose();
             }

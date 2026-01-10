@@ -28,7 +28,7 @@ function MenuItem({ link, text, image, skills = [], speed }) {
     const animationRef = useRef(null);
     const [repetitions, setRepetitions] = useState(2);
 
-    const animationDefaults = { duration: 0.6, ease: 'expo' };
+    const animationDefaults = { duration: 0.4, ease: 'power2.out', force3D: true };
 
     const findClosestEdge = (mouseX, mouseY, width, height) => {
         const topEdgeDist = distMetric(mouseX, mouseY, width / 2, 0);
@@ -52,8 +52,8 @@ function MenuItem({ link, text, image, skills = [], speed }) {
             const contentWidth = marqueeContent.offsetWidth;
             const viewportWidth = window.innerWidth; // Or container width
 
-            // Simple plenty repetitions to ensure seamlessness
-            setRepetitions(12);
+            // Reduced repetitions for better performance
+            setRepetitions(4);
         };
 
         calculateRepetitions();
@@ -84,12 +84,13 @@ function MenuItem({ link, text, image, skills = [], speed }) {
                 x: -contentWidth,
                 duration: speed,
                 ease: 'none',
-                repeat: -1
+                repeat: -1,
+                force3D: true
             });
         };
 
-        // Small delay to ensure DOM is ready
-        const timer = setTimeout(setupMarquee, 100);
+        // Longer delay to ensure window animation completes first
+        const timer = setTimeout(setupMarquee, 300);
 
         return () => {
             clearTimeout(timer);
