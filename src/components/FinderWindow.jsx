@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import './AeroWindow.css';
 
-export default function FinderWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus, triggerClose, onOpenResume, onOpenGallery, onOpenAboutMe }) {
+export default function FinderWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus, triggerClose, onOpenResume, onOpenGallery, onOpenAboutMe, onOpenProject }) {
     const [position, setPosition] = useState(initialPosition);
     const [isDragging, setIsDragging] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
@@ -106,10 +106,11 @@ export default function FinderWindow({ title, icon, onClose, initialPosition = {
         if (onFocus) onFocus();
     };
 
-    // Projects data (same as ProjectsWindow)
+    // Projects data
     const projects = [
-        { id: 1, name: 'DeskJockey', icon: '/glass_folder.png' },
-        { id: 2, name: 'AI Calorie Tracker', icon: '/glass_folder.png' },
+        { id: 1, name: 'WHOP Clone', icon: '/glass_folder.png', url: 'https://github.com/MukeshKumar-17/WHOP' },
+        { id: 2, name: 'MeetMogger AI', icon: '/glass_folder.png', url: 'https://github.com/MukeshKumar-17/MeetMogger-AI' },
+        { id: 3, name: 'Frutiger Portfolio', icon: '/glass_folder.png', url: 'https://github.com/MukeshKumar-17/Frutiger-portfolio' },
     ];
 
     return (
@@ -187,6 +188,7 @@ export default function FinderWindow({ title, icon, onClose, initialPosition = {
                                 key={project.id}
                                 className="folder-item"
                                 style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+                                onClick={() => onOpenProject && onOpenProject(project.id)}
                             >
                                 <img src={project.icon} alt={project.name} style={{ width: '64px', height: '64px', objectFit: 'contain' }} />
                                 <span style={{ fontSize: '12px', color: '#333', textAlign: 'center' }}>{project.name}</span>

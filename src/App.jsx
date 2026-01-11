@@ -223,6 +223,25 @@ function App() {
                 handleIconClick({ id: 'aboutme', name: 'About Me', src: '/finder.png' });
               }
             }}
+            onOpenProject={(projectId) => {
+              // Close existing Projects window if any
+              const existingWindow = openWindows.find(w => w.type === 'system_prefs');
+              if (existingWindow) {
+                handleCloseWindow(existingWindow.id);
+              }
+              // Create new Projects window with pre-selected project
+              const newWindow = {
+                id: nextWindowId,
+                type: 'system_prefs',
+                title: 'Projects',
+                icon: '/system_prefs.png',
+                preSelectedProjectId: projectId,
+                position: { x: Math.max(50, (window.innerWidth - 800) / 2), y: Math.max(50, (window.innerHeight - 500) / 2) }
+              };
+              setOpenWindows(prev => [...prev, newWindow]);
+              setWindowStack(prev => [...prev, nextWindowId]);
+              setNextWindowId(prev => prev + 1);
+            }}
           />
         );
       case 'aboutme':
@@ -235,6 +254,7 @@ function App() {
         return (
           <ProjectsWindow
             {...commonProps}
+            preSelectedProjectId={win.preSelectedProjectId || null}
             onOpenAboutMe={() => handleIconClick({ id: 'finder', name: 'About Me', src: '/finder.png' })}
             onOpenResume={() => {
               if (!showResumeWindow) {
@@ -281,19 +301,6 @@ function App() {
       <Welcome />
 
       {/* Desktop Icons */}
-      <DesktopIcon
-        name="Projects"
-        icon="/glass_folder.png"
-        initialPosition={{ x: 20, y: 15 }}
-        onClick={() => {
-          const existingWindow = openWindows.find(w => w.type === 'system_prefs');
-          if (existingWindow) {
-            bringToFront(existingWindow.id);
-          } else {
-            handleIconClick({ id: 'system_prefs', name: 'Projects', src: '/system_prefs.png' });
-          }
-        }}
-      />
 
       <DesktopIcon
         name="Resume.pdf"
@@ -312,7 +319,7 @@ function App() {
       <DesktopIcon
         name="AboutMe.txt"
         icon="/doct.png"
-        initialPosition={{ x: 20, y: 215 }}
+        initialPosition={{ x: 20, y: 15 }}
         onClick={() => {
           const existingWindow = openWindows.find(w => w.type === 'aboutme');
           if (existingWindow) {
@@ -320,6 +327,79 @@ function App() {
           } else {
             handleIconClick({ id: 'aboutme', name: 'About Me', src: '/finder.png' });
           }
+        }}
+      />
+
+      {/* Project Desktop Icons */}
+      <DesktopIcon
+        name="Project01"
+        icon="/glass_folder.png"
+        initialPosition={{ x: 20, y: 215 }}
+        onClick={() => {
+          // Check if a Projects window already exists
+          const existingWindow = openWindows.find(w => w.type === 'system_prefs');
+          if (existingWindow) {
+            // Close it and open a new one with the selected project
+            handleCloseWindow(existingWindow.id);
+          }
+          // Create new Projects window with pre-selected project
+          const newWindow = {
+            id: nextWindowId,
+            type: 'system_prefs',
+            title: 'Projects',
+            icon: '/system_prefs.png',
+            preSelectedProjectId: 1, // WHOP Clone
+            position: { x: Math.max(50, (window.innerWidth - 800) / 2), y: Math.max(50, (window.innerHeight - 500) / 2) }
+          };
+          setOpenWindows(prev => [...prev, newWindow]);
+          setWindowStack(prev => [...prev, nextWindowId]);
+          setNextWindowId(prev => prev + 1);
+        }}
+      />
+
+      <DesktopIcon
+        name="Project02"
+        icon="/glass_folder.png"
+        initialPosition={{ x: 20, y: 315 }}
+        onClick={() => {
+          const existingWindow = openWindows.find(w => w.type === 'system_prefs');
+          if (existingWindow) {
+            handleCloseWindow(existingWindow.id);
+          }
+          const newWindow = {
+            id: nextWindowId,
+            type: 'system_prefs',
+            title: 'Projects',
+            icon: '/system_prefs.png',
+            preSelectedProjectId: 2, // MeetMogger AI
+            position: { x: Math.max(50, (window.innerWidth - 800) / 2), y: Math.max(50, (window.innerHeight - 500) / 2) }
+          };
+          setOpenWindows(prev => [...prev, newWindow]);
+          setWindowStack(prev => [...prev, nextWindowId]);
+          setNextWindowId(prev => prev + 1);
+        }}
+      />
+
+      <DesktopIcon
+        name="Project03"
+        icon="/glass_folder.png"
+        initialPosition={{ x: 20, y: 415 }}
+        onClick={() => {
+          const existingWindow = openWindows.find(w => w.type === 'system_prefs');
+          if (existingWindow) {
+            handleCloseWindow(existingWindow.id);
+          }
+          const newWindow = {
+            id: nextWindowId,
+            type: 'system_prefs',
+            title: 'Projects',
+            icon: '/system_prefs.png',
+            preSelectedProjectId: 3, // Frutiger Portfolio
+            position: { x: Math.max(50, (window.innerWidth - 800) / 2), y: Math.max(50, (window.innerHeight - 500) / 2) }
+          };
+          setOpenWindows(prev => [...prev, newWindow]);
+          setWindowStack(prev => [...prev, nextWindowId]);
+          setNextWindowId(prev => prev + 1);
         }}
       />
 
