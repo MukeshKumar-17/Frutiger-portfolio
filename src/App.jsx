@@ -33,9 +33,14 @@ function App() {
   const baseZIndex = 100;
 
   // Get z-index for a window based on its position in the stack
+  // Windows not in stack yet get highest z-index to appear on top
   const getZIndex = useCallback((windowId) => {
     const index = windowStack.indexOf(windowId);
-    return index === -1 ? baseZIndex : baseZIndex + index;
+    if (index === -1) {
+      // Window not in stack yet - give it highest z-index (will be added to stack end)
+      return baseZIndex + windowStack.length + 10;
+    }
+    return baseZIndex + index;
   }, [windowStack]);
 
   // Bring a window to the front
@@ -230,8 +235,9 @@ function App() {
                 handleCloseWindow(existingWindow.id);
               }
               // Create new Projects window with pre-selected project
+              const newId = nextWindowId;
               const newWindow = {
-                id: nextWindowId,
+                id: newId,
                 type: 'system_prefs',
                 title: 'Projects',
                 icon: '/system_prefs.png',
@@ -239,7 +245,8 @@ function App() {
                 position: { x: Math.max(50, (window.innerWidth - 800) / 2), y: Math.max(50, (window.innerHeight - 500) / 2) }
               };
               setOpenWindows(prev => [...prev, newWindow]);
-              setWindowStack(prev => [...prev, nextWindowId]);
+              // Ensure new window is at the top of the stack
+              setWindowStack(prev => [...prev.filter(id => id !== newId), newId]);
               setNextWindowId(prev => prev + 1);
             }}
           />
@@ -343,8 +350,9 @@ function App() {
             handleCloseWindow(existingWindow.id);
           }
           // Create new Projects window with pre-selected project
+          const newId = nextWindowId;
           const newWindow = {
-            id: nextWindowId,
+            id: newId,
             type: 'system_prefs',
             title: 'Projects',
             icon: '/system_prefs.png',
@@ -352,7 +360,8 @@ function App() {
             position: { x: Math.max(50, (window.innerWidth - 800) / 2), y: Math.max(50, (window.innerHeight - 500) / 2) }
           };
           setOpenWindows(prev => [...prev, newWindow]);
-          setWindowStack(prev => [...prev, nextWindowId]);
+          // Ensure new window is at the top of the stack
+          setWindowStack(prev => [...prev.filter(id => id !== newId), newId]);
           setNextWindowId(prev => prev + 1);
         }}
       />
@@ -366,8 +375,9 @@ function App() {
           if (existingWindow) {
             handleCloseWindow(existingWindow.id);
           }
+          const newId = nextWindowId;
           const newWindow = {
-            id: nextWindowId,
+            id: newId,
             type: 'system_prefs',
             title: 'Projects',
             icon: '/system_prefs.png',
@@ -375,7 +385,7 @@ function App() {
             position: { x: Math.max(50, (window.innerWidth - 800) / 2), y: Math.max(50, (window.innerHeight - 500) / 2) }
           };
           setOpenWindows(prev => [...prev, newWindow]);
-          setWindowStack(prev => [...prev, nextWindowId]);
+          setWindowStack(prev => [...prev.filter(id => id !== newId), newId]);
           setNextWindowId(prev => prev + 1);
         }}
       />
@@ -389,8 +399,9 @@ function App() {
           if (existingWindow) {
             handleCloseWindow(existingWindow.id);
           }
+          const newId = nextWindowId;
           const newWindow = {
-            id: nextWindowId,
+            id: newId,
             type: 'system_prefs',
             title: 'Projects',
             icon: '/system_prefs.png',
@@ -398,7 +409,7 @@ function App() {
             position: { x: Math.max(50, (window.innerWidth - 800) / 2), y: Math.max(50, (window.innerHeight - 500) / 2) }
           };
           setOpenWindows(prev => [...prev, newWindow]);
-          setWindowStack(prev => [...prev, nextWindowId]);
+          setWindowStack(prev => [...prev.filter(id => id !== newId), newId]);
           setNextWindowId(prev => prev + 1);
         }}
       />
