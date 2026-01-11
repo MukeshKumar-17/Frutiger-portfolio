@@ -1,0 +1,201 @@
+/* Spotify Window - Aqua Glass Style (matching AeroWindow) */
+
+.spotify-window {
+    position: fixed;
+    width: 380px;
+    height: 480px;
+    z-index: 500;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica Neue', sans-serif;
+    user-select: none;
+    /* GPU acceleration for smooth animations */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.spotify-frame {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    /* Aqua Glass effect - translucent blue/teal */
+    background: linear-gradient(180deg,
+            rgba(180, 220, 255, 0.92) 0%,
+            rgba(140, 200, 250, 0.88) 22px,
+            rgba(230, 240, 250, 0.96) 22px,
+            rgba(245, 248, 255, 0.98) 100%);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.9) inset,
+        0 2px 0 rgba(255, 255, 255, 0.7) inset,
+        0 -1px 0 rgba(0, 0, 0, 0.1) inset,
+        0 0 50px rgba(100, 180, 255, 0.2),
+        0 20px 60px rgba(0, 0, 0, 0.35),
+        0 8px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(80, 130, 180, 0.4);
+}
+
+/* Title Bar - Aqua Brushed Metal Look */
+.spotify-titlebar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+    padding: 0 10px;
+    /* Aqua pinstripe/brushed metal gradient */
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(255, 255, 255, 0.03) 0px,
+            rgba(255, 255, 255, 0.03) 1px,
+            transparent 1px,
+            transparent 2px),
+        linear-gradient(180deg,
+            rgba(220, 230, 245, 0.95) 0%,
+            rgba(200, 215, 235, 0.9) 45%,
+            rgba(180, 200, 225, 0.85) 55%,
+            rgba(190, 208, 230, 0.9) 100%);
+    border-bottom: 1px solid rgba(150, 170, 190, 0.5);
+    position: relative;
+    z-index: 10;
+    cursor: grab;
+}
+
+.spotify-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #333;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.spotify-title-icon {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
+
+/* Aqua Traffic Light Window Controls */
+.spotify-window-controls {
+    position: absolute;
+    left: 8px;
+    display: flex;
+    gap: 6px;
+}
+
+.spotify-window .window-control-btn {
+    width: 14px;
+    height: 14px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.15s ease;
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.spotify-window .window-control-btn .control-icon {
+    font-size: 8px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.spotify-window:hover .window-control-btn .control-icon {
+    opacity: 1;
+}
+
+/* Close button - Red Aqua Gel */
+.spotify-window .close-btn {
+    background: linear-gradient(180deg,
+            #ff6b6b 0%,
+            #ff5f57 50%,
+            #e74c3c 100%);
+    border: 1px solid #c0392b;
+}
+
+.spotify-window .close-btn .control-icon {
+    color: #4a0000;
+}
+
+.spotify-window .close-btn:hover {
+    background: linear-gradient(180deg,
+            #ff8080 0%,
+            #ff6b6b 50%,
+            #e74c3c 100%);
+}
+
+/* Minimize button - Yellow Aqua Gel */
+.spotify-window .minimize-btn {
+    background: linear-gradient(180deg,
+            #ffda6b 0%,
+            #ffbd2e 50%,
+            #f39c12 100%);
+    border: 1px solid #d68910;
+}
+
+.spotify-window .minimize-btn .control-icon {
+    color: #5a4a00;
+}
+
+.spotify-window .minimize-btn:hover {
+    background: linear-gradient(180deg,
+            #ffe680 0%,
+            #ffda6b 50%,
+            #f39c12 100%);
+}
+
+/* Maximize button - Green Aqua Gel */
+.spotify-window .maximize-btn {
+    background: linear-gradient(180deg,
+            #5edc82 0%,
+            #28ca41 50%,
+            #1e8449 100%);
+    border: 1px solid #196f3d;
+}
+
+.spotify-window .maximize-btn .control-icon {
+    color: #003a00;
+}
+
+.spotify-window .maximize-btn:hover {
+    background: linear-gradient(180deg,
+            #7dea98 0%,
+            #5edc82 50%,
+            #1e8449 100%);
+}
+
+/* Spotify Content/Embed Area */
+.spotify-content {
+    flex: 1;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 0 0 10px 10px;
+}
+
+.spotify-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0 0 9px 9px;
+}
+
+/* Window Focus Effects */
+.spotify-window:focus-within .spotify-frame {
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.95) inset,
+        0 2px 0 rgba(255, 255, 255, 0.8) inset,
+        0 0 60px rgba(100, 200, 255, 0.25),
+        0 25px 70px rgba(0, 0, 0, 0.4),
+        0 10px 25px rgba(0, 0, 0, 0.2);
+}

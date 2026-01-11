@@ -8,25 +8,26 @@
 }
 
 .gallery-audio-player .glass-panel {
-    /* Much brighter/whiter texture */
+    /* Glossy bright light blue texture */
     background:
         repeating-linear-gradient(90deg,
-            rgba(255, 255, 255, 0.1) 0px,
-            rgba(255, 255, 255, 0.1) 1px,
+            rgba(255, 255, 255, 0.15) 0px,
+            rgba(255, 255, 255, 0.15) 1px,
             transparent 1px,
             transparent 2px),
         linear-gradient(180deg,
-            rgba(250, 252, 255, 1) 0%,
-            rgba(240, 245, 255, 0.98) 45%,
-            rgba(225, 235, 252, 0.95) 55%,
-            rgba(235, 242, 255, 0.98) 100%);
+            rgba(180, 230, 255, 1) 0%,
+            rgba(130, 210, 255, 0.98) 45%,
+            rgba(100, 195, 255, 0.95) 55%,
+            rgba(150, 220, 255, 0.98) 100%);
 
-    /* Borders matching titlebar */
-    border: 1px solid rgba(150, 170, 190, 0.5);
-    border-top: 1px solid rgba(150, 170, 190, 0.5);
+    /* Bright blue borders */
+    border: 1px solid rgba(80, 180, 255, 0.6);
+    border-top: 1px solid rgba(100, 200, 255, 0.7);
     box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.3) inset,
-        0 4px 10px rgba(0, 0, 0, 0.15);
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+        0 4px 15px rgba(0, 150, 255, 0.2),
+        0 2px 8px rgba(0, 180, 255, 0.15);
 
     border-radius: 0 0 10px 10px;
     padding: 6px 16px;
@@ -54,22 +55,22 @@
     height: 30px;
     box-sizing: border-box;
     border-radius: 50%;
-    border: 1px solid rgba(100, 120, 140, 0.6);
+    border: 1px solid rgba(60, 180, 255, 0.7);
     background: linear-gradient(180deg,
-            rgba(255, 255, 255, 0.95) 0%,
-            rgba(230, 240, 250, 0.9) 50%,
-            rgba(200, 220, 240, 0.85) 100%);
+            rgba(200, 240, 255, 0.98) 0%,
+            rgba(140, 220, 255, 0.95) 50%,
+            rgba(100, 200, 255, 0.9) 100%);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #4a6fa5;
+    color: #0088cc;
     position: relative;
     overflow: hidden;
     transition: all 0.15s ease;
     box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.8) inset,
-        0 1px 2px rgba(0, 0, 0, 0.1);
+        0 1px 0 rgba(255, 255, 255, 0.9) inset,
+        0 2px 4px rgba(0, 150, 255, 0.2);
     flex-shrink: 0;
 }
 
@@ -87,17 +88,17 @@
 
 .gallery-audio-player .player-btn:hover {
     background: linear-gradient(180deg,
-            rgba(200, 230, 255, 0.95) 0%,
-            rgba(150, 200, 250, 0.9) 50%,
-            rgba(100, 170, 240, 0.85) 100%);
-    border-color: #5a90c8;
+            rgba(220, 250, 255, 0.98) 0%,
+            rgba(160, 230, 255, 0.95) 50%,
+            rgba(120, 210, 255, 0.9) 100%);
+    border-color: #40c0ff;
 }
 
 .gallery-audio-player .player-btn:active {
     background: linear-gradient(180deg,
-            rgba(100, 160, 220, 0.95) 0%,
-            rgba(80, 140, 200, 0.9) 100%);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+            rgba(100, 200, 255, 0.95) 0%,
+            rgba(60, 180, 255, 0.9) 100%);
+    box-shadow: inset 0 1px 3px rgba(0, 100, 200, 0.3);
 }
 
 .gallery-audio-player .player-btn svg {
@@ -135,11 +136,11 @@
     appearance: none;
     width: 70px;
     height: 4px;
-    background: linear-gradient(180deg, #a0b5c8 0%, #d0dce8 100%);
+    background: linear-gradient(180deg, #60c8ff 0%, #a0e0ff 100%);
     border-radius: 2px;
     outline: none;
-    border: 1px solid #90a5b8;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.12);
+    border: 1px solid #50b8f0;
+    box-shadow: inset 0 1px 1px rgba(0, 100, 200, 0.15);
     margin: 0;
     vertical-align: middle;
 }
@@ -150,18 +151,18 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(180deg, #ffffff 0%, #c0efff 100%);
+    box-shadow: 0 1px 3px rgba(0, 150, 255, 0.4);
     cursor: pointer;
-    border: 1px solid #8090a0;
+    border: 1px solid #60c0f0;
 }
 
 .gallery-audio-player .volume-slider::-moz-range-thumb {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(180deg, #ffffff 0%, #c0efff 100%);
+    box-shadow: 0 1px 3px rgba(0, 150, 255, 0.4);
     cursor: pointer;
-    border: 1px solid #8090a0;
+    border: 1px solid #60c0f0;
 }

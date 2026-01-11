@@ -141,3 +141,13 @@
 .dock-icon img[src*="itunes"] {
     transform: scale(0.75);
 }
+
+/* Increase monitor icon size */
+.dock-icon img[src*="monitor"] {
+    transform: scale(1.15);
+}
+
+/* Reduce Spotify icon size */
+.dock-icon img[src*="spotify"] {
+    transform: scale(0.85);
+}

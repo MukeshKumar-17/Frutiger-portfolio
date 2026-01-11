@@ -96,6 +96,8 @@
     gap: 12px;
     pointer-events: auto;
     /* Enable clicks on links */
+    transform-style: flat;
+    /* Prevent 3D transform issues with child elements */
 }
 
 .card-link {
@@ -113,6 +115,11 @@
     /* stronger blur */
     border: 1px solid rgba(255, 255, 255, 0.4);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    /* Ensure links are clickable */
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    pointer-events: auto;
 }
 
 .card-link:hover {

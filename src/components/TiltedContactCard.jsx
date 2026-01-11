@@ -128,9 +128,42 @@ export default function TiltedContactCard({ onClose }) {
                             </div>
 
                             <div className="card-links">
-                                <a href="tel:+918608622547" className="card-link">+91 8608622547</a>
-                                <a href="mailto:mukeshkumark1755@gmail.com" className="card-link">mukeshkumark1755@gmail.com</a>
-                                <a href="https://www.linkedin.com/in/mukeshkumark17/" target="_blank" rel="noopener noreferrer" className="card-link">LinkedIn</a>
+                                <span
+                                    className="card-link"
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        window.open('tel:+918608622547', '_self');
+                                    }}
+                                    onKeyDown={(e) => e.key === 'Enter' && window.open('tel:+918608622547', '_self')}
+                                >
+                                    +91 8608622547
+                                </span>
+                                <span
+                                    className="card-link"
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        window.open('mailto:mukeshkumark1755@gmail.com', '_self');
+                                    }}
+                                    onKeyDown={(e) => e.key === 'Enter' && window.open('mailto:mukeshkumark1755@gmail.com', '_self')}
+                                >
+                                    mukeshkumark1755@gmail.com
+                                </span>
+                                <span
+                                    className="card-link"
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        window.open('https://www.linkedin.com/in/mukeshkumark17/', '_blank', 'noopener,noreferrer');
+                                    }}
+                                    onKeyDown={(e) => e.key === 'Enter' && window.open('https://www.linkedin.com/in/mukeshkumark17/', '_blank', 'noopener,noreferrer')}
+                                >
+                                    LinkedIn
+                                </span>
                             </div>
                         </motion.div>
                     </motion.div>

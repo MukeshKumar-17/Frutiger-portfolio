@@ -14,6 +14,7 @@ import BrowserWindow from './components/BrowserWindow';
 import MusicPlayer from './components/MusicPlayer';
 import DesktopIcon from './components/DesktopIcon';
 import FinderWindow from './components/FinderWindow';
+import SpotifyWindow from './components/SpotifyWindow';
 import './App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
   const [showContactCard, setShowContactCard] = useState(false);
   const [showResumeWindow, setShowResumeWindow] = useState(false);
   const [showGalleryWindow, setShowGalleryWindow] = useState(false);
+  const [showSpotifyWindow, setShowSpotifyWindow] = useState(false);
   const [triggerCloseAll, setTriggerCloseAll] = useState(false);
 
   // Window stack for z-index management - last item has highest z-index
@@ -51,6 +53,7 @@ function App() {
       setWindowStack([]);
       setShowResumeWindow(false);
       setShowGalleryWindow(false);
+      setShowSpotifyWindow(false);
       setTriggerCloseAll(false);
     }, 250); // Match animation duration
   }, []);
@@ -97,6 +100,17 @@ function App() {
       return;
     }
 
+    if (icon.id === 'spotify') {
+      // Open Spotify window
+      if (!showSpotifyWindow) {
+        setShowSpotifyWindow(true);
+        setWindowStack(prev => [...prev, 'spotify']);
+      } else {
+        bringToFront('spotify');
+      }
+      return;
+    }
+
     // Check if this type of window is already open
     const existingWindow = openWindows.find(w => w.type === icon.id);
     if (existingWindow) {
@@ -135,6 +149,11 @@ function App() {
   const handleCloseGallery = () => {
     setShowGalleryWindow(false);
     setWindowStack(prev => prev.filter(id => id !== 'gallery'));
+  };
+
+  const handleCloseSpotify = () => {
+    setShowSpotifyWindow(false);
+    setWindowStack(prev => prev.filter(id => id !== 'spotify'));
   };
 
   // Background click - close all windows when clicking outside
@@ -308,6 +327,15 @@ function App() {
           onClose={handleCloseGallery}
           zIndex={getZIndex('gallery')}
           onFocus={() => bringToFront('gallery')}
+          triggerClose={triggerCloseAll}
+        />
+      )}
+
+      {showSpotifyWindow && (
+        <SpotifyWindow
+          onClose={handleCloseSpotify}
+          zIndex={getZIndex('spotify')}
+          onFocus={() => bringToFront('spotify')}
           triggerClose={triggerCloseAll}
         />
       )}

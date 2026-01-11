@@ -10,11 +10,11 @@ const icons = [
     { id: 'sherlock', name: 'Sherlock', src: '/sherlock.png', tooltip: 'Skills' },
     { id: 'system_prefs', name: 'System Prefs', src: '/system_prefs.png', tooltip: 'Projects' },
     { id: 'monitor', name: 'Monitor', src: '/monitor.png', tooltip: 'GitHub' },
-    { id: 'quicktime', name: 'QuickTime', src: '/quicktime.png' },
-    { id: 'grab', name: 'Grab', src: '/grab.png' },
+    { id: 'quicktime', name: 'QuickTime', src: '/quicktime.png', tooltip: 'LinkedIn', url: 'https://www.linkedin.com/in/mukeshkumark17' },
+    { id: 'spotify', name: 'Spotify', src: '/spotify.ico', tooltip: 'Spotify' },
     // Separator here conceptually
     { id: 'spring', name: 'Spring', src: '/spring.png', tooltip: 'Contact' },
-    { id: 'news', name: 'News', src: '/news.png', tooltip: 'Resume' },
+    { id: 'news', name: 'News', src: '/news.png', tooltip: 'Email Me', url: 'mailto:mukeshkumark1755@gmail.com' },
     { id: 'music', name: 'iTunes', src: '/itunes.ico', tooltip: 'Music Player' },
     { id: 'trash', name: 'Trash', src: '/trash.png' },
 ];
@@ -32,7 +32,7 @@ function DockIcon({ icon, mouseX, onClick }) {
     const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
     const handleMouseMove = (e) => {
-        if (icon.id === 'finder' || icon.id === 'sherlock' || icon.id === 'spring' || icon.id === 'explorer' || icon.id === 'system_prefs' || icon.id === 'monitor' || icon.id === 'news' || icon.id === 'mail' || icon.id === 'music') {
+        if (icon.id === 'finder' || icon.id === 'sherlock' || icon.id === 'spring' || icon.id === 'explorer' || icon.id === 'system_prefs' || icon.id === 'monitor' || icon.id === 'news' || icon.id === 'mail' || icon.id === 'music' || icon.id === 'quicktime' || icon.id === 'spotify') {
             setCursorPos({ x: e.clientX, y: e.clientY });
         }
     };
@@ -68,7 +68,7 @@ function DockIcon({ icon, mouseX, onClick }) {
     const y = useSpring(ySync, springConfig);
 
     const renderTooltip = () => {
-        if (icon.id === 'finder' || icon.id === 'sherlock' || icon.id === 'spring' || icon.id === 'explorer' || icon.id === 'system_prefs' || icon.id === 'monitor' || icon.id === 'news' || icon.id === 'mail' || icon.id === 'music') {
+        if (icon.id === 'finder' || icon.id === 'sherlock' || icon.id === 'spring' || icon.id === 'explorer' || icon.id === 'system_prefs' || icon.id === 'monitor' || icon.id === 'news' || icon.id === 'mail' || icon.id === 'music' || icon.id === 'quicktime' || icon.id === 'spotify') {
             if (!isHovered) return null;
             return createPortal(
                 <div
@@ -137,6 +137,11 @@ export default function Dock({ onIconClick }) {
     const mouseX = useMotionValue(Infinity);
 
     const handleIconClick = (icon) => {
+        // Open external URL in new tab if defined
+        if (icon.url) {
+            window.open(icon.url, '_blank', 'noopener,noreferrer');
+            return;
+        }
         if (onIconClick) {
             onIconClick(icon);
         }
