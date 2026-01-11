@@ -30,7 +30,12 @@ main.sphere-main {
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
-    background: transparent;
+    /* Glossy white gradient background */
+    background: linear-gradient(135deg,
+            rgba(245, 248, 255, 1) 0%,
+            rgba(230, 240, 255, 0.95) 30%,
+            rgba(220, 235, 255, 0.9) 60%,
+            rgba(240, 245, 255, 1) 100%);
 }
 
 .stage {
@@ -41,6 +46,11 @@ main.sphere-main {
     perspective: calc(var(--radius) * 2);
     perspective-origin: 50% 50%;
     contain: layout paint size;
+    /* White background to eliminate dark corners */
+    background: linear-gradient(180deg,
+            rgba(210, 225, 245, 1) 0%,
+            rgba(220, 235, 250, 1) 50%,
+            rgba(195, 215, 240, 1) 100%);
 }
 
 .sphere {
@@ -58,13 +68,13 @@ main.sphere-main {
 }
 
 .overlay {
-    background-image: radial-gradient(rgba(235, 235, 235, 0) 65%, var(--overlay-blur-color, #060010) 100%);
+    background-image: radial-gradient(transparent 55%, rgba(210, 225, 245, 1) 100%);
 }
 
 .overlay--blur {
-    -webkit-mask-image: radial-gradient(rgba(235, 235, 235, 0) 70%, var(--overlay-blur-color, #060010) 90%);
-    mask-image: radial-gradient(rgba(235, 235, 235, 0) 70%, var(--overlay-blur-color, #060010) 90%);
-    backdrop-filter: blur(3px);
+    -webkit-mask-image: radial-gradient(transparent 60%, rgba(210, 225, 245, 1) 95%);
+    mask-image: radial-gradient(transparent 60%, rgba(210, 225, 245, 1) 95%);
+    backdrop-filter: blur(5px);
 }
 
 .item {
@@ -183,7 +193,7 @@ main.sphere-main {
     height: 120px;
     z-index: 5;
     pointer-events: none;
-    background: linear-gradient(to bottom, transparent, var(--overlay-blur-color, #060010));
+    background: linear-gradient(to bottom, transparent, rgba(210, 225, 245, 1));
 }
 
 .edge-fade--top {
