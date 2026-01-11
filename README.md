@@ -20,8 +20,6 @@ A nostalgic, web-based operating system portfolio inspired by the **Frutiger Aer
 |:---:|:---:|
 | ![Finder Window](public/readme_assets/finder.png) | *Explore projects with a familiar interface* |
 
-### Assets & Icons
-
 <p align="center">
   <img src="public/readme_assets/logo_apple.png" width="120" alt="Apple Logo" />
   <img src="public/readme_assets/logo_github.png" width="120" alt="GitHub Logo" />
