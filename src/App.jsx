@@ -112,8 +112,8 @@ function App() {
       title: icon.name,
       icon: icon.src,
       position: {
-        x: 100 + (nextWindowId * 30) % 200,
-        y: 80 + (nextWindowId * 30) % 150
+        x: Math.max(50, (window.innerWidth - 700) / 2),
+        y: Math.max(50, (window.innerHeight - 500) / 2)
       }
     };
 
