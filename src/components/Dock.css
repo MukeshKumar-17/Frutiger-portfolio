@@ -149,5 +149,9 @@
 
 /* Reduce Spotify icon size */
 .dock-icon img[src*="spotify"] {
-    transform: scale(0.85);
+    transform: scale(0.75);
+}
+
+.dock-icon img[src*="spring"] {
+    transform: scale(0.95);
 }
