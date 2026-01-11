@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import DomeGallery from './DomeGallery';
+import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import './AeroWindow.css';
+import './GalleryAudioPlayer.css';
 
 export default function GalleryWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus, triggerClose }) {
     const [position, setPosition] = useState(initialPosition);
@@ -116,75 +118,172 @@ export default function GalleryWindow({ title, icon, onClose, initialPosition = 
     };
 
     return (
-        <div
-            ref={windowRef}
-            className="aero-window"
-            style={{
-                left: position.x,
-                top: position.y,
-                cursor: isDragging ? 'grabbing' : 'grab',
-                width: '850px',
-                height: '600px',
-                zIndex: zIndex
-            }}
-            onMouseDown={handleMouseDown}
-            onClick={handleWindowClick}
-        >
-            {/* Glass Frame */}
-            <div className="aero-frame" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                {/* Title Bar */}
-                <div className="aero-titlebar">
-                    <div className="aero-window-controls">
-                        <button className="window-control-btn minimize-btn" onClick={handleClose}>
-                            <span className="control-icon">─</span>
-                        </button>
-                        <button className="window-control-btn maximize-btn" onClick={handleClose}>
-                            <span className="control-icon">□</span>
-                        </button>
-                        <button className="window-control-btn close-btn" onClick={handleClose}>
-                            <span className="control-icon">✕</span>
-                        </button>
-                    </div>
-                    <span className="aero-title" style={{ fontFamily: "'Apple Garamond', serif" }}>
-                        {title || 'Art Gallery'}
-                    </span>
-                </div>
-
-                {/* Content Area - Gallery */}
-                <div className="aero-content" style={{
-                    padding: 0,
-                    overflow: 'hidden',
-                    position: 'relative',
-                    flex: 1,
-                    display: 'flex',
-                    background: '#0a0a12'
-                }}>
-                    {isGalleryReady ? (
-                        <DomeGallery
-                            grayscale={false}
-                            overlayBlurColor="#0a0a12"
-                            imageBorderRadius="16px"
-                            openedImageBorderRadius="20px"
-                            openedImageWidth="300px"
-                            openedImageHeight="400px"
-                            fit={0.6}
-                            minRadius={400}
-                            segments={25}
-                        />
-                    ) : (
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: '100%',
-                            height: '100%',
-                            color: '#888',
-                            fontSize: '16px',
-                            background: '#0a0a12'
-                        }}>
-                            Loading Gallery...
+        <div className="gallery-window-wrapper" style={{ position: 'absolute', left: position.x, top: position.y, zIndex: zIndex }}>
+            <div
+                ref={windowRef}
+                className="aero-window"
+                style={{
+                    cursor: isDragging ? 'grabbing' : 'grab',
+                    width: '850px',
+                    height: '600px',
+                    position: 'relative'
+                }}
+                onMouseDown={handleMouseDown}
+                onClick={handleWindowClick}
+            >
+                {/* Glass Frame */}
+                <div className="aero-frame" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                    {/* Title Bar */}
+                    <div className="aero-titlebar">
+                        <div className="aero-window-controls">
+                            <button className="window-control-btn minimize-btn" onClick={handleClose}>
+                                <span className="control-icon">─</span>
+                            </button>
+                            <button className="window-control-btn maximize-btn" onClick={handleClose}>
+                                <span className="control-icon">□</span>
+                            </button>
+                            <button className="window-control-btn close-btn" onClick={handleClose}>
+                                <span className="control-icon">✕</span>
+                            </button>
                         </div>
-                    )}
+                        <span className="aero-title" style={{ fontFamily: "'Apple Garamond', serif" }}>
+                            {title || 'Art Gallery'}
+                        </span>
+                    </div>
+
+                    {/* Content Area - Gallery */}
+                    <div className="aero-content" style={{
+                        padding: 0,
+                        overflow: 'hidden',
+                        position: 'relative',
+                        flex: 1,
+                        display: 'flex',
+                        background: '#0a0a12'
+                    }}>
+                        {isGalleryReady ? (
+                            <DomeGallery
+                                grayscale={false}
+                                overlayBlurColor="#0a0a12"
+                                imageBorderRadius="16px"
+                                openedImageBorderRadius="20px"
+                                openedImageWidth="300px"
+                                openedImageHeight="400px"
+                                fit={0.6}
+                                minRadius={400}
+                                segments={25}
+                            />
+                        ) : (
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: '100%',
+                                height: '100%',
+                                color: '#888',
+                                fontSize: '16px',
+                                background: '#0a0a12'
+                            }}>
+                                Loading Gallery...
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            {/* Audio Player - Below the window */}
+            {isGalleryReady && <AudioPlayer />}
+        </div>
+    );
+}
+
+function AudioPlayer() {
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [volume, setVolume] = useState(0.5);
+    const [isMuted, setIsMuted] = useState(false);
+    const audioRef = useRef(null);
+
+    useEffect(() => {
+        audioRef.current = new Audio('/Music/Neverending_night.mp3');
+        audioRef.current.loop = true;
+        audioRef.current.volume = volume;
+
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                setIsPlaying(true);
+            }).catch(error => {
+                console.log("Auto-play prevented:", error);
+                setIsPlaying(false);
+            });
+        }
+
+        return () => {
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current = null;
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.volume = isMuted ? 0 : volume;
+        }
+    }, [volume, isMuted]);
+
+    const togglePlay = () => {
+        if (audioRef.current) {
+            if (isPlaying) {
+                audioRef.current.pause();
+            } else {
+                audioRef.current.play();
+            }
+            setIsPlaying(!isPlaying);
+        }
+    };
+
+    const toggleMute = () => {
+        setIsMuted(!isMuted);
+    };
+
+    const handleVolumeChange = (e) => {
+        const newVolume = parseFloat(e.target.value);
+        setVolume(newVolume);
+        if (newVolume > 0 && isMuted) {
+            setIsMuted(false);
+        }
+    };
+
+    return (
+        <div className="gallery-audio-player">
+            <div className="glass-panel">
+                <div className="player-controls">
+                    <button
+                        className="player-btn play-btn"
+                        onClick={togglePlay}
+                        aria-label={isPlaying ? "Pause" : "Play"}
+                    >
+                        {isPlaying ? <Pause size={20} /> : <Play size={20} fill="currentColor" />}
+                    </button>
+
+                    <div className="volume-control">
+                        <button
+                            className="player-btn volume-btn"
+                            onClick={toggleMute}
+                            aria-label={isMuted ? "Unmute" : "Mute"}
+                        >
+                            {isMuted || volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                        </button>
+                        <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={isMuted ? 0 : volume}
+                            onChange={handleVolumeChange}
+                            className="volume-slider"
+                        />
+                    </div>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useCallback, useState } from 'react';
 import { useGesture } from '@use-gesture/react';
 import './DomeGallery.css';
 
+
 // Import ALL images from assets folder
 const DEFAULT_IMAGES = [
     { src: '/assets/p1.jpg', alt: 'Photo 1' },
@@ -102,6 +103,7 @@ function computeItemBaseRotation(offsetX, offsetY, sizeX, sizeY, segments) {
     const rotateX = unit * (offsetY - (sizeY - 1) / 2);
     return { rotateX, rotateY };
 }
+
 
 export default function DomeGallery({
     images = DEFAULT_IMAGES,
