@@ -241,7 +241,7 @@ function App() {
       <DesktopIcon
         name="Projects"
         icon="/glass_folder.png"
-        initialPosition={{ x: 30, y: 60 }}
+        initialPosition={{ x: 20, y: 15 }}
         onClick={() => {
           const existingWindow = openWindows.find(w => w.type === 'system_prefs');
           if (existingWindow) {
@@ -255,7 +255,7 @@ function App() {
       <DesktopIcon
         name="Resume.pdf"
         icon="/docr.png"
-        initialPosition={{ x: 30, y: 170 }}
+        initialPosition={{ x: 20, y: 115 }}
         onClick={() => {
           if (!showResumeWindow) {
             setShowResumeWindow(true);
@@ -269,7 +269,7 @@ function App() {
       <DesktopIcon
         name="AboutMe.txt"
         icon="/doct.png"
-        initialPosition={{ x: 30, y: 280 }}
+        initialPosition={{ x: 20, y: 215 }}
         onClick={() => {
           const existingWindow = openWindows.find(w => w.type === 'aboutme');
           if (existingWindow) {
