@@ -44,61 +44,14 @@ function MenuItem({ link, text, image, skills = [], speed }) {
 
     useEffect(() => {
         const calculateRepetitions = () => {
-            if (!marqueeInnerRef.current) return;
-
-            const marqueeContent = marqueeInnerRef.current.querySelector('.marquee__part');
-            if (!marqueeContent) return;
-
-            const contentWidth = marqueeContent.offsetWidth;
-            const viewportWidth = window.innerWidth; // Or container width
-
-            // Reduced repetitions for better performance
-            setRepetitions(4);
+            // Only need 1 repetition since we're not looping
+            setRepetitions(1);
         };
 
         calculateRepetitions();
-        window.addEventListener('resize', calculateRepetitions);
-        return () => window.removeEventListener('resize', calculateRepetitions);
     }, [skills]);
 
-    useEffect(() => {
-        const setupMarquee = () => {
-            if (!marqueeInnerRef.current) return;
-
-            const marqueeContent = marqueeInnerRef.current.querySelector('.marquee__part');
-            if (!marqueeContent) return;
-
-            const contentWidth = marqueeContent.offsetWidth;
-            if (contentWidth === 0) return;
-
-            if (animationRef.current) {
-                animationRef.current.kill(); // Kill previous to avoid stacking
-            }
-
-            // Reset position
-            gsap.set(marqueeInnerRef.current, { x: 0 });
-
-            // Animate
-            // We want to move by the width of ONE content part to create the seamless loop effect
-            animationRef.current = gsap.to(marqueeInnerRef.current, {
-                x: -contentWidth,
-                duration: speed,
-                ease: 'none',
-                repeat: -1,
-                force3D: true
-            });
-        };
-
-        // Longer delay to ensure window animation completes first
-        const timer = setTimeout(setupMarquee, 300);
-
-        return () => {
-            clearTimeout(timer);
-            if (animationRef.current) {
-                animationRef.current.kill();
-            }
-        };
-    }, [skills, repetitions, speed]);
+    // No loop animation - skills will be static on hover
 
     const handleMouseEnter = ev => {
         if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
@@ -106,6 +59,9 @@ function MenuItem({ link, text, image, skills = [], speed }) {
         const x = ev.clientX - rect.left;
         const y = ev.clientY - rect.top;
         const edge = findClosestEdge(x, y, rect.width, rect.height);
+
+        // Reset to start position to show all skills from beginning
+        gsap.set(marqueeInnerRef.current, { x: 0 });
 
         gsap
             .timeline({ defaults: animationDefaults })

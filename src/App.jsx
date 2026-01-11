@@ -215,6 +215,14 @@ function App() {
                 bringToFront('gallery');
               }
             }}
+            onOpenAboutMe={() => {
+              const existingWindow = openWindows.find(w => w.type === 'aboutme');
+              if (existingWindow) {
+                bringToFront(existingWindow.id);
+              } else {
+                handleIconClick({ id: 'aboutme', name: 'About Me', src: '/finder.png' });
+              }
+            }}
           />
         );
       case 'aboutme':

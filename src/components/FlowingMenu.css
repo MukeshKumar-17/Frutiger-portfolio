@@ -52,6 +52,9 @@
     z-index: 1;
     /* Below marquee */
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .menu__item-link:hover {
@@ -93,24 +96,28 @@
     overflow: hidden;
     display: flex;
     align-items: center;
-    /* Center content vertically */
+    justify-content: center;
+    /* Center content horizontally */
 }
 
 .marquee__inner {
     display: flex;
     align-items: center;
+    justify-content: center;
     position: relative;
     height: 100%;
-    width: fit-content;
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
+    width: auto;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .marquee__part {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-shrink: 0;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .marquee__part-item {

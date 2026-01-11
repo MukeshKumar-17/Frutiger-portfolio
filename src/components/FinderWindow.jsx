@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import './AeroWindow.css';
 
-export default function FinderWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus, triggerClose, onOpenResume, onOpenGallery }) {
+export default function FinderWindow({ title, icon, onClose, initialPosition = { x: 100, y: 100 }, zIndex = 100, onFocus, triggerClose, onOpenResume, onOpenGallery, onOpenAboutMe }) {
     const [position, setPosition] = useState(initialPosition);
     const [isDragging, setIsDragging] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
@@ -168,6 +168,13 @@ export default function FinderWindow({ title, icon, onClose, initialPosition = {
                                 onClick={() => onOpenGallery && onOpenGallery()}
                             >
                                 🖼️ Photos
+                            </div>
+                            <div
+                                className="sidebar-item"
+                                style={{ cursor: 'pointer' }}
+                                onClick={() => onOpenAboutMe && onOpenAboutMe()}
+                            >
+                                👤 About Me
                             </div>
                         </div>
                     </div>

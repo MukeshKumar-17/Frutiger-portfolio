@@ -39,3 +39,15 @@
 .desktop-icon-container:active .desktop-icon-label {
   background: rgba(58, 129, 237, 0.7);
 }
+
+/* Prevent all images from being dragged */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  pointer-events: auto;
+  -webkit-user-select: none;
+  user-select: none;
+}

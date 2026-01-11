@@ -5,28 +5,28 @@ import FlowingMenu from './FlowingMenu';
 
 const items = [
     {
+        text: 'Programming Languages',
+        link: '#',
+        image: '',
+        skills: ['Python', 'JavaScript']
+    },
+    {
         text: 'Frontend',
         link: '#',
         image: '',
-        skills: ['React', 'Vue', 'Next.js', 'Tailwind CSS', 'HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'Framer Motion']
+        skills: ['HTML5', 'CSS3', 'React', 'Tailwind CSS']
     },
     {
         text: 'Backend',
         link: '#',
         image: '',
-        skills: ['Node.js', 'Express', 'Python', 'Django', 'FastAPI', 'REST APIs', 'GraphQL', 'WebSockets']
+        skills: ['Node.js', 'Express.js', 'Firebase', 'Supabase']
     },
     {
-        text: 'Languages',
+        text: 'Database & Tools',
         link: '#',
         image: '',
-        skills: ['JavaScript', 'Python', 'C++', 'Java', 'SQL', 'HTML', 'CSS', 'Bash']
-    },
-    {
-        text: 'Database',
-        link: '#',
-        image: '',
-        skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Firebase', 'Supabase', 'Prisma']
+        skills: ['MySQL', 'MongoDB', 'Git', 'GitHub']
     }
 ];
 
@@ -201,6 +201,12 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
                                 fontWeight: '600',
                                 fontFamily: "'Apple Garamond', serif"
                             }}>Skills</h2>
+                            <div style={{
+                                height: '2px',
+                                background: 'linear-gradient(90deg, #2a4a7a 0%, #73bce3 50%, #2a4a7a 100%)',
+                                marginTop: '10px',
+                                borderRadius: '1px'
+                            }}></div>
                         </div>
 
                         {/* Menu Section - Deferred render for smooth animation */}
