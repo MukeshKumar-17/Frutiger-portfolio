@@ -9,7 +9,7 @@ const springValues = {
 };
 
 export default function TiltedContactCard({ onClose }) {
-    const imageSrc = '/cyan_metal_card_bg.png';
+    const imageSrc = '/silver_chrome_card_bg.png';
     const altText = 'Contact Me';
     const containerHeight = '400px';
     const containerWidth = '100%';
