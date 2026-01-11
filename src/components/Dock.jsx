@@ -4,7 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from
 import './Dock.css';
 
 const icons = [
-    { id: 'finder', name: 'Finder', src: '/finder.png', tooltip: 'About Me' },
+    { id: 'finder', name: 'Finder', src: '/finder.png', tooltip: 'Finder' },
     { id: 'mail', name: 'Mail', src: '/mail.png', tooltip: 'Art Gallery' },
     { id: 'explorer', name: 'Explorer', src: '/ie.png', tooltip: 'Coding Profiles' },
     { id: 'sherlock', name: 'Sherlock', src: '/sherlock.png', tooltip: 'Skills' },
@@ -16,7 +16,7 @@ const icons = [
     { id: 'spring', name: 'Spring', src: '/spring.png', tooltip: 'Contact' },
     { id: 'news', name: 'News', src: '/news.png', tooltip: 'Email Me', url: 'mailto:mukeshkumark1755@gmail.com' },
     { id: 'music', name: 'iTunes', src: '/itunes.ico', tooltip: 'Music Player' },
-    { id: 'trash', name: 'Trash', src: '/trash.png' },
+    { id: 'trash', name: 'Trash', src: '/trash.png', tooltip: 'Trash' },
 ];
 
 // Spring configuration for smooth, natural feel
@@ -32,7 +32,7 @@ function DockIcon({ icon, mouseX, onClick }) {
     const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
     const handleMouseMove = (e) => {
-        if (icon.id === 'finder' || icon.id === 'sherlock' || icon.id === 'spring' || icon.id === 'explorer' || icon.id === 'system_prefs' || icon.id === 'monitor' || icon.id === 'news' || icon.id === 'mail' || icon.id === 'music' || icon.id === 'quicktime' || icon.id === 'spotify') {
+        if (icon.id === 'finder' || icon.id === 'sherlock' || icon.id === 'spring' || icon.id === 'explorer' || icon.id === 'system_prefs' || icon.id === 'monitor' || icon.id === 'news' || icon.id === 'mail' || icon.id === 'music' || icon.id === 'quicktime' || icon.id === 'spotify' || icon.id === 'trash') {
             setCursorPos({ x: e.clientX, y: e.clientY });
         }
     };
@@ -68,7 +68,7 @@ function DockIcon({ icon, mouseX, onClick }) {
     const y = useSpring(ySync, springConfig);
 
     const renderTooltip = () => {
-        if (icon.id === 'finder' || icon.id === 'sherlock' || icon.id === 'spring' || icon.id === 'explorer' || icon.id === 'system_prefs' || icon.id === 'monitor' || icon.id === 'news' || icon.id === 'mail' || icon.id === 'music' || icon.id === 'quicktime' || icon.id === 'spotify') {
+        if (icon.id === 'finder' || icon.id === 'sherlock' || icon.id === 'spring' || icon.id === 'explorer' || icon.id === 'system_prefs' || icon.id === 'monitor' || icon.id === 'news' || icon.id === 'mail' || icon.id === 'music' || icon.id === 'quicktime' || icon.id === 'spotify' || icon.id === 'trash') {
             if (!isHovered) return null;
             return createPortal(
                 <div

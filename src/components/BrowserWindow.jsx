@@ -146,6 +146,7 @@ export default function BrowserWindow({ title, icon, onClose, initialPosition = 
                             <span className="control-icon">✕</span>
                         </button>
                     </div>
+                    <span className="aero-title">Coding Profiles</span>
                 </div>
 
                 {/* Navigation Bar (Address Bar style) */}

@@ -1,254 +1,191 @@
-/* Retro Music Player - Brushed Metal Style */
+/* iTunes Aero Style - Overrides and Custom Styles */
+
 .music-player-window {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg,
-            #d1d1d1 0%,
-            #f4f4f4 5%,
-            #b8b8b8 100%);
-    border-radius: 6px 6px 6px 6px;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.8),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
-        0 10px 30px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    position: relative;
-    overflow: hidden;
-    /* Brushed metal texture overlay */
-    background-image:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 10%, rgba(0, 0, 0, 0) 100%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.15' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    /* Base styles inherited from AeroWindow */
     user-select: none;
 }
 
-.music-player-title-bar {
-    height: 20px;
-    background: linear-gradient(180deg, #e6e6e6 0%, #dcdcdc 100%);
-    border-bottom: 1px solid #a0a0a0;
+.music-player-window .aero-content {
+    padding: 0;
+    min-height: auto;
+}
+
+.music-player-aero-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: linear-gradient(180deg, #f5f9fc 0%, #e8edf5 100%);
+    box-sizing: border-box;
+}
+
+/* Song Info Display */
+.song-info-display {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    border: 1px solid #c0d0e0;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.album-art-placeholder {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #e0eefc 0%, #c0d8f0 100%);
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    /* Draggable area */
-    cursor: default;
+    border: 1px solid #b0c8e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
 }
 
-.music-player-title {
-    font-size: 11px;
-    color: #444;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
-    font-weight: 600;
-}
-
-.window-controls-mini {
-    position: absolute;
-    left: 6px;
-    display: flex;
-    gap: 6px;
-}
-
-.control-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    box-shadow:
-        inset 0 1px 2px rgba(0, 0, 0, 0.3),
-        0 1px 0 rgba(255, 255, 255, 0.5);
-    background: #ccc;
-    /* Default grey for disabled look or generic */
-}
-
-.control-dot.red {
-    background: radial-gradient(circle at 30% 30%, #ff8c8c, #ff4c4c);
-    border: 1px solid #bf3535;
-}
-
-.control-dot.yellow {
-    background: radial-gradient(circle at 30% 30%, #fff08c, #ffcc00);
-    border: 1px solid #b89200;
-}
-
-.control-dot.green {
-    background: radial-gradient(circle at 30% 30%, #b2ff8c, #4cd964);
-    border: 1px solid #2da841;
-}
-
-/* Main Content Area */
-.music-player-body {
-    padding: 10px 14px;
+.track-details {
+    flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 2px;
+}
+
+.track-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.track-artist {
+    font-size: 12px;
+    color: #666;
+}
+
+.track-album {
+    font-size: 11px;
+    color: #888;
+    font-style: italic;
+}
+
+/* Progress Section */
+.player-progress-section {
+    display: flex;
+    align-items: center;
     gap: 10px;
 }
 
-/* LCD Display */
-.lcd-display {
-    background: #e8f3e6;
-    /* Classic greenish LCD tint */
-    border: 1px solid #848d84;
-    box-shadow:
-        inset 0 2px 4px rgba(0, 0, 0, 0.2),
-        0 1px 0 rgba(255, 255, 255, 0.6);
-    border-radius: 3px;
-    height: 48px;
-    padding: 6px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    font-family: "Lucida Grande", sans-serif;
-    color: #333;
-}
-
-.lcd-top-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 10px;
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 2px;
-}
-
-.lcd-song-title {
-    font-size: 13px;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
-    width: 100%;
-}
-
-.lcd-artist {
+.time-display {
     font-size: 11px;
     color: #666;
-    text-align: center;
-
+    font-variant-numeric: tabular-nums;
+    width: 35px;
 }
 
-/* Progress Bar inside LCD */
-.lcd-progress-container {
+.time-display.right {
+    text-align: right;
+}
+
+.progress-track {
+    flex: 1;
     height: 6px;
-    background: rgba(0, 0, 0, 0.1);
+    background: #d0dce8;
     border-radius: 3px;
-    margin-top: 4px;
+    border: 1px solid #b0c0d0;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
     position: relative;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    overflow: hidden;
 }
 
-.lcd-progress-bar {
+.progress-fill {
     height: 100%;
-    background: #8e9e8e;
-    width: 0%;
+    background: linear-gradient(180deg, #70c0ff 0%, #4090e0 100%);
     border-radius: 2px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset;
 }
 
-.lcd-progress-thumb {
-    position: absolute;
-    top: -3px;
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 5px solid #555;
-    transform: translateX(-50%);
-}
-
-/* Controls */
-.controls-row {
+/* Controls Section */
+.player-controls-section {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.playback-controls {
+.main-controls {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
 }
 
-.metal-btn {
-    border: 1px solid #777;
-    background: linear-gradient(180deg, #fcfcfc 0%, #dcdcdc 50%, #c4c4c4 51%, #e6e6e6 100%);
+.control-btn {
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    border: 1px solid #a0b0c0;
+    background: linear-gradient(180deg, #ffffff 0%, #e0e8f0 100%);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #333;
-    font-size: 12px;
+    color: #556677;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all 0.1s ease;
 }
 
-.metal-btn:active {
-    background: linear-gradient(180deg, #b8b8b8 0%, #c4c4c4 100%);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+.control-btn:hover {
+    background: linear-gradient(180deg, #ffffff 0%, #c0d8f0 100%);
+    border-color: #80a0c0;
+    color: #335577;
 }
 
-.btn-small {
-    width: 26px;
-    height: 26px;
+.control-btn:active {
+    background: linear-gradient(180deg, #d0d8e0 0%, #e0e8f0 100%);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.btn-large {
-    width: 38px;
-    height: 38px;
-    font-size: 16px;
-    border: 1px solid #666;
-    background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 50%, #dcdcdc 51%, #efefef 100%);
+.play-btn {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(180deg, #ffffff 0%, #d8e6f3 100%);
 }
 
-.btn-large.playing {
-    background: linear-gradient(180deg, #dcebf5 0%, #c6dff2 50%, #8abce6 51%, #b3d6f5 100%);
-    border-color: #4a77a5;
-    color: #1a3c61;
+.play-btn.active {
+    /* Pause state */
+    background: linear-gradient(180deg, #e6f0fa 0%, #c3d9ef 100%);
+    border-color: #7090b0;
+    color: #2a5a8a;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.volume-control {
+/* Volume Slider */
+.volume-slider-container {
     display: flex;
     align-items: center;
-    gap: 6px;
-    width: 60px;
+    gap: 8px;
+    width: 100px;
 }
 
-.volume-icon {
-    font-size: 10px;
-    color: #666;
-}
-
-input[type=range].retro-slider {
+.aero-slider {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    background: transparent;
-}
-
-input[type=range].retro-slider:focus {
+    height: 4px;
+    background: #c0d0e0;
+    border-radius: 2px;
+    border: 1px solid #a0b0c0;
     outline: none;
 }
 
-input[type=range].retro-slider::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 4px;
-    cursor: pointer;
-    background: #a0a0a0;
-    border-radius: 2px;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.3);
-    border-bottom: 1px solid #f0f0f0;
-}
-
-input[type=range].retro-slider::-webkit-slider-thumb {
-    height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #fff, #bbb);
-    border: 1px solid #777;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
+.aero-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    margin-top: -4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #ffffff 0%, #d0e0f0 100%);
+    border: 1px solid #8090a0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    margin-top: -5px;
+    /* Adjust for track height discrepancy if needed, though standard flex centering usually handles it, webkit needs this often matching track height diff */
 }

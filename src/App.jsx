@@ -15,6 +15,7 @@ import MusicPlayer from './components/MusicPlayer';
 import DesktopIcon from './components/DesktopIcon';
 import FinderWindow from './components/FinderWindow';
 import SpotifyWindow from './components/SpotifyWindow';
+import TrashWindow from './components/TrashWindow';
 import './App.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
   const [showResumeWindow, setShowResumeWindow] = useState(false);
   const [showGalleryWindow, setShowGalleryWindow] = useState(false);
   const [showSpotifyWindow, setShowSpotifyWindow] = useState(false);
+  const [showTrashWindow, setShowTrashWindow] = useState(false);
   const [triggerCloseAll, setTriggerCloseAll] = useState(false);
 
   // Window stack for z-index management - last item has highest z-index
@@ -54,6 +56,7 @@ function App() {
       setShowResumeWindow(false);
       setShowGalleryWindow(false);
       setShowSpotifyWindow(false);
+      setShowTrashWindow(false);
       setTriggerCloseAll(false);
     }, 250); // Match animation duration
   }, []);
@@ -65,8 +68,16 @@ function App() {
   }, [closeAllWindows]);
 
   const handleIconClick = (icon) => {
-    // Don't open if trash is clicked (or handle differently)
-    if (icon.id === 'trash') return;
+    if (icon.id === 'trash') {
+      // Open trash window
+      if (!showTrashWindow) {
+        setShowTrashWindow(true);
+        setWindowStack(prev => [...prev, 'trash']);
+      } else {
+        bringToFront('trash');
+      }
+      return;
+    }
 
     if (icon.id === 'spring') {
       handleOpenContactCard();
@@ -154,6 +165,11 @@ function App() {
   const handleCloseSpotify = () => {
     setShowSpotifyWindow(false);
     setWindowStack(prev => prev.filter(id => id !== 'spotify'));
+  };
+
+  const handleCloseTrash = () => {
+    setShowTrashWindow(false);
+    setWindowStack(prev => prev.filter(id => id !== 'trash'));
   };
 
   // Background click - close all windows when clicking outside
@@ -336,6 +352,15 @@ function App() {
           onClose={handleCloseSpotify}
           zIndex={getZIndex('spotify')}
           onFocus={() => bringToFront('spotify')}
+          triggerClose={triggerCloseAll}
+        />
+      )}
+
+      {showTrashWindow && (
+        <TrashWindow
+          onClose={handleCloseTrash}
+          zIndex={getZIndex('trash')}
+          onFocus={() => bringToFront('trash')}
           triggerClose={triggerCloseAll}
         />
       )}

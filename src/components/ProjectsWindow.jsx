@@ -153,6 +153,7 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
                             <span className="control-icon">✕</span>
                         </button>
                     </div>
+                    <span className="aero-title">Projects</span>
                 </div>
 
                 {/* Content Area */}

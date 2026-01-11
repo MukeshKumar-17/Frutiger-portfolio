@@ -1,16 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import './SpotifyWindow.css';
+import './TrashWindow.css';
 
-export default function SpotifyWindow({ onClose, initialPosition = { x: 150, y: 80 }, zIndex = 100, onFocus, triggerClose }) {
+export default function TrashWindow({ onClose, initialPosition = { x: 200, y: 120 }, zIndex = 100, onFocus, triggerClose }) {
     const [position, setPosition] = useState(initialPosition);
     const [isDragging, setIsDragging] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const windowRef = useRef(null);
     const offsetRef = useRef({ x: 0, y: 0 });
-
-    // C418 Minecraft Volume Alpha album
-    const spotifyAlbumId = '3Gt7rOjcZQoHCfnKl5AkK7';
 
     useEffect(() => {
         const windowEl = windowRef.current;
@@ -61,8 +58,7 @@ export default function SpotifyWindow({ onClose, initialPosition = { x: 150, y: 
 
     const handleMouseDown = (e) => {
         if (e.target.closest('.window-control-btn') ||
-            e.target.closest('button') ||
-            e.target.closest('iframe')) return;
+            e.target.closest('button')) return;
 
         e.stopPropagation();
         if (onFocus) onFocus();
@@ -106,15 +102,15 @@ export default function SpotifyWindow({ onClose, initialPosition = { x: 150, y: 
     return (
         <div
             ref={windowRef}
-            className="spotify-window"
+            className="trash-window"
             style={{ left: position.x, top: position.y, cursor: isDragging ? 'grabbing' : 'grab', zIndex: zIndex }}
             onMouseDown={handleMouseDown}
             onClick={handleWindowClick}
         >
-            <div className="spotify-frame">
+            <div className="trash-frame">
                 {/* Title Bar */}
-                <div className="spotify-titlebar">
-                    <div className="spotify-window-controls">
+                <div className="trash-titlebar">
+                    <div className="trash-window-controls">
                         <button className="window-control-btn minimize-btn" onClick={handleClose}>
                             <span className="control-icon">─</span>
                         </button>
@@ -125,22 +121,22 @@ export default function SpotifyWindow({ onClose, initialPosition = { x: 150, y: 
                             <span className="control-icon">✕</span>
                         </button>
                     </div>
-                    <div className="spotify-title">
-                        <span>Minecraft - Volume Alpha</span>
+                    <div className="trash-title">
+                        <span>Trash</span>
                     </div>
                 </div>
 
-                {/* Spotify Embed */}
-                <div className="spotify-content">
-                    <iframe
-                        src={`https://open.spotify.com/embed/album/${spotifyAlbumId}?utm_source=generator&theme=0`}
-                        width="100%"
-                        height="100%"
-                        frameBorder="0"
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                        loading="lazy"
-                        title="Spotify Embed"
-                    />
+                {/* Content Area */}
+                <div className="trash-content">
+                    <div className="trash-empty-state">
+                        <img src="/trash.png" alt="Empty Trash" className="trash-empty-icon" />
+                        <p className="trash-empty-text">Trash is empty</p>
+                    </div>
+                </div>
+
+                {/* Status Bar */}
+                <div className="trash-statusbar">
+                    <span>0 items</span>
                 </div>
             </div>
         </div>

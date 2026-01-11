@@ -173,6 +173,7 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
                             <span className="control-icon">✕</span>
                         </button>
                     </div>
+                    <span className="aero-title">Skills</span>
                 </div>
 
                 {/* Content Area */}

@@ -146,7 +146,7 @@ export default function GalleryWindow({ title, icon, onClose, initialPosition = 
                                 <span className="control-icon">✕</span>
                             </button>
                         </div>
-                        <span className="aero-title" style={{ fontFamily: "'Apple Garamond', serif" }}>
+                        <span className="aero-title">
                             {title || 'Art Gallery'}
                         </span>
                     </div>
