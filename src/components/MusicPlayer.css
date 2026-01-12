@@ -193,23 +193,97 @@
         0 0 12px rgba(52, 150, 255, 0.5);
 }
 
-/* Volume Slider */
+/* Volume Control Container - Matches Gallery Player */
 .volume-slider-container {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 8px;
-    width: 100px;
+    gap: 6px;
+    background: transparent;
+    padding: 0 8px;
+    border-radius: 12px;
+    height: 30px;
+}
+
+.volume-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 1000px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.15s ease;
+    background: linear-gradient(rgba(0, 65, 184, 0.7),
+            rgba(45, 115, 199, 0.7),
+            rgba(33, 160, 196, 0.7));
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        0 2px 2px rgba(0, 78, 187, 0.5),
+        inset 0 3px 6px rgba(0, 17, 49, 0.6),
+        inset 0 4px 8px 3px rgba(0, 78, 187, 0.5);
+    flex-shrink: 0;
+}
+
+.volume-btn::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 35%;
+    background: linear-gradient(rgba(255, 255, 255, 0.85),
+            rgba(255, 255, 255, 0.25));
+    width: calc(100% - 10px);
+    border-radius: 100px 100px 50px 50px;
+    top: 8%;
+    filter: blur(1px);
+    pointer-events: none;
+}
+
+.volume-btn:hover {
+    background: linear-gradient(rgba(20, 85, 200, 0.8),
+            rgba(60, 130, 210, 0.8),
+            rgba(50, 175, 210, 0.8));
+    box-shadow:
+        0 5px 10px rgba(0, 0, 0, 0.35),
+        0 2px 2px rgba(0, 78, 187, 0.5),
+        inset 0 3px 6px rgba(0, 17, 49, 0.6),
+        inset 0 4px 8px 3px rgba(0, 78, 187, 0.5),
+        0 0 8px rgba(52, 106, 227, 0.4);
+}
+
+.volume-btn:active {
+    background: linear-gradient(rgba(0, 50, 150, 0.8),
+            rgba(30, 90, 170, 0.8),
+            rgba(20, 130, 170, 0.8));
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(0, 17, 49, 0.8);
+}
+
+.volume-btn svg {
+    color: #fff;
+    z-index: 3;
+    position: relative;
+    filter: drop-shadow(0 1px 2px rgba(0, 30, 80, 0.5));
 }
 
 .aero-slider {
     -webkit-appearance: none;
     appearance: none;
-    width: 100%;
+    width: 70px;
     height: 4px;
-    background: #c0d0e0;
+    background: linear-gradient(180deg, #a0b5c8 0%, #d0dce8 100%);
     border-radius: 2px;
-    border: 1px solid #a0b0c0;
     outline: none;
+    border: 1px solid #90a5b8;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.12);
+    margin: 0;
+    vertical-align: middle;
 }
 
 .aero-slider::-webkit-slider-thumb {
@@ -218,10 +292,37 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: linear-gradient(180deg, #ffffff 0%, #d0e0f0 100%);
-    border: 1px solid #8090a0;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    margin-top: -5px;
-    /* Adjust for track height discrepancy if needed, though standard flex centering usually handles it, webkit needs this often matching track height diff */
+    border: 1px solid #8090a0;
+    margin-top: 0;
+    /* Updated from -5px */
+}
+
+.aero-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    border: 1px solid #8090a0;
+}
+
+/* Status Bar - Matching Trash Window Style */
+.music-player-statusbar {
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(228, 235, 245, 1) 0px,
+            rgba(228, 235, 245, 1) 1px,
+            rgba(242, 246, 252, 1) 1px,
+            rgba(242, 246, 252, 1) 2px);
+    border-top: 1px solid #b8c4d0;
+    font-size: 11px;
+    color: #555;
+    border-radius: 0 0 10px 10px;
 }

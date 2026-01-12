@@ -17,8 +17,8 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    border-radius: 10px 10px 0 0;
-    /* Rounded top, flat bottom for audio player */
+    border-radius: 10px;
+    /* Fully rounded corners for curvy statusbar */
     overflow: hidden;
     /* Aqua Glass effect - translucent blue/teal */
     background: linear-gradient(180deg,

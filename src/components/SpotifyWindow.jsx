@@ -142,6 +142,11 @@ export default function SpotifyWindow({ onClose, initialPosition = { x: 150, y: 
                         title="Spotify Embed"
                     />
                 </div>
+
+                {/* Status Bar */}
+                <div className="spotify-statusbar">
+                    <span>Spotify</span>
+                </div>
             </div>
         </div>
     );

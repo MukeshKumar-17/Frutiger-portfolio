@@ -23,12 +23,19 @@ import './App.css';
 const STARTUP_SOUND = '/Music/windows_7_startup.mp3';
 const WINDOW_OPEN_SOUND = '/Music/exclamation.mp3';
 const CONTACT_CARD_SOUND = '/Music/battery-critical.mp3';
+const ALREADY_OPEN_SOUND = '/Music/ding.mp3';
 
 // Helper function to play window open sound
 const playWindowOpenSound = () => {
   const audio = new Audio(WINDOW_OPEN_SOUND);
   audio.volume = 0.4;
   audio.play().catch(() => { }); // Ignore autoplay errors
+};
+
+const playAlreadyOpenSound = () => {
+  const audio = new Audio(ALREADY_OPEN_SOUND);
+  audio.volume = 0.5;
+  audio.play().catch(() => { });
 };
 
 function App() {
@@ -135,6 +142,7 @@ function App() {
         setShowTrashWindow(true);
         setWindowStack(prev => [...prev, 'trash']);
       } else {
+        playAlreadyOpenSound();
         bringToFront('trash');
       }
       return;
@@ -157,6 +165,7 @@ function App() {
         setShowResumeWindow(true);
         setWindowStack(prev => [...prev, 'resume']);
       } else {
+        playAlreadyOpenSound();
         bringToFront('resume');
       }
       return;
@@ -169,6 +178,7 @@ function App() {
         setShowGalleryWindow(true);
         setWindowStack(prev => [...prev, 'gallery']);
       } else {
+        playAlreadyOpenSound();
         bringToFront('gallery');
       }
       return;
@@ -181,6 +191,7 @@ function App() {
         setShowSpotifyWindow(true);
         setWindowStack(prev => [...prev, 'spotify']);
       } else {
+        playAlreadyOpenSound();
         bringToFront('spotify');
       }
       return;
@@ -190,6 +201,7 @@ function App() {
     const existingWindow = openWindows.find(w => w.type === icon.id);
     if (existingWindow) {
       // Bring existing window to front
+      playAlreadyOpenSound();
       bringToFront(existingWindow.id);
       return;
     }
@@ -270,6 +282,7 @@ function App() {
                 setShowResumeWindow(true);
                 setWindowStack(prev => [...prev, 'resume']);
               } else {
+                playAlreadyOpenSound();
                 bringToFront('resume');
               }
             }}
@@ -279,12 +292,14 @@ function App() {
                 setShowGalleryWindow(true);
                 setWindowStack(prev => [...prev, 'gallery']);
               } else {
+                playAlreadyOpenSound();
                 bringToFront('gallery');
               }
             }}
             onOpenAboutMe={() => {
               const existingWindow = openWindows.find(w => w.type === 'aboutme');
               if (existingWindow) {
+                playAlreadyOpenSound();
                 bringToFront(existingWindow.id);
               } else {
                 handleIconClick({ id: 'aboutme', name: 'About Me', src: '/finder.png' });
@@ -332,6 +347,7 @@ function App() {
                 setShowResumeWindow(true);
                 setWindowStack(prev => [...prev, 'resume']);
               } else {
+                playAlreadyOpenSound();
                 bringToFront('resume');
               }
             }}
@@ -352,6 +368,7 @@ function App() {
         onOpenProjects={() => {
           const existingWindow = openWindows.find(w => w.type === 'system_prefs');
           if (existingWindow) {
+            playAlreadyOpenSound();
             bringToFront(existingWindow.id);
           } else {
             handleIconClick({ id: 'system_prefs', name: 'Projects', src: '/system_prefs.png' });
@@ -364,6 +381,7 @@ function App() {
             setShowResumeWindow(true);
             setWindowStack(prev => [...prev, 'resume']);
           } else {
+            playAlreadyOpenSound();
             bringToFront('resume');
           }
         }}
@@ -384,6 +402,7 @@ function App() {
             setShowResumeWindow(true);
             setWindowStack(prev => [...prev, 'resume']);
           } else {
+            playAlreadyOpenSound();
             bringToFront('resume');
           }
         }}
@@ -396,6 +415,7 @@ function App() {
         onClick={() => {
           const existingWindow = openWindows.find(w => w.type === 'aboutme');
           if (existingWindow) {
+            playAlreadyOpenSound();
             bringToFront(existingWindow.id);
           } else {
             handleIconClick({ id: 'aboutme', name: 'About Me', src: '/finder.png' });

@@ -1,4 +1,4 @@
-/* Gallery Audio Player - Titlebar Texture Style */
+/* Gallery Audio Player - Trash Window Status Bar Style */
 .gallery-audio-player {
     margin-top: 0;
     display: flex;
@@ -8,23 +8,22 @@
 }
 
 .gallery-audio-player .glass-panel {
-    /* Vibrant Aqua Glass Style */
-    background: linear-gradient(180deg,
-            rgba(240, 245, 255, 0.95) 0%,
-            rgba(210, 225, 245, 0.9) 45%,
-            rgba(180, 205, 235, 0.9) 50%,
-            rgba(190, 215, 245, 0.9) 100%);
+    /* Horizontal pinstripe pattern matching trash statusbar */
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(228, 235, 245, 1) 0px,
+            rgba(228, 235, 245, 1) 1px,
+            rgba(242, 246, 252, 1) 1px,
+            rgba(242, 246, 252, 1) 2px);
 
-    /* Brighter borders */
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-top: 1px solid rgba(200, 220, 240, 0.8);
+    /* Border matching trash statusbar */
+    border-top: 1px solid #b8c4d0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
 
-    box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.5) inset,
-        0 -1px 0 rgba(255, 255, 255, 0.6) inset,
-        0 4px 12px rgba(0, 0, 0, 0.2);
-
-    backdrop-filter: blur(10px);
+    box-shadow: none;
+    backdrop-filter: none;
 
     border-radius: 0 0 10px 10px;
     padding: 8px 20px;
@@ -32,9 +31,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    /* Match window width */
     box-sizing: border-box;
-    /* Include padding/border in width */
     height: 44px;
 }
 

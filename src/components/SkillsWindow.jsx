@@ -228,6 +228,20 @@ export default function SkillsWindow({ title, icon, onClose, initialPosition = {
                         </div>
                     </div>
                 </div>
+
+                {/* Status Bar */}
+                <div className="skills-statusbar" style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '5px 15px',
+                    background: 'repeating-linear-gradient(0deg, rgba(228, 235, 245, 1) 0px, rgba(228, 235, 245, 1) 1px, rgba(242, 246, 252, 1) 1px, rgba(242, 246, 252, 1) 2px)',
+                    borderTop: '1px solid #b8c4d0',
+                    fontSize: '11px',
+                    color: '#555',
+                    borderRadius: '0 0 10px 10px'
+                }}>
+                    <span>4 categories</span>
+                </div>
             </div>
         </div>
     );
