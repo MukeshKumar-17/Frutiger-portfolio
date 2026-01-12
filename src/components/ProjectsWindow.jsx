@@ -293,17 +293,7 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
                                     className="sidebar-selection-highlight"
                                     style={{
                                         position: 'absolute',
-                                        // CSS Metrics from ProjectsSidebar.css:
-                                        // Padding Top: 12px
-                                        // Header Height: 18px
-                                        // Header Margin Bottom: 6px
-                                        // First Item Margin Top: 2px
-                                        // Base Start = 12 + 18 + 6 + 2 = 38px
-
-                                        // Item Height: 26px
-                                        // Item Margin Top: 2px
-                                        // Item Margin Bottom: 2px
-                                        // Stride = 26 + 2 + 2 = 30px
+                                        // Base: 38px (padding + header + margins), Stride: 30px per item
                                         top: `${38 + (activeIndex * 30)}px`,
                                         left: '8px',
                                         right: '8px',

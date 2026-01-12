@@ -132,8 +132,8 @@ export default function ResumeWindow({ title, icon, onClose, initialPosition = {
         >
             {/* Glass Frame */}
             <div className="aero-frame" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                {/* Title Bar */}
-                <div className="aero-titlebar" style={{ position: 'relative' }}>
+                {/* Title Bar - Increased height for button visibility */}
+                <div className="aero-titlebar" style={{ position: 'relative', height: '32px', minHeight: '32px' }}>
                     <div className="aero-window-controls">
                         <button className="window-control-btn minimize-btn" onClick={handleClose}>
                             <span className="control-icon">─</span>

@@ -172,18 +172,7 @@ export default function FinderWindow({ title, icon, onClose, initialPosition = {
                                 className="sidebar-selection-highlight"
                                 style={{
                                     position: 'absolute',
-                                    // CSS Metrics from FinderSidebar.css:
-                                    // Padding Top: 12px
-                                    // Header Height: 18px
-                                    // Header Margin Bottom: 6px
-                                    // First Item Margin Top: 2px
-                                    // Base Start = 12 + 18 + 6 + 2 = 38px
-
-                                    // Item Height: 26px
-                                    // Item Margin Top: 2px
-                                    // Item Margin Bottom: 2px
-                                    // Stride = 26 + 2 + 2 = 30px
-                                    // Correct Base for Highlight INSIDE Section: 18(H) + 6(MB) + 2(MT) = 26px
+                                    // Base: 26px (header + margins), Stride: 30px per item
                                     top: `${26 + (activeIndex * 30)}px`,
                                     left: '5px',
                                     right: '5px',
