@@ -75,7 +75,7 @@
     border-right: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Frutiger Aero Style Tooltip */
+/* Frutiger Aero Aqua Gel Tooltip */
 .aero-tooltip {
     position: absolute;
     bottom: calc(100% + 15px);
@@ -87,37 +87,53 @@
 
 .aero-tooltip-text {
     display: inline-block;
-    padding: 8px 16px;
-    font-family: 'Segoe UI', 'Lucida Grande', 'Helvetica Neue', Arial, sans-serif;
+    padding: 8px 18px;
+    font-family: 'Lucida Grande', 'Helvetica Neue', Arial, sans-serif;
     font-size: 13px;
     font-weight: 500;
-    color: #333;
+    color: #fff;
     white-space: nowrap;
+    position: relative;
+    overflow: hidden;
 
-    /* Frutiger Aero glossy glass effect */
-    background: linear-gradient(180deg,
-            rgba(255, 255, 255, 0.95) 0%,
-            rgba(255, 255, 255, 0.85) 45%,
-            rgba(230, 240, 250, 0.9) 50%,
-            rgba(200, 220, 240, 0.85) 100%);
+    /* Sky blue aqua gel gradient */
+    background: linear-gradient(rgba(80, 180, 240, 0.9),
+            rgba(100, 200, 255, 0.9),
+            rgba(130, 210, 255, 0.9));
 
-    /* Rounded bubble shape */
-    border-radius: 20px;
+    /* Pill shape */
+    border-radius: 1000px;
 
-    /* Glass border */
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    /* Layered aqua shadows - lighter blue tones */
     box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.15),
-        0 4px 16px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 1),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+        0 4px 8px rgba(0, 0, 0, 0.25),
+        0 2px 2px rgba(50, 150, 220, 0.4),
+        inset 0 3px 6px rgba(30, 100, 180, 0.4),
+        inset 0 4px 8px 3px rgba(80, 170, 230, 0.4);
 
-    /* Subtle blur backdrop */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    /* Text styling */
+    text-shadow: 0 1px 2px rgba(30, 100, 170, 0.5);
+    letter-spacing: 0.02em;
 }
 
-/* Tooltip arrow/pointer - Applied globally to aero-tooltip */
+/* Aqua shine effect on tooltip */
+.aero-tooltip-text::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 40%;
+    background: linear-gradient(rgba(255, 255, 255, 0.85),
+            rgba(255, 255, 255, 0.25));
+    width: calc(100% - 14px);
+    border-radius: 100px 100px 50px 50px;
+    top: 6%;
+    filter: blur(0.5px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Tooltip arrow/pointer - Sky blue to match */
 .aero-tooltip::after {
     content: '';
     position: absolute;
@@ -126,8 +142,8 @@
     transform: translateX(-50%);
     border-width: 8px;
     border-style: solid;
-    border-color: rgba(220, 235, 250, 0.9) transparent transparent transparent;
-    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+    border-color: rgba(130, 210, 255, 0.9) transparent transparent transparent;
+    filter: drop-shadow(0 2px 3px rgba(50, 140, 200, 0.3));
 }
 
 /* Hide arrow specifically for finder-tooltip */
