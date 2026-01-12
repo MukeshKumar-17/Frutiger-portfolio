@@ -152,28 +152,32 @@ export default function BrowserWindow({ title, icon, onClose, initialPosition = 
                 {/* Navigation Bar (Address Bar style) */}
                 <div className="aero-navbar">
                     <div className="aero-nav-buttons">
-                        <button className="nav-btn back-btn" disabled>
+                        <button className="nav-btn back-btn">
                             <span>◀</span>
                         </button>
-                        <button className="nav-btn forward-btn" disabled>
+                        <button className="nav-btn forward-btn">
                             <span>▶</span>
                         </button>
                     </div>
 
                     {/* Address Bar */}
-                    <div className="aero-search" style={{ width: '100%', maxWidth: 'none', margin: '0 10px' }}>
+                    <div className="aero-breadcrumb" style={{ flex: 1, margin: '0 10px', height: '26px', padding: '0' }}>
                         <input
                             type="text"
                             value={url}
                             readOnly
                             style={{
                                 width: '100%',
-                                paddingLeft: '25px',
-                                fontFamily: 'align',
-                                color: '#333'
+                                height: '100%',
+                                border: 'none',
+                                background: 'transparent',
+                                padding: '0 10px',
+                                fontSize: '12px',
+                                color: '#333',
+                                outline: 'none',
+                                fontFamily: "'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica Neue', sans-serif"
                             }}
                         />
-                        <span className="search-icon" style={{ left: '8px', right: 'auto' }}>🔒</span>
                     </div>
 
                     {/* Open in New Tab Button */}

@@ -37,7 +37,7 @@
     margin-bottom: 0.5rem;
     letter-spacing: 0.02em;
     line-height: 1.4;
-    color: #000000;
+    color: #ffffff;
 }
 
 .welcome-letter {
@@ -55,19 +55,19 @@
     font-family: 'Apple Garamond', 'Georgia', 'Times New Roman', serif;
     font-style: normal;
     font-weight: 400;
-    color: #000000;
+    color: #ffffff;
 }
 
 .welcome-name {
     font-family: 'Apple Garamond', 'Arial', 'Helvetica Neue', sans-serif;
     font-weight: 400;
-    color: #000000;
+    color: #ffffff;
 }
 
 .welcome-light {
     font-family: 'Apple Garamond', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
-    color: #000000;
+    color: #ffffff;
 }
 
 /* Portfolio Title - Using Nearvana Font */
@@ -87,7 +87,7 @@
 
 .portfolio-letter {
     display: inline-block;
-    color: rgba(0, 0, 0, 0.95);
+    color: rgba(255, 255, 255, 0.95);
 
     cursor: pointer;
     transform-style: preserve-3d;

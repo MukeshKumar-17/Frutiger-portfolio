@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import './AeroWindow.css';
 import './ProjectsWindow.css';
+import './ProjectsSidebar.css'; // Separate alignment CSS
 
 // Project Data with descriptions
 const projectsData = [
@@ -40,6 +41,17 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
         }
         return null;
     });
+
+    // Track active sidebar index
+    // 0: Work, 1: About Me, 2: Resume, 3: GitHub, 4+: Projects
+    const [activeIndex, setActiveIndex] = useState(() => {
+        if (preSelectedProjectId) {
+            const idx = projectsData.findIndex(p => p.id === preSelectedProjectId);
+            return idx !== -1 ? 4 + idx : 0;
+        }
+        return 0;
+    });
+
     const [showExplanation, setShowExplanation] = useState(false);
     const [explanationProject, setExplanationProject] = useState(null);
 
@@ -148,8 +160,14 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
         if (onFocus) onFocus();
     };
 
-    const handleProjectSelect = (project) => {
+    const handleSidebarClick = (index, action) => {
+        setActiveIndex(index);
+        if (action) action();
+    };
+
+    const handleProjectSelect = (project, index) => {
         setSelectedProject(project);
+        setActiveIndex(index);
         setShowExplanation(false);
     };
 
@@ -238,39 +256,89 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
                         <span className="aero-title">Projects</span>
                     </div>
 
+                    {/* Navigation Bar */}
+                    <div className="aero-navbar">
+                        <div className="aero-nav-buttons">
+                            <button className="nav-btn back-btn"><span>◀</span></button>
+                            <button className="nav-btn forward-btn"><span>▶</span></button>
+                        </div>
+                        {/* Address Bar style from Finder/Browser */}
+                        <div className="aero-breadcrumb" style={{ flex: 1, margin: '0 10px', height: '26px', padding: '0' }}>
+                            <input
+                                type="text"
+                                value={selectedProject ? selectedProject.name : 'Projects'}
+                                readOnly
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    border: 'none',
+                                    background: 'transparent',
+                                    padding: '0 10px',
+                                    fontSize: '12px',
+                                    color: '#333',
+                                    outline: 'none',
+                                    fontFamily: "'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica Neue', sans-serif"
+                                }}
+                            />
+                        </div>
+                    </div>
+
                     {/* Content Area */}
                     <div className="aero-content" style={{ padding: 0 }}>
                         <div className="projects-window-content">
                             {/* Sidebar */}
-                            <div className="projects-sidebar">
-                                <div className="sidebar-section">
-                                    <div className={`sidebar-item ${!selectedProject ? 'active' : ''}`} onClick={() => setSelectedProject(null)}>
-                                        <div className="sidebar-icon" style={{ background: '#888' }}></div>
-                                        Work
-                                    </div>
-                                    <div className="sidebar-item" onClick={onOpenAboutMe} style={{ cursor: 'pointer' }}>
-                                        <div className="sidebar-icon"></div>
-                                        About Me
-                                    </div>
-                                    <div className="sidebar-item" onClick={onOpenResume} style={{ cursor: 'pointer' }}>
-                                        <div className="sidebar-icon"></div>
-                                        Resume
-                                    </div>
-                                    <div className="sidebar-item" onClick={() => window.open('https://github.com/MukeshKumar-17', '_blank')} style={{ cursor: 'pointer' }}>
-                                        <div className="sidebar-icon"></div>
-                                        GitHub
-                                    </div>
+                            <div className="projects-sidebar" style={{ position: 'relative' }}>
+                                {/* Selection Highlight Button */}
+                                <div
+                                    className="sidebar-selection-highlight"
+                                    style={{
+                                        position: 'absolute',
+                                        // CSS Metrics from ProjectsSidebar.css:
+                                        // Padding Top: 12px
+                                        // Header Height: 18px
+                                        // Header Margin Bottom: 6px
+                                        // First Item Margin Top: 2px
+                                        // Base Start = 12 + 18 + 6 + 2 = 38px
+
+                                        // Item Height: 26px
+                                        // Item Margin Top: 2px
+                                        // Item Margin Bottom: 2px
+                                        // Stride = 26 + 2 + 2 = 30px
+                                        top: `${38 + (activeIndex * 30)}px`,
+                                        left: '8px',
+                                        right: '8px',
+                                        height: '26px',
+                                        borderRadius: '1000px',
+                                        background: 'linear-gradient(rgba(50, 130, 220, 0.8), rgba(30, 100, 200, 0.85), rgba(20, 80, 180, 0.8))',
+                                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 1px rgba(30, 80, 150, 0.5), inset 0 2px 4px rgba(0, 30, 80, 0.4), inset 0 3px 5px 2px rgba(50, 120, 200, 0.5)',
+                                        zIndex: 0,
+                                        pointerEvents: 'none',
+                                        // Only show highlight if we have a valid index (0-2 for projects)
+                                        display: activeIndex >= 0 && activeIndex < projectsData.length ? 'block' : 'none'
+                                    }}
+                                >
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: '6%',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        width: 'calc(100% - 12px)',
+                                        height: '40%',
+                                        background: 'linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1))',
+                                        borderRadius: '100px 100px 50px 50px',
+                                        filter: 'blur(0.5px)'
+                                    }}></div>
                                 </div>
 
                                 <div className="sidebar-section">
-                                    {projectsData.map(project => (
+                                    <div className="sidebar-header">Favorites</div>
+                                    {projectsData.map((project, idx) => (
                                         <div
                                             key={project.id}
-                                            className={`sidebar-item ${selectedProject?.id === project.id ? 'active' : ''}`}
-                                            onClick={() => handleProjectSelect(project)}
+                                            className={`sidebar-item ${activeIndex === idx ? 'active' : ''}`}
+                                            onClick={() => handleProjectSelect(project, idx)}
                                             style={{ cursor: 'pointer' }}
                                         >
-                                            <div className="sidebar-icon"></div>
                                             {project.folder}
                                         </div>
                                     ))}
@@ -288,11 +356,11 @@ export default function ProjectsWindow({ title, icon, onClose, initialPosition =
                                 <div className="projects-grid">
                                     {!selectedProject ? (
                                         // Show all project folders when no project selected
-                                        projectsData.map(project => (
+                                        projectsData.map((project, idx) => (
                                             <div
                                                 key={project.id}
                                                 className="project-item"
-                                                onClick={() => handleProjectSelect(project)}
+                                                onClick={() => handleProjectSelect(project, 4 + idx)}
                                                 style={{ cursor: 'pointer' }}
                                             >
                                                 <img src="/glass_folder.png" alt={project.name} className="project-folder-icon" />

@@ -91,7 +91,7 @@
     font-family: 'Lucida Grande', 'Helvetica Neue', Arial, sans-serif;
     font-size: 13px;
     font-weight: 500;
-    color: #fff;
+    color: #000;
     white-space: nowrap;
     position: relative;
     overflow: hidden;
@@ -112,7 +112,7 @@
         inset 0 4px 8px 3px rgba(80, 170, 230, 0.4);
 
     /* Text styling */
-    text-shadow: 0 1px 2px rgba(30, 100, 170, 0.5);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
     letter-spacing: 0.02em;
 }
 
