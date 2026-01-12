@@ -3,6 +3,9 @@ import { createPortal } from 'react-dom';
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import './Dock.css';
 
+// Hover sound
+const HOVER_SOUND = '/Music/bubble-pop-06-351337.mp3';
+
 const icons = [
     { id: 'finder', name: 'Finder', src: '/finder.png', tooltip: 'Finder' },
     { id: 'mail', name: 'Mail', src: '/mail.png', tooltip: 'Art Gallery' },
@@ -30,6 +33,21 @@ function DockIcon({ icon, mouseX, onClick }) {
     const ref = useRef(null);
     const [isHovered, setIsHovered] = useState(false);
     const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+    const hoverAudioRef = useRef(null);
+
+    // Play hover sound
+    const playHoverSound = () => {
+        // Create new audio instance to allow overlapping sounds
+        const audio = new Audio(HOVER_SOUND);
+        audio.volume = 0.3;
+        audio.play().catch(() => { }); // Ignore autoplay errors
+        hoverAudioRef.current = audio;
+    };
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+        playHoverSound();
+    };
 
     const handleMouseMove = (e) => {
         if (icon.id === 'finder' || icon.id === 'sherlock' || icon.id === 'spring' || icon.id === 'explorer' || icon.id === 'system_prefs' || icon.id === 'monitor' || icon.id === 'news' || icon.id === 'mail' || icon.id === 'music' || icon.id === 'quicktime' || icon.id === 'spotify' || icon.id === 'trash') {
@@ -119,7 +137,7 @@ function DockIcon({ icon, mouseX, onClick }) {
             whileTap={{ scale: 0.85 }}
             transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             onClick={() => onClick(icon)}
-            onMouseEnter={() => setIsHovered(true)}
+            onMouseEnter={handleMouseEnter}
             onMouseLeave={() => setIsHovered(false)}
             onMouseMove={handleMouseMove}
         >

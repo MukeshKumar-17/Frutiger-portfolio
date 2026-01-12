@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import TopBar from './components/TopBar';
@@ -19,6 +19,18 @@ import SpotifyWindow from './components/SpotifyWindow';
 import TrashWindow from './components/TrashWindow';
 import './App.css';
 
+// Sound paths
+const STARTUP_SOUND = '/Music/windows_7_startup.mp3';
+const WINDOW_OPEN_SOUND = '/Music/exclamation.mp3';
+const CONTACT_CARD_SOUND = '/Music/battery-critical.mp3';
+
+// Helper function to play window open sound
+const playWindowOpenSound = () => {
+  const audio = new Audio(WINDOW_OPEN_SOUND);
+  audio.volume = 0.4;
+  audio.play().catch(() => { }); // Ignore autoplay errors
+};
+
 function App() {
   const [openWindows, setOpenWindows] = useState([]);
   const [nextWindowId, setNextWindowId] = useState(1);
@@ -28,6 +40,44 @@ function App() {
   const [showSpotifyWindow, setShowSpotifyWindow] = useState(false);
   const [showTrashWindow, setShowTrashWindow] = useState(false);
   const [triggerCloseAll, setTriggerCloseAll] = useState(false);
+  const startupAudioRef = useRef(null);
+
+  // Play startup sound on page load/reload
+  useEffect(() => {
+    // Check if we've already played the sound this session
+    const hasPlayedStartup = sessionStorage.getItem('startupSoundPlayed');
+
+    if (!hasPlayedStartup) {
+      const audio = new Audio(STARTUP_SOUND);
+      audio.volume = 0.5;
+      startupAudioRef.current = audio;
+
+      // Try to play immediately (works if user has interacted before)
+      const playPromise = audio.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            sessionStorage.setItem('startupSoundPlayed', 'true');
+          })
+          .catch(() => {
+            // Autoplay blocked - wait for user interaction
+            const playOnInteraction = () => {
+              audio.play()
+                .then(() => {
+                  sessionStorage.setItem('startupSoundPlayed', 'true');
+                })
+                .catch(() => { });
+              // Remove listeners after first interaction
+              document.removeEventListener('click', playOnInteraction);
+              document.removeEventListener('keydown', playOnInteraction);
+            };
+            document.addEventListener('click', playOnInteraction, { once: true });
+            document.addEventListener('keydown', playOnInteraction, { once: true });
+          });
+      }
+    }
+  }, []);
 
   // Window stack for z-index management - last item has highest z-index
   const [windowStack, setWindowStack] = useState([]);
@@ -70,6 +120,10 @@ function App() {
   // Handle Contact Card open - close all windows first
   const handleOpenContactCard = useCallback(() => {
     closeAllWindows();
+    // Play contact card sound
+    const audio = new Audio(CONTACT_CARD_SOUND);
+    audio.volume = 0.4;
+    audio.play().catch(() => { });
     setShowContactCard(true);
   }, [closeAllWindows]);
 
@@ -77,6 +131,7 @@ function App() {
     if (icon.id === 'trash') {
       // Open trash window
       if (!showTrashWindow) {
+        playWindowOpenSound();
         setShowTrashWindow(true);
         setWindowStack(prev => [...prev, 'trash']);
       } else {
@@ -98,6 +153,7 @@ function App() {
     if (icon.id === 'news') {
       // Bring resume to front if already open, otherwise open it
       if (!showResumeWindow) {
+        playWindowOpenSound();
         setShowResumeWindow(true);
         setWindowStack(prev => [...prev, 'resume']);
       } else {
@@ -109,6 +165,7 @@ function App() {
     if (icon.id === 'mail') {
       // Open gallery window
       if (!showGalleryWindow) {
+        playWindowOpenSound();
         setShowGalleryWindow(true);
         setWindowStack(prev => [...prev, 'gallery']);
       } else {
@@ -120,6 +177,7 @@ function App() {
     if (icon.id === 'spotify') {
       // Open Spotify window
       if (!showSpotifyWindow) {
+        playWindowOpenSound();
         setShowSpotifyWindow(true);
         setWindowStack(prev => [...prev, 'spotify']);
       } else {
@@ -148,6 +206,7 @@ function App() {
       }
     };
 
+    playWindowOpenSound();
     setOpenWindows(prev => [...prev, newWindow]);
     setWindowStack(prev => [...prev, nextWindowId]);
     setNextWindowId(prev => prev + 1);
@@ -207,6 +266,7 @@ function App() {
             {...commonProps}
             onOpenResume={() => {
               if (!showResumeWindow) {
+                playWindowOpenSound();
                 setShowResumeWindow(true);
                 setWindowStack(prev => [...prev, 'resume']);
               } else {
@@ -215,6 +275,7 @@ function App() {
             }}
             onOpenGallery={() => {
               if (!showGalleryWindow) {
+                playWindowOpenSound();
                 setShowGalleryWindow(true);
                 setWindowStack(prev => [...prev, 'gallery']);
               } else {
@@ -245,6 +306,7 @@ function App() {
                 preSelectedProjectId: projectId,
                 position: { x: Math.max(50, (window.innerWidth - 800) / 2), y: Math.max(50, (window.innerHeight - 500) / 2) }
               };
+              playWindowOpenSound();
               setOpenWindows(prev => [...prev, newWindow]);
               // Ensure new window is at the top of the stack
               setWindowStack(prev => [...prev.filter(id => id !== newId), newId]);
@@ -266,6 +328,7 @@ function App() {
             onOpenAboutMe={() => handleIconClick({ id: 'finder', name: 'About Me', src: '/finder.png' })}
             onOpenResume={() => {
               if (!showResumeWindow) {
+                playWindowOpenSound();
                 setShowResumeWindow(true);
                 setWindowStack(prev => [...prev, 'resume']);
               } else {
@@ -297,6 +360,7 @@ function App() {
         onOpenContact={handleOpenContactCard}
         onOpenResume={() => {
           if (!showResumeWindow) {
+            playWindowOpenSound();
             setShowResumeWindow(true);
             setWindowStack(prev => [...prev, 'resume']);
           } else {
@@ -316,6 +380,7 @@ function App() {
         initialPosition={{ x: 20, y: 115 }}
         onClick={() => {
           if (!showResumeWindow) {
+            playWindowOpenSound();
             setShowResumeWindow(true);
             setWindowStack(prev => [...prev, 'resume']);
           } else {
@@ -360,6 +425,7 @@ function App() {
             preSelectedProjectId: 1, // WHOP Clone
             position: { x: Math.max(50, (window.innerWidth - 800) / 2), y: Math.max(50, (window.innerHeight - 500) / 2) }
           };
+          playWindowOpenSound();
           setOpenWindows(prev => [...prev, newWindow]);
           // Ensure new window is at the top of the stack
           setWindowStack(prev => [...prev.filter(id => id !== newId), newId]);
@@ -385,6 +451,7 @@ function App() {
             preSelectedProjectId: 2, // MeetMogger AI
             position: { x: Math.max(50, (window.innerWidth - 800) / 2), y: Math.max(50, (window.innerHeight - 500) / 2) }
           };
+          playWindowOpenSound();
           setOpenWindows(prev => [...prev, newWindow]);
           setWindowStack(prev => [...prev.filter(id => id !== newId), newId]);
           setNextWindowId(prev => prev + 1);
@@ -409,6 +476,7 @@ function App() {
             preSelectedProjectId: 3, // Frutiger Portfolio
             position: { x: Math.max(50, (window.innerWidth - 800) / 2), y: Math.max(50, (window.innerHeight - 500) / 2) }
           };
+          playWindowOpenSound();
           setOpenWindows(prev => [...prev, newWindow]);
           setWindowStack(prev => [...prev.filter(id => id !== newId), newId]);
           setNextWindowId(prev => prev + 1);
