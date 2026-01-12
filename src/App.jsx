@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 import TopBar from './components/TopBar';
 import Dock from './components/Dock';
 import AeroWindow from './components/AeroWindow';
@@ -465,6 +466,7 @@ function App() {
       )}
 
       <Dock onIconClick={handleIconClick} />
+      <Analytics />
     </div>
   );
 }
