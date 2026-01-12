@@ -1,0 +1,151 @@
+/* Frutiger Aero Aqua Gel Button Styling */
+
+/* Base Aqua Button - Glossy pill shape with shine effects */
+.aqua-btn {
+    font-family: "myriad-pro", "Lucida Grande", system-ui, sans-serif;
+    height: 2em;
+    padding: 0 1.5em;
+    min-width: 4em;
+    border-radius: 1000px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: all 0.15s ease;
+}
+
+/* Primary button - Blue aqua gradient */
+.aqua-btn.primary,
+.aqua-btn-primary {
+    background: linear-gradient(
+        rgba(0, 65, 184, 0.625), 
+        rgba(45, 115, 199, 0.625), 
+        rgba(33, 160, 196, 0.625)
+    );
+    box-shadow: 
+        0 0.375em 0.5em rgba(0, 0, 0, 0.3), 
+        0 0.125em 0.125em rgba(0, 78, 187, 0.5), 
+        inset 0 0.25em 0.5em rgba(0, 17, 49, 0.8),
+        inset 0 0.375em 0.5em 0.25em rgba(0, 78, 187, 0.75);
+}
+
+.aqua-btn.primary:hover,
+.aqua-btn-primary:hover {
+    background: linear-gradient(
+        rgba(20, 85, 200, 0.7), 
+        rgba(60, 130, 210, 0.7), 
+        rgba(50, 175, 210, 0.7)
+    );
+}
+
+.aqua-btn.primary:focus,
+.aqua-btn.primary:active,
+.aqua-btn-primary:focus,
+.aqua-btn-primary:active {
+    box-shadow: 
+        0 0.375em 0.5em rgba(0, 0, 0, 0.3), 
+        0 0.125em 0.125em rgba(0, 78, 187, 0.5), 
+        inset 0 0.25em 0.5em rgba(0, 17, 49, 0.8),
+        inset 0 0.375em 0.5em 0.25em rgba(0, 78, 187, 0.75),
+        0 0 0.5em rgba(52, 106, 227, 0.5);
+}
+
+/* Secondary button - Gray/white aqua gradient */
+.aqua-btn.secondary,
+.aqua-btn-secondary {
+    background: linear-gradient(
+        rgba(160, 160, 160, 0.625), 
+        rgba(255, 255, 255, 0.625)
+    );
+    box-shadow: 
+        0 0.375em 0.5em rgba(0, 0, 0, 0.2), 
+        0 0.125em 0.125em rgba(0, 0, 0, 0.3),  
+        inset 0 0.25em 0.25em rgba(0, 0, 0, 0.4),
+        inset 0 0.375em 0.5em 0.25em #BBBBBB;
+}
+
+.aqua-btn.secondary:hover,
+.aqua-btn-secondary:hover {
+    background: linear-gradient(
+        rgba(180, 180, 180, 0.7), 
+        rgba(255, 255, 255, 0.75)
+    );
+}
+
+.aqua-btn.secondary:focus,
+.aqua-btn.secondary:active,
+.aqua-btn-secondary:focus,
+.aqua-btn-secondary:active {
+    box-shadow: 
+        0 0.375em 0.5em rgba(0, 0, 0, 0.2), 
+        0 0.125em 0.125em rgba(0, 0, 0, 0.3),  
+        inset 0 0.25em 0.25em rgba(0, 0, 0, 0.4),
+        inset 0 0.375em 0.5em 0.25em #BBBBBB,
+        0 0 0.5em rgba(0, 0, 0, 0.25);
+}
+
+/* Top shine pseudo-element */
+.aqua-btn::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 33%;
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.9), 
+        rgba(255, 255, 255, 0.3)
+    );
+    width: calc(100% - 0.875em);
+    border-radius: 2em 2em 0.5em 0.5em;
+    top: 5%;
+    filter: blur(1px);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Bottom glow pseudo-element */
+.aqua-btn::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 33%;
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.2), 
+        rgba(255, 255, 255, 0.5)
+    );
+    width: calc(100% - 1.25em);
+    border-radius: 0.75em;
+    bottom: 10%;
+    filter: blur(3px);
+    pointer-events: none;
+}
+
+/* Text styling */
+.aqua-btn span {
+    position: relative;
+    top: -1px;
+    z-index: 1;  
+    letter-spacing: 0.0375em;
+    -webkit-text-stroke-width: 0.025em;
+    -webkit-text-stroke-color: #000000;
+}
+
+.aqua-btn.primary span,
+.aqua-btn-primary span {
+    color: #fff;
+    text-shadow: 0 0.25em 0.2em rgba(30, 77, 161, 0.5);
+}
+
+.aqua-btn.secondary span,
+.aqua-btn-secondary span {
+    color: #333;
+    text-shadow: 0 0.25em 0.2em rgba(0, 0, 0, 0.25);
+}
+
+/* Disabled state */
+.aqua-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

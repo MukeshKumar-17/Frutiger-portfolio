@@ -201,34 +201,55 @@
     gap: 3px;
 }
 
-/* Aqua Pill Buttons */
+/* Aqua Gel Navigation Buttons */
 .nav-btn {
-    width: 28px;
-    height: 24px;
-    border: 1px solid rgba(100, 120, 140, 0.6);
-    background: linear-gradient(180deg,
-            rgba(255, 255, 255, 0.95) 0%,
-            rgba(230, 240, 250, 0.9) 50%,
-            rgba(200, 220, 240, 0.85) 100%);
-    border-radius: 5px;
+    width: 30px;
+    height: 26px;
+    border: none;
+    border-radius: 1000px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 10px;
-    color: #4a6fa5;
+    color: #333;
+    position: relative;
+    overflow: hidden;
     transition: all 0.15s ease;
+    /* Aqua secondary gradient */
+    background: linear-gradient(rgba(160, 160, 160, 0.625),
+            rgba(255, 255, 255, 0.625));
     box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.8) inset,
-        0 1px 2px rgba(0, 0, 0, 0.1);
+        0 4px 6px rgba(0, 0, 0, 0.2),
+        0 2px 2px rgba(0, 0, 0, 0.3),
+        inset 0 3px 4px rgba(0, 0, 0, 0.35),
+        inset 0 4px 6px 3px #BBBBBB;
+}
+
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 35%;
+    background: linear-gradient(rgba(255, 255, 255, 0.9),
+            rgba(255, 255, 255, 0.3));
+    width: calc(100% - 8px);
+    border-radius: 100px 100px 50px 50px;
+    top: 8%;
+    filter: blur(1px);
+    pointer-events: none;
 }
 
 .nav-btn:hover:not(:disabled) {
-    background: linear-gradient(180deg,
-            rgba(200, 230, 255, 0.95) 0%,
-            rgba(150, 200, 250, 0.9) 50%,
-            rgba(100, 170, 240, 0.85) 100%);
-    border-color: #5a90c8;
+    background: linear-gradient(rgba(180, 180, 180, 0.7),
+            rgba(255, 255, 255, 0.75));
+    box-shadow:
+        0 5px 8px rgba(0, 0, 0, 0.25),
+        0 2px 2px rgba(0, 0, 0, 0.3),
+        inset 0 3px 4px rgba(0, 0, 0, 0.35),
+        inset 0 4px 6px 3px #CCCCCC,
+        0 0 6px rgba(0, 0, 0, 0.15);
 }
 
 .nav-btn:disabled {
@@ -304,40 +325,59 @@
     border-bottom: 1px solid #c5d0dc;
 }
 
-/* Aqua Gel Buttons */
+/* Aqua Gel Toolbar Buttons */
 .toolbar-btn {
-    padding: 4px 14px;
-    border: 1px solid rgba(100, 130, 160, 0.5);
-    background: linear-gradient(180deg,
-            rgba(255, 255, 255, 0.95) 0%,
-            rgba(235, 245, 255, 0.9) 45%,
-            rgba(210, 230, 250, 0.85) 55%,
-            rgba(220, 235, 252, 0.9) 100%);
-    border-radius: 5px;
+    padding: 5px 14px;
+    border: none;
+    border-radius: 1000px;
     font-size: 11px;
     color: #333;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
     transition: all 0.15s ease;
+    /* Aqua secondary gradient */
+    background: linear-gradient(rgba(160, 160, 160, 0.625),
+            rgba(255, 255, 255, 0.625));
     box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.9) inset,
-        0 1px 2px rgba(0, 0, 0, 0.1);
+        0 4px 6px rgba(0, 0, 0, 0.2),
+        0 2px 2px rgba(0, 0, 0, 0.3),
+        inset 0 3px 4px rgba(0, 0, 0, 0.35),
+        inset 0 4px 6px 3px #BBBBBB;
+}
+
+.toolbar-btn::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 35%;
+    background: linear-gradient(rgba(255, 255, 255, 0.9),
+            rgba(255, 255, 255, 0.3));
+    width: calc(100% - 10px);
+    border-radius: 100px 100px 50px 50px;
+    top: 8%;
+    filter: blur(1px);
+    pointer-events: none;
 }
 
 .toolbar-btn:hover {
-    background: linear-gradient(180deg,
-            rgba(180, 220, 255, 0.95) 0%,
-            rgba(140, 195, 250, 0.9) 45%,
-            rgba(100, 170, 240, 0.85) 55%,
-            rgba(120, 185, 250, 0.9) 100%);
-    border-color: #5a90c8;
+    background: linear-gradient(rgba(180, 180, 180, 0.7),
+            rgba(255, 255, 255, 0.75));
+    box-shadow:
+        0 5px 8px rgba(0, 0, 0, 0.25),
+        0 2px 2px rgba(0, 0, 0, 0.3),
+        inset 0 3px 4px rgba(0, 0, 0, 0.35),
+        inset 0 4px 6px 3px #CCCCCC,
+        0 0 6px rgba(0, 0, 0, 0.15);
 }
 
 .toolbar-btn:active {
-    background: linear-gradient(180deg,
-            rgba(100, 160, 220, 0.95) 0%,
-            rgba(80, 140, 200, 0.9) 45%,
-            rgba(60, 120, 180, 0.85) 55%,
-            rgba(70, 130, 190, 0.9) 100%);
+    background: linear-gradient(rgba(140, 140, 140, 0.7),
+            rgba(220, 220, 220, 0.7));
+    box-shadow:
+        0 2px 3px rgba(0, 0, 0, 0.2),
+        inset 0 2px 3px rgba(0, 0, 0, 0.4);
 }
 
 .toolbar-separator {
