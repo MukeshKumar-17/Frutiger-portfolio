@@ -1,4 +1,4 @@
-# 🪟 Frutiger Aero Portfolio
+# Frutiger Aero Portfolio
 
 > *"Humanism in Technology"*
 
@@ -6,7 +6,7 @@ A nostalgic, web-based operating system portfolio inspired by the **Frutiger Aer
 
 ![Desktop Preview](public/readme_assets/desktop.png)
 
-## ✨ Features
+## Features
 
 - **Windows 7 Aero Glass UI**: Authentic glassmorphism with blur, reflection, and glow effects.
 - **MacOS-style Dock**: Smooth, physics-based magnification animation using `framer-motion` springs.
@@ -14,7 +14,7 @@ A nostalgic, web-based operating system portfolio inspired by the **Frutiger Aer
 - **Project Folder System**: Integrated Finder-like file exploration with redirect links.
 - **Dynamic Animations**: Fluid opening/closing transitions and hover effects.
 
-## � Gallery
+## Gallery
 
 | Project Finder | Projects Window |
 |:---:|:---:|
@@ -25,14 +25,14 @@ A nostalgic, web-based operating system portfolio inspired by the **Frutiger Aer
   <img src="public/readme_assets/logo_github.png" width="120" alt="GitHub Logo" />
 </p>
 
-## �🛠️ Tech Stack
+## Tech Stack
 
 - **React** components
 - **Vite** for fast development
 - **Framer Motion** for physics-based animations
 - **CSS3** for glassmorphism and glossy textures (No external UI libraries)
 
-## 🚀 Getting Started
+## Getting Started
 
 1. Clone the repository
 2. Install dependencies:
@@ -44,7 +44,7 @@ A nostalgic, web-based operating system portfolio inspired by the **Frutiger Aer
    npm run dev
    ```
 
-## 🎨 Design Philosophy
+## Design Philosophy
 
 This project aims to capture the **Frutiger Aero** aesthetic:
 - **Skeuomorphism**: Realistic textures alongside digital interfaces.
