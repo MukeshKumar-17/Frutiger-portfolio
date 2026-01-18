@@ -16,8 +16,8 @@ const icons = [
     { id: 'quicktime', name: 'QuickTime', src: '/quicktime.png', tooltip: 'LinkedIn', url: 'https://www.linkedin.com/in/mukeshkumark17' },
     { id: 'spotify', name: 'Spotify', src: '/spotify.ico', tooltip: 'Spotify' },
     // Separator here conceptually
-    { id: 'spring', name: 'Spring', src: '/spring.png', tooltip: 'Contact' },
-    { id: 'news', name: 'News', src: '/news.png', tooltip: 'Email Me' },
+    { id: 'spring', name: 'Spring', src: '/spring.png', tooltip: 'Business Card' },
+    { id: 'news', name: 'News', src: '/news.png', tooltip: 'Contact' },
     { id: 'music', name: 'iTunes', src: '/itunes.ico', tooltip: 'Music Player' },
     { id: 'trash', name: 'Trash', src: '/trash.png', tooltip: 'Trash' },
 ];

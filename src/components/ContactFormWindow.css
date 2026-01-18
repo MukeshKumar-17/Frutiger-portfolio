@@ -67,7 +67,7 @@
 
 .contact-title {
     font-size: 13px;
-    font-family: 'Apple Garamond', 'Garamond', 'Georgia', serif;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica Neue', sans-serif;
     color: #333;
     font-weight: bold;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -122,7 +122,9 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(150, 30, 30, 0.5), inset 0 2px 3px rgba(80, 0, 0, 0.4), inset 0 2px 4px 2px rgba(200, 60, 60, 0.5);
 }
 
-.contact-form-window .window-control-btn.close-btn .control-icon { color: #4a0000; }
+.contact-form-window .window-control-btn.close-btn .control-icon {
+    color: #4a0000;
+}
 
 /* Minimize button - Yellow */
 .contact-form-window .window-control-btn.minimize-btn {
@@ -130,7 +132,9 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(180, 130, 0, 0.5), inset 0 2px 3px rgba(120, 80, 0, 0.4), inset 0 2px 4px 2px rgba(220, 180, 50, 0.5);
 }
 
-.contact-form-window .window-control-btn.minimize-btn .control-icon { color: #5a4a00; }
+.contact-form-window .window-control-btn.minimize-btn .control-icon {
+    color: #5a4a00;
+}
 
 /* Maximize button - Green */
 .contact-form-window .window-control-btn.maximize-btn {
@@ -138,7 +142,9 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(20, 100, 50, 0.5), inset 0 2px 3px rgba(0, 60, 30, 0.4), inset 0 2px 4px 2px rgba(40, 160, 80, 0.5);
 }
 
-.contact-form-window .window-control-btn.maximize-btn .control-icon { color: #003a00; }
+.contact-form-window .window-control-btn.maximize-btn .control-icon {
+    color: #003a00;
+}
 
 /* Content Area */
 .contact-content {

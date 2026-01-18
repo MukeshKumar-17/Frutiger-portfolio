@@ -405,7 +405,16 @@ function App() {
             handleIconClick({ id: 'system_prefs', name: 'Projects', src: '/system_prefs.png' });
           }
         }}
-        onOpenContact={handleOpenContactCard}
+        onOpenContact={() => {
+          if (!showContactFormWindow) {
+            playWindowOpenSound();
+            setShowContactFormWindow(true);
+            setWindowStack(prev => [...prev, 'contactform']);
+          } else {
+            playAlreadyOpenSound();
+            bringToFront('contactform');
+          }
+        }}
         onOpenResume={() => {
           if (!showResumeWindow) {
             playWindowOpenSound();
