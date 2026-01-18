@@ -17,7 +17,7 @@ const icons = [
     { id: 'spotify', name: 'Spotify', src: '/spotify.ico', tooltip: 'Spotify' },
     // Separator here conceptually
     { id: 'spring', name: 'Spring', src: '/spring.png', tooltip: 'Contact' },
-    { id: 'news', name: 'News', src: '/news.png', tooltip: 'Email Me', url: 'mailto:mukeshkumark1755@gmail.com' },
+    { id: 'news', name: 'News', src: '/news.png', tooltip: 'Email Me' },
     { id: 'music', name: 'iTunes', src: '/itunes.ico', tooltip: 'Music Player' },
     { id: 'trash', name: 'Trash', src: '/trash.png', tooltip: 'Trash' },
 ];

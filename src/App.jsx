@@ -17,6 +17,7 @@ import DesktopIcon from './components/DesktopIcon';
 import FinderWindow from './components/FinderWindow';
 import SpotifyWindow from './components/SpotifyWindow';
 import TrashWindow from './components/TrashWindow';
+import ContactFormWindow from './components/ContactFormWindow';
 import './App.css';
 
 // Sound paths
@@ -46,7 +47,8 @@ function App() {
   const [showGalleryWindow, setShowGalleryWindow] = useState(false);
   const [showSpotifyWindow, setShowSpotifyWindow] = useState(false);
   const [showTrashWindow, setShowTrashWindow] = useState(false);
-  const [triggerCloseAll, setTriggerCloseAll] = useState(false);
+  const [showContactFormWindow, setShowContactFormWindow] = useState(false);
+
   const startupAudioRef = useRef(null);
 
   // Play startup sound on page load/reload
@@ -109,10 +111,33 @@ function App() {
     });
   }, []);
 
-  // Close all windows with animation support
+  // Track which windows should close (with stagger)
+  const [closingWindows, setClosingWindows] = useState(new Set());
+
+  // Close all windows with staggered animation to prevent stuttering
   const closeAllWindows = useCallback(() => {
-    setTriggerCloseAll(true);
-    // Reset trigger after animations complete
+    // Collect all window IDs to close
+    const allWindowIds = [
+      ...openWindows.map(w => w.id),
+      ...(showResumeWindow ? ['resume'] : []),
+      ...(showGalleryWindow ? ['gallery'] : []),
+      ...(showSpotifyWindow ? ['spotify'] : []),
+      ...(showTrashWindow ? ['trash'] : []),
+      ...(showContactFormWindow ? ['contactform'] : [])
+    ];
+
+    if (allWindowIds.length === 0) return;
+
+    // Stagger the closing animations with 30ms delay between each
+    const staggerDelay = 30;
+    allWindowIds.forEach((id, index) => {
+      setTimeout(() => {
+        setClosingWindows(prev => new Set([...prev, id]));
+      }, index * staggerDelay);
+    });
+
+    // Clear all state after animations complete (last window + animation duration)
+    const totalTime = (allWindowIds.length * staggerDelay) + 200;
     setTimeout(() => {
       setOpenWindows([]);
       setWindowStack([]);
@@ -120,9 +145,10 @@ function App() {
       setShowGalleryWindow(false);
       setShowSpotifyWindow(false);
       setShowTrashWindow(false);
-      setTriggerCloseAll(false);
-    }, 250); // Match animation duration
-  }, []);
+      setShowContactFormWindow(false);
+      setClosingWindows(new Set());
+    }, totalTime);
+  }, [openWindows, showResumeWindow, showGalleryWindow, showSpotifyWindow, showTrashWindow, showContactFormWindow]);
 
   // Handle Contact Card open - close all windows first
   const handleOpenContactCard = useCallback(() => {
@@ -159,14 +185,14 @@ function App() {
     }
 
     if (icon.id === 'news') {
-      // Bring resume to front if already open, otherwise open it
-      if (!showResumeWindow) {
+      // Open contact form window
+      if (!showContactFormWindow) {
         playWindowOpenSound();
-        setShowResumeWindow(true);
-        setWindowStack(prev => [...prev, 'resume']);
+        setShowContactFormWindow(true);
+        setWindowStack(prev => [...prev, 'contactform']);
       } else {
         playAlreadyOpenSound();
-        bringToFront('resume');
+        bringToFront('contactform');
       }
       return;
     }
@@ -249,6 +275,11 @@ function App() {
     setWindowStack(prev => prev.filter(id => id !== 'trash'));
   };
 
+  const handleCloseContactForm = () => {
+    setShowContactFormWindow(false);
+    setWindowStack(prev => prev.filter(id => id !== 'contactform'));
+  };
+
   // Background click - close all windows when clicking outside
   const handleBackgroundClick = (e) => {
     // Only close if clicking directly on the app container background
@@ -268,7 +299,7 @@ function App() {
       onClose: () => handleCloseWindow(win.id),
       zIndex: getZIndex(win.id),
       onFocus: () => bringToFront(win.id),
-      triggerClose: triggerCloseAll
+      triggerClose: closingWindows.has(win.id)
     };
 
     switch (win.type) {
@@ -520,7 +551,7 @@ function App() {
           onClose={handleCloseResume}
           zIndex={getZIndex('resume')}
           onFocus={() => bringToFront('resume')}
-          triggerClose={triggerCloseAll}
+          triggerClose={closingWindows.has('resume')}
         />
       )}
 
@@ -531,7 +562,7 @@ function App() {
           onClose={handleCloseGallery}
           zIndex={getZIndex('gallery')}
           onFocus={() => bringToFront('gallery')}
-          triggerClose={triggerCloseAll}
+          triggerClose={closingWindows.has('gallery')}
         />
       )}
 
@@ -540,7 +571,7 @@ function App() {
           onClose={handleCloseSpotify}
           zIndex={getZIndex('spotify')}
           onFocus={() => bringToFront('spotify')}
-          triggerClose={triggerCloseAll}
+          triggerClose={closingWindows.has('spotify')}
         />
       )}
 
@@ -549,7 +580,16 @@ function App() {
           onClose={handleCloseTrash}
           zIndex={getZIndex('trash')}
           onFocus={() => bringToFront('trash')}
-          triggerClose={triggerCloseAll}
+          triggerClose={closingWindows.has('trash')}
+        />
+      )}
+
+      {showContactFormWindow && (
+        <ContactFormWindow
+          onClose={handleCloseContactForm}
+          zIndex={getZIndex('contactform')}
+          onFocus={() => bringToFront('contactform')}
+          triggerClose={closingWindows.has('contactform')}
         />
       )}
 

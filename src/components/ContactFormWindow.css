@@ -1,0 +1,321 @@
+/* Contact Form Window - Frutiger Aero Glass Styling */
+
+.contact-form-window {
+    position: absolute;
+    width: 500px;
+    min-height: 480px;
+    z-index: 500;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica Neue', sans-serif;
+    user-select: none;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.contact-frame {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    /* Aqua Glass effect */
+    background: linear-gradient(180deg,
+            rgba(180, 220, 255, 0.92) 0%,
+            rgba(140, 200, 250, 0.88) 22px,
+            rgba(230, 240, 250, 0.96) 22px,
+            rgba(245, 248, 255, 0.98) 100%);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.9) inset,
+        0 2px 0 rgba(255, 255, 255, 0.7) inset,
+        0 -1px 0 rgba(0, 0, 0, 0.1) inset,
+        0 0 50px rgba(100, 180, 255, 0.2),
+        0 20px 60px rgba(0, 0, 0, 0.35),
+        0 8px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(80, 130, 180, 0.4);
+}
+
+/* Title Bar */
+.contact-titlebar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+    padding: 0 10px;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(255, 255, 255, 0.03) 0px,
+            rgba(255, 255, 255, 0.03) 1px,
+            transparent 1px,
+            transparent 2px),
+        linear-gradient(180deg,
+            rgba(220, 230, 245, 0.95) 0%,
+            rgba(200, 215, 235, 0.9) 45%,
+            rgba(180, 200, 225, 0.85) 55%,
+            rgba(190, 208, 230, 0.9) 100%);
+    border-bottom: 1px solid rgba(150, 170, 190, 0.5);
+    position: relative;
+}
+
+.contact-window-controls {
+    position: absolute;
+    left: 8px;
+    display: flex;
+    gap: 6px;
+}
+
+.contact-title {
+    font-size: 13px;
+    font-family: 'Apple Garamond', 'Garamond', 'Georgia', serif;
+    color: #333;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Traffic Light Buttons */
+.contact-form-window .window-control-btn {
+    width: 14px;
+    height: 14px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.15s ease;
+}
+
+.contact-form-window .window-control-btn::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 40%;
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.2));
+    width: calc(100% - 4px);
+    border-radius: 100px 100px 50px 50px;
+    top: 8%;
+    filter: blur(0.5px);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.contact-form-window .window-control-btn .control-icon {
+    font-size: 8px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    z-index: 3;
+    position: relative;
+}
+
+.contact-form-window:hover .window-control-btn .control-icon {
+    opacity: 1;
+}
+
+/* Close button - Red */
+.contact-form-window .window-control-btn.close-btn {
+    background: linear-gradient(rgba(255, 120, 120, 0.9), rgba(255, 95, 87, 0.85), rgba(200, 50, 50, 0.9));
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(150, 30, 30, 0.5), inset 0 2px 3px rgba(80, 0, 0, 0.4), inset 0 2px 4px 2px rgba(200, 60, 60, 0.5);
+}
+
+.contact-form-window .window-control-btn.close-btn .control-icon { color: #4a0000; }
+
+/* Minimize button - Yellow */
+.contact-form-window .window-control-btn.minimize-btn {
+    background: linear-gradient(rgba(255, 220, 100, 0.9), rgba(255, 190, 50, 0.85), rgba(220, 160, 20, 0.9));
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(180, 130, 0, 0.5), inset 0 2px 3px rgba(120, 80, 0, 0.4), inset 0 2px 4px 2px rgba(220, 180, 50, 0.5);
+}
+
+.contact-form-window .window-control-btn.minimize-btn .control-icon { color: #5a4a00; }
+
+/* Maximize button - Green */
+.contact-form-window .window-control-btn.maximize-btn {
+    background: linear-gradient(rgba(100, 220, 130, 0.9), rgba(40, 200, 70, 0.85), rgba(30, 130, 70, 0.9));
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(20, 100, 50, 0.5), inset 0 2px 3px rgba(0, 60, 30, 0.4), inset 0 2px 4px 2px rgba(40, 160, 80, 0.5);
+}
+
+.contact-form-window .window-control-btn.maximize-btn .control-icon { color: #003a00; }
+
+/* Content Area */
+.contact-content {
+    flex: 1;
+    padding: 25px 30px;
+    background: linear-gradient(180deg,
+            rgba(248, 250, 255, 0.98) 0%,
+            rgba(240, 245, 252, 0.96) 100%);
+    overflow-y: auto;
+}
+
+/* Form Styles */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #4a6a8a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 10px 14px;
+    border: 1px solid rgba(150, 180, 210, 0.5);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Lucida Grande', 'Helvetica Neue', sans-serif;
+    color: #333;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(250, 252, 255, 0.98) 100%);
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.08),
+        0 1px 0 rgba(255, 255, 255, 0.9);
+    transition: all 0.2s ease;
+    cursor: text;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: rgba(90, 150, 220, 0.7);
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.08),
+        0 0 0 3px rgba(100, 180, 255, 0.25),
+        0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #a0b0c0;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Submit Button - Aqua Gel */
+.submit-btn {
+    margin-top: 10px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 1000px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    /* Aqua blue gradient */
+    background: linear-gradient(180deg,
+            rgba(100, 180, 255, 0.95) 0%,
+            rgba(60, 140, 220, 0.9) 50%,
+            rgba(40, 110, 190, 0.95) 100%);
+    box-shadow:
+        0 4px 8px rgba(40, 100, 180, 0.4),
+        0 2px 3px rgba(0, 0, 0, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -2px 3px rgba(0, 50, 100, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 50, 100, 0.5);
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 40%;
+    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.1));
+    width: calc(100% - 20px);
+    border-radius: 100px 100px 50px 50px;
+    top: 6%;
+    filter: blur(1px);
+    pointer-events: none;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: linear-gradient(180deg,
+            rgba(120, 200, 255, 0.95) 0%,
+            rgba(80, 160, 240, 0.9) 50%,
+            rgba(50, 130, 210, 0.95) 100%);
+    box-shadow:
+        0 6px 12px rgba(40, 100, 180, 0.5),
+        0 2px 3px rgba(0, 0, 0, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -2px 3px rgba(0, 50, 100, 0.3);
+    transform: translateY(-1px);
+}
+
+.submit-btn:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow:
+        0 2px 4px rgba(40, 100, 180, 0.4),
+        0 1px 2px rgba(0, 0, 0, 0.2),
+        inset 0 2px 4px rgba(0, 50, 100, 0.4);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Status Messages */
+.status-message {
+    margin-top: 10px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.status-message.success {
+    background: linear-gradient(180deg,
+            rgba(180, 255, 200, 0.9) 0%,
+            rgba(150, 240, 180, 0.85) 100%);
+    color: #1a5a2a;
+    border: 1px solid rgba(100, 180, 120, 0.5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.status-message.error {
+    background: linear-gradient(180deg,
+            rgba(255, 200, 200, 0.9) 0%,
+            rgba(255, 180, 180, 0.85) 100%);
+    color: #8a2a2a;
+    border: 1px solid rgba(200, 120, 120, 0.5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Status Bar */
+.contact-statusbar {
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(228, 235, 245, 1) 0px,
+            rgba(228, 235, 245, 1) 1px,
+            rgba(242, 246, 252, 1) 1px,
+            rgba(242, 246, 252, 1) 2px);
+    border-top: 1px solid #b8c4d0;
+    font-size: 11px;
+    color: #555;
+}
