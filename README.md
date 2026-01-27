@@ -4,7 +4,7 @@
 
 A nostalgic, web-based operating system portfolio inspired by the **Frutiger Aero** and **Windows 7** design languages (2000s-2010s era). This project captures the optimism of mid-2000s tech with glossy textures, vibrant colors, and skeumorphic design.
 
-TRY IT YOURSELF: mukeshkumark.vercel.app
+TRY IT YOURSELF: [mukeshkumark.vercel.app](https://mukeshkumark.vercel.app/)
 
 ![Desktop Preview](public/readme_assets/desktop.png)
 
